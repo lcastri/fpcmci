@@ -1,4 +1,4 @@
-from fselector.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod, SSMode
+from .SubsamplingMethod import SubsamplingMethod, SSMode
 
 
 class Static(SubsamplingMethod):

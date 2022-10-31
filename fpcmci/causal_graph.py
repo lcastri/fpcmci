@@ -6,17 +6,17 @@ from fpcmci.utilities.constants import *
 
 
 def dag(res,
-        node_layout = 'dot',
+        node_layout = 'circular',
         min_width = 1,
         max_width = 5,
         min_score = 0,
         max_score = 1,
-        node_size = 8,
+        node_size = 5,
         node_color = 'orange',
         edge_color = 'grey',
-        font_size = 12,
+        font_size = 10,
         show_edge_labels = True,
-        label_type = LabelType.LAG,
+        label_type = LabelType.Lag,
         save_name = None):
     """
     build a dag
@@ -50,10 +50,10 @@ def dag(res,
                 border[t] = __scale(s[SCORE], min_width, max_width, min_score, max_score)
     
     if show_edge_labels:
-        if label_type == LabelType.LAG:
+        if label_type == LabelType.Lag:
             node_label = {t: s[LAG] for t in res.keys() for s in res[t] if t == s[SOURCE]}
-        elif label_type == LabelType.SCORE:
-            node_label = {t: s[SCORE] for t in res.keys() for s in res[t] if t == s[SOURCE]}
+        elif label_type == LabelType.Score:
+            node_label = {t: round(s[SCORE], 3) for t in res.keys() for s in res[t] if t == s[SOURCE]}
     else:
         node_label = None
 
@@ -63,10 +63,10 @@ def dag(res,
     
     edge_width = {(s[SOURCE], t): __scale(s[SCORE], min_width, max_width, min_score, max_score) for t in res.keys() for s in res[t] if t != s[SOURCE]}
     if show_edge_labels:
-        if label_type == LabelType.LAG:
+        if label_type == LabelType.Lag:
             edge_label = {(s[SOURCE], t): s[LAG] for t in res.keys() for s in res[t] if t != s[SOURCE]}
-        elif label_type == LabelType.SCORE:
-            edge_label = {(s[SOURCE], t): s[SCORE] for t in res.keys() for s in res[t] if t != s[SOURCE]}
+        elif label_type == LabelType.Score:
+            edge_label = {(s[SOURCE], t): round(s[SCORE], 3) for t in res.keys() for s in res[t] if t != s[SOURCE]}
     else:
         edge_label = None
 

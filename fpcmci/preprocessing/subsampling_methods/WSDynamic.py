@@ -1,6 +1,6 @@
 import ruptures as rpt
-from fselector.preprocessing.subsampling_methods.EntropyBasedMethod import EntropyBasedMethod
-from fselector.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod, SSMode
+from .EntropyBasedMethod import EntropyBasedMethod
+from .SubsamplingMethod import SubsamplingMethod, SSMode
 
 
 class EntropyBasedDynamic(SubsamplingMethod, EntropyBasedMethod):

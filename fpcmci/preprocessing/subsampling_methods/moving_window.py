@@ -1,9 +1,6 @@
-# region IMPORT
 
 import math
 from scipy.stats import entropy
-
-# endregion
 
 
 class MovingWindow:

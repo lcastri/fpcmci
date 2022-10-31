@@ -16,5 +16,5 @@ LOG_FILENAME = "log.txt"
 RESULTS_FILENAME = "results"
 
 class LabelType(Enum):
-    LAG
-    SCORE
+    Lag = "lag"
+    Score = "Score"

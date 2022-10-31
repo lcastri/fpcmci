@@ -3,8 +3,8 @@ import pandas as pd
 from matplotlib import gridspec
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
-from fselector.preprocessing.Subsampler import Subsampler
-from fselector.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
+from fpcmci.preprocessing.Subsampler import Subsampler
+from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
 
 
 class Data():
@@ -32,6 +32,7 @@ class Data():
         # Data handling
         if type(data) == np.ndarray:
             self.d = pd.DataFrame(data)
+            if vars is None: self.d.columns = list(['X_' + str(f) for f in range(len(self.d.columns))])
         elif type(data) == pd.DataFrame:
             self.d = data
         elif type(data) == str:
@@ -43,9 +44,7 @@ class Data():
         # Columns name handling
         if vars is not None:
             self.d.columns = list(vars)
-        else:
-            if not list(self.d.columns):
-                self.d.columns = list(['X_' + str(f) for f in range(len(self.d.columns))])
+                
         
         self.orig_features = self.features
         self.orig_pretty_features = self.pretty_features

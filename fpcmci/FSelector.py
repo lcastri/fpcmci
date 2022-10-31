@@ -175,7 +175,7 @@ class FSelector():
             edge_color = 'grey',
             font_size = 12,
             show_edge_labels = True,
-            label_type = LabelType.LAG):
+            label_type = LabelType.Lag):
         """
         Saves dag plot if resfolder has been set otherwise it shows the figure
         

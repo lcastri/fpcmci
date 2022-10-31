@@ -1,5 +1,3 @@
-from time import time
-from datetime import timedelta
 from tigramite.independence_tests import GPDC
 from fpcmci.CPrinter import CPLevel
 from fpcmci.FSelector import FSelector
@@ -11,6 +9,7 @@ from fpcmci.preprocessing.subsampling_methods.WSFFTStatic import EntropyBasedFFT
 from fpcmci.preprocessing.subsampling_methods.WSStatic import EntropyBasedStatic
 from fpcmci.selection_methods.TE import TE, TEestimator
 import numpy as np
+from fpcmci.utilities.constants import LabelType
 
 
 if __name__ == '__main__':   
@@ -26,10 +25,9 @@ if __name__ == '__main__':
         d[t, 0] += 5 * d[t-1, 1] + 7 * d[t-1, 2]
         d[t, 2] += 1.5 * d[t-1, 1]
         d[t, 3] += d[t-1, 3] + 1.35 + np.random.randn()
-        d[t, 4] += 10 / d[t-1, 4] + 0.57 * d[t-1, 5]
+        d[t, 4] += d[t-1, 4] + 1.57 * d[t-1, 5]
         
     df = Data(d)
-    start = time()
     FS = FSelector(df, 
                    alpha = alpha, 
                    min_lag = min_lag, 
@@ -41,10 +39,7 @@ if __name__ == '__main__':
                    resfolder = 'example')
     
     selector_res = FS.run()
-    elapsed = time() - start
-    print(str(timedelta(seconds = elapsed)))
-    FS.dag(show_edge_labels = False)
-    FS.timeseries_dag()
+    FS.dag(show_edge_labels = True, label_type = LabelType.Score)
 
     
     

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from copy import deepcopy
-from fselector.preprocessing.subsampling_methods.moving_window import MovingWindow
+from .moving_window import MovingWindow
 
     
 class EntropyBasedMethod(ABC):
