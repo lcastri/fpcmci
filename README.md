@@ -1,1 +1,1 @@
-# FPCMCI - Filtered PCMCI 
+# FPCMCI - Filtered PCMCI causal discovery method
