@@ -8,10 +8,30 @@ Extension of the state-of-the-art causal discovery method PCMCI augmented with a
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is ble to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
 
+## Citation
+
+If you found this useful for your work, please cite these papers:
+```
+@article{ghidoni2022human,
+  title={From Human Perception and Action Recognition to Causal Understanding of Human-Robot Interaction in Industrial Environments},
+  author={Ghidoni, Stefano and Terreran, Matteo and Evangelista, Daniele and Menegatti, Emanuele and Eitzinger, Christian and Villagrossi, Enrico and Pedrocchi, Nicola and Castaman, Nicola and Malecha, Marcin and Mghames, Sariah and others},
+  year={2022}
+}
+```
+```
+@inproceedings{castri2022causal,
+    title={Causal Discovery of Dynamic Models for Predicting Human Spatial Interactions},
+    author={Castri, Luca and Mghames, Sariah and Hanheide, Marc and Bellotto, Nicola},
+    booktitle={International Conference on Social Robotics (ICSR)},
+    year={2022},
+}
+```
+
+
 # Requirements
 
 * matplotlib==3.6.1
-* netgraph==4.10.1
+* netgraph==4.10.2
 * networkx==2.8.6
 * numpy==1.21.5
 * pandas==1.5.0
