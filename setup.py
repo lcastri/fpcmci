@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 INSTALL_REQUIRES = ["numpy==1.21.5", "scipy==1.8.0", "tigramite==5.1.0.3"]
 EXTRA_REQUIRES = {"all": ["matplotlib==3.6.1",
-                          "netgraph==4.10.1",
+                          "netgraph==4.10.2",
                           "networkx==2.8.6",
                           "pandas==1.5.0",
                           "ruptures==1.1.7",
