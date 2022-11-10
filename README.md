@@ -3,7 +3,7 @@
 Extension of the state-of-the-art causal discovery method PCMCI augmented with a feature-selection method based on Transfer Entropy, that is able to identify the correct subset of variables involved in the causal analysis, starting from a prefixed set of them.
 
 
-# Why FPCMCI?
+## Why FPCMCI?
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is ble to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
@@ -28,7 +28,7 @@ If you found this useful for your work, please cite these papers:
 ```
 
 
-# Requirements
+## Requirements
 
 * matplotlib==3.6.1
 * netgraph==4.10.2
@@ -42,7 +42,7 @@ If you found this useful for your work, please cite these papers:
 * tigramite==5.1.0.3
 
 
-# Installation
+## Installation
 
 Before installing the FPCMCI package, you need to install the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the package with:
 ```
@@ -50,9 +50,9 @@ pip install fpcmci
 ```
 
 
-# Documentation
+## Documentation
 Coming soon..
 
 
-# Quickstart
+## Quickstart
 Coming soon..
