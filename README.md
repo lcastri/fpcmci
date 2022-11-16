@@ -43,12 +43,13 @@ If you found this useful for your work, please cite these papers:
 
 
 ## Installation
-
+Coming soon..
+<!--
 Before installing the FPCMCI package, you need to install the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the package with:
 ```
 pip install fpcmci
 ```
-
+-->
 
 ## Documentation
 Coming soon..
