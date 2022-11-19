@@ -58,5 +58,6 @@ Coming soon..
 ## Quickstart
 PCMCI      |  FPCMCI 
 :-------------------------:|:-------------------------:
-![](https://github.com/lcastri/fpcmci/blob/main/images/PCMCI_example.png "PCMCI")  |  ![](https://github.com/lcastri/fpcmci/blob/main/images/FPCMCI_example.png "FPCMCI") 
+![](https://github.com/lcastri/fpcmci/blob/main/images/PCMCI_example.png "PCMCI")  |  ![](https://github.com/lcastri/fpcmci/blob/main/images/FPCMCI_example.png "FPCMCI")
+Execution time ~ 7min 30sec | Execution time ~ 2min 10sec
 
