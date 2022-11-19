@@ -29,6 +29,10 @@ PCMCI      |  FPCMCI
 ![](https://github.com/lcastri/fpcmci/blob/main/images/PCMCI_example.png "PCMCI")  |  ![](https://github.com/lcastri/fpcmci/blob/main/images/FPCMCI_example.png "FPCMCI")
 Execution time ~ 6min 50sec | Execution time ~ 2min 45sec
 
+The causal analysis performed by the **FPCMCI** results not only faster but also more accurate. Indeed, the causal model derived by the FPCMCI agrees with the structure of the system of equations, instead the onoe derived by the PCMCI presents spurious links:
+* $X_2$ &rarr; $X_4$
+* $X_2$ &rarr; $X_5$
+
 
 ## Citation
 
