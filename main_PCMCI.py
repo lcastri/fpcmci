@@ -24,10 +24,10 @@ if __name__ == '__main__':
     nfeature = 6
     d = np.random.random(size = (nsample, nfeature))
     for t in range(max_lag, nsample):
-        d[t, 0] += 5 * d[t-1, 1] + 7 * d[t-1, 2]
-        d[t, 2] += 1.5 * d[t-1, 1]
-        d[t, 3] += d[t-1, 3] + 1.35 + np.random.randn()
-        d[t, 4] += d[t-1, 4] + 0.55 * d[t-1, 5]
+        d[t, 0] += 2 * d[t-1, 1] + 3 * d[t-1, 3]
+        d[t, 2] += 1.1 * d[t-1, 1]**2
+        d[t, 3] += d[t-1, 3] * d[t-1, 2]
+        d[t, 4] += d[t-1, 4] + d[t-1, 5] * d[t-1, 0]
 
     df = Data(d)
     start = time()
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     selector_res = FS.run_validator()
     elapsed_PCMCI = time() - start
     print(str(timedelta(seconds = elapsed_PCMCI)))
-    FS.dag(show_edge_labels = False, label_type = LabelType.Score)
+    FS.dag(show_edge_labels = False, label_type = LabelType.Score, node_layout = 'circular')
 
 
     

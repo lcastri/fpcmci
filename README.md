@@ -7,6 +7,28 @@ Extension of the state-of-the-art causal discovery method PCMCI augmented with a
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
+In the following example a comparison between causal models obtained by PCMCI and FPCMCI using the same data. The latter have been created as follows:
+
+```
+min_lag = 1
+max_lag = 1
+np.random.seed(1)
+nsample = 1500
+nfeature = 6
+
+d = np.random.random(size = (nsample, feature))
+for t in range(max_lag, nsample):
+  d[t, 0] += 2 * d[t-1, 1] + 3 * d[t-1, 3]
+  d[t, 2] += 1.1 * d[t-1, 1]**2
+  d[t, 3] += d[t-1, 3] * d[t-1, 2]
+  d[t, 4] += d[t-1, 4] + d[t-1, 5] * d[t-1, 0]
+```
+
+PCMCI      |  FPCMCI 
+:-------------------------:|:-------------------------:
+![](https://github.com/lcastri/fpcmci/blob/main/images/PCMCI_example.png "PCMCI")  |  ![](https://github.com/lcastri/fpcmci/blob/main/images/FPCMCI_example.png "FPCMCI")
+Execution time ~ 6min 50sec | Execution time ~ 2min 45sec
+
 
 ## Citation
 
@@ -53,11 +75,3 @@ pip install fpcmci
 
 ## Documentation
 Coming soon..
-
-
-## Quickstart
-PCMCI      |  FPCMCI 
-:-------------------------:|:-------------------------:
-![](https://github.com/lcastri/fpcmci/blob/main/images/PCMCI_example.png "PCMCI")  |  ![](https://github.com/lcastri/fpcmci/blob/main/images/FPCMCI_example.png "FPCMCI")
-Execution time ~ 7min 30sec | Execution time ~ 2min 10sec
-
