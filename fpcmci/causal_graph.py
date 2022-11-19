@@ -6,15 +6,15 @@ from fpcmci.utilities.constants import *
 
 
 def dag(res,
-        node_layout = 'circular',
+        node_layout = 'dot',
         min_width = 1,
         max_width = 5,
         min_score = 0,
         max_score = 1,
-        node_size = 5,
+        node_size = 8,
         node_color = 'orange',
         edge_color = 'grey',
-        font_size = 10,
+        font_size = 12,
         show_edge_labels = True,
         label_type = LabelType.Lag,
         save_name = None):

@@ -351,3 +351,6 @@ MigrationBackup/
 *.egg-info/
 build/
 dist/
+
+# results
+results/
