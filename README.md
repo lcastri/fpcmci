@@ -7,7 +7,7 @@ Extension of the state-of-the-art causal discovery method PCMCI augmented with a
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
-In the following example a comparison between causal models obtained by PCMCI and FPCMCI using the same data. The latter have been created as follows:
+In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
 
 ```
 min_lag = 1
