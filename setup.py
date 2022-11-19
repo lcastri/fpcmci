@@ -1,4 +1,5 @@
 from setuptools import setup
+from fpcmci.version import VERSION
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
@@ -18,19 +19,19 @@ EXTRA_REQUIRES = {"all": ["matplotlib==3.6.1",
 
 setup(
     name = 'fpcmci',
-    version = '1.0.0.0',    
+    version = VERSION,    
     description = 'A causal discovery Python package',
     long_description = long_description,
     long_description_content_type = 'text/markdown',
     url = 'https://github.com/lcastri/fpcmci',
     author = 'Luca Castri',
     author_email = 'lucacastri94@gmail.com',
-    packages = ['fpcmci', "fpcmci.preprocessing", "fpcmci.utilities", "fpcmci.selection_methods"],
+    packages = ['fpcmci', "fpcmci.preprocessing", "fpcmci.preprocessing.subsampling_methods", "fpcmci.utilities", "fpcmci.selection_methods"],
     install_requires = INSTALL_REQUIRES,
     extras_require = EXTRA_REQUIRES,
 
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Science/Research',  
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3',

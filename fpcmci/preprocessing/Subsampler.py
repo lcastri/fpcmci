@@ -1,4 +1,4 @@
-from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
+from .subsampling_methods.SubsamplingMethod import SubsamplingMethod
 import pandas as pd
 from matplotlib import gridspec
 import pylab as pl

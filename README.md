@@ -7,9 +7,9 @@ Extension of the state-of-the-art causal discovery method PCMCI augmented with a
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
-In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
+In the following it is presented an example showing a comparison between causal models obtained by [PCMCI](https://github.com/jakobrunge/tigramite) and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
 
-```
+``` python
 min_lag = 1
 max_lag = 1
 np.random.seed(1)
@@ -24,9 +24,9 @@ for t in range(max_lag, nsample):
   d[t, 4] += d[t-1, 4] + d[t-1, 5] * d[t-1, 0]
 ```
 
-PCMCI      |  FPCMCI 
+Causal Model by PCMCI       |  Causal Model by FPCMCI 
 :-------------------------:|:-------------------------:
-![](./images/PCMCI_example.png "PCMCI")  |  ![](./images/FPCMCI_example.png "FPCMCI")
+![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example.png "Causal model by FPCMCI")
 Execution time ~ 6min 50sec | Execution time ~ 2min 45sec
 
 The causal analysis performed by the **FPCMCI** results not only faster but also more accurate. Indeed, the causal model derived by the FPCMCI agrees with the structure of the system of equations, instead the onoe derived by the PCMCI presents spurious links:
@@ -69,13 +69,10 @@ If you found this useful for your work, please cite these papers:
 
 
 ## Installation
-Coming soon..
-<!--
-Before installing the FPCMCI package, you need to install the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the package with:
-```
+Before installing the FPCMCI package, you need to install the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the current release of `FPCMCI` with:
+``` shell
 pip install fpcmci
 ```
--->
 
 ## Documentation
 Coming soon..

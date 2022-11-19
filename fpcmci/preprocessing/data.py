@@ -3,8 +3,8 @@ import pandas as pd
 from matplotlib import gridspec
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
-from fpcmci.preprocessing.Subsampler import Subsampler
-from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
+from .Subsampler import Subsampler
+from .subsampling_methods.SubsamplingMethod import SubsamplingMethod
 
 
 class Data():
