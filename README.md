@@ -1,13 +1,13 @@
 # FPCMCI - Filtered PCMCI
 
-Extension of the state-of-the-art causal discovery method PCMCI augmented with a feature-selection method based on Transfer Entropy, that is able to identify the correct subset of variables involved in the causal analysis, starting from a prefixed set of them.
+Extension of the state-of-the-art causal discovery method [PCMCI](https://github.com/jakobrunge/tigramite) augmented with a feature-selection method based on Transfer Entropy, that is able to identify the correct subset of variables involved in the causal analysis, starting from a prefixed set of them.
 
 
 ## Why FPCMCI?
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
-In the following it is presented an example showing a comparison between causal models obtained by [PCMCI](https://github.com/jakobrunge/tigramite) and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
+In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
 
 ``` python
 min_lag = 1
