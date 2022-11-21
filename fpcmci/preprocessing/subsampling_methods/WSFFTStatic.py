@@ -1,6 +1,6 @@
 from scipy.fft import rfft, rfftfreq
-from .EntropyBasedMethod import EntropyBasedMethod
-from .SubsamplingMethod import SSMode, SubsamplingMethod
+from fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod import EntropyBasedMethod
+from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SSMode, SubsamplingMethod
 import numpy as np
 import pylab as pl
 from math import ceil

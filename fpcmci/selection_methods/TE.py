@@ -1,6 +1,6 @@
 from enum import Enum
 import numpy as np
-from .SelectionMethod import SelectionMethod, CTest, _suppress_stdout
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod, CTest, _suppress_stdout
 from idtxl.multivariate_te import MultivariateTE
 from idtxl.bivariate_mi import BivariateMI
 from idtxl.data import Data

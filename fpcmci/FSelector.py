@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from tigramite.independence_tests import CondIndTest
 import sys
-from .selection_methods.SelectionMethod import SelectionMethod
-from .CPrinter import CPLevel, CP
-from .utilities.constants import *
-from .utilities import utilities as utils, logger as log
-from .FValidator import FValidator
-from .preprocessing.data import Data 
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod
+from fpcmci.CPrinter import CPLevel, CP
+from fpcmci.utilities.constants import *
+from fpcmci.utilities import utilities as utils, logger as log
+from fpcmci.FValidator import FValidator
+from fpcmci.preprocessing.data import Data 
 
 import warnings
 warnings.filterwarnings('ignore')

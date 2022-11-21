@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>fpcmci.FSelector API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fpcmci.FSelector</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import copy
+import pickle
+import matplotlib.pyplot as plt
+import numpy as np
+from tigramite.independence_tests import CondIndTest
+import sys
+from .selection_methods.SelectionMethod import SelectionMethod
+from .CPrinter import CPLevel, CP
+from .utilities.constants import *
+from .utilities import utilities as utils, logger as log
+from .FValidator import FValidator
+from .preprocessing.data import Data 
+
+import warnings
+warnings.filterwarnings(&#39;ignore&#39;)
+
+
+class FSelector():
+    &#34;&#34;&#34;
+    FSelector class.
+
+    FSelector is a causal feature selector framework for large-scale time series
+    datasets. The framework starts from a Data object and outputs the main features
+    responsible for the evolution of the analysed system. Based on the selected features,
+    the framework outputs a causal model.
+    &#34;&#34;&#34;
+
+    def __init__(self, 
+                 data: Data, 
+                 min_lag, max_lag, 
+                 sel_method: SelectionMethod, val_condtest: CondIndTest, 
+                 verbosity: CPLevel, 
+                 alpha = 0.05, 
+                 resfolder = None,
+                 neglect_only_autodep = False):
+        &#34;&#34;&#34;
+        FSelector contructor
+
+        Args:
+            d (Data): data to analyse
+            min_lag (int): minimum time lag
+            max_lag (int): maximum time lag
+            sel_method (SelectionMethod): selection method
+            val_condtest (CondIndTest): validation method
+            verbosity (CPLevel): verbosity level
+            alpha (float, optional): significance level. Defaults to 0.05.
+            resfolder (string, optional): result folder to create. Defaults to None.
+            neglect_only_autodep (bool, optional): Bit for neglecting variables with only autodependency. Defaults to False.
+        &#34;&#34;&#34;
+        
+        self.data = data
+        self.alpha = alpha
+        self.min_lag = min_lag
+        self.max_lag = max_lag
+        self.sel_method = sel_method
+        self.dependencies = None
+        self.result = None
+        self.neglect_only_autodep = neglect_only_autodep
+
+        self.dependency_path = None
+        if resfolder is not None:
+            utils.create_results_folder()
+            logpath, self.dependency_path = utils.get_selectorpath(resfolder)
+            sys.stdout = log.Logger(logpath)
+        
+        self.validator = FValidator(data, alpha, min_lag, max_lag, val_condtest, resfolder, verbosity)       
+        CP.set_verbosity(verbosity)
+
+
+    def run_selector(self):
+        &#34;&#34;&#34;
+        Run selection method
+        &#34;&#34;&#34;
+        CP.info(&#34;\n&#34;)
+        CP.info(DASH)
+        CP.info(&#34;Selecting relevant features among: &#34; + str(self.data.features))
+        CP.info(&#34;Selection method: &#34; + self.sel_method.name)
+        CP.info(&#34;Significance level: &#34; + str(self.alpha))
+        CP.info(&#34;Max lag time: &#34; + str(self.max_lag))
+        CP.info(&#34;Min lag time: &#34; + str(self.min_lag))
+        CP.info(&#34;Data length: &#34; + str(self.data.T))
+
+        self.sel_method.initialise(self.data, self.alpha, self.min_lag, self.max_lag)
+        self.dependencies = self.sel_method.compute_dependencies()
+        self.o_dependecies = copy.deepcopy(self.dependencies)
+
+
+    def run_validator(self):
+        &#34;&#34;&#34;
+        Run Validator
+        
+        Returns:
+            list(str): list of selected variable names
+        &#34;&#34;&#34;
+        CP.info(&#34;Significance level: &#34; + str(self.alpha))
+        CP.info(&#34;Max lag time: &#34; + str(self.max_lag))
+        CP.info(&#34;Min lag time: &#34; + str(self.min_lag))
+        CP.info(&#34;Data length: &#34; + str(self.data.T))
+
+        # causal model
+        self.validator.data = self.data
+        pcmci_result = self.validator.run()
+        self.result = self.data.features
+        
+        self.save_validator_res()
+        
+        return self.result
+
+    
+    def run(self):
+        &#34;&#34;&#34;
+        Run Selector and Validator without feedback
+        
+        Returns:
+            list(str): list of selected variable names
+        &#34;&#34;&#34;
+        
+        self.run_selector()        
+            
+        # list of selected features based on dependencies
+        tmp_sel_features = self.get_selected_features()
+        if not tmp_sel_features:
+            return self.result
+
+        # shrink dataframe d and dependencies by the selector result
+        self.shrink(tmp_sel_features)
+        
+        # selected links to check by the validator
+        selected_links = self.__get_selected_links()
+            
+        # causal model on selected links
+        self.validator.data = self.data
+        pcmci_result = self.validator.run(selected_links)
+        self.__apply_validator_result(pcmci_result)
+        
+        self.result = self.get_selected_features()
+        # shrink dataframe d and dependencies by the validator result
+        self.shrink(self.result)
+        
+        self.save_validator_res()
+        
+        CP.info(&#34;\nFeature selected: &#34; + str(self.result))
+        return self.result
+    
+
+    def shrink(self, sel_features):
+        &#34;&#34;&#34;
+        Wrapper in order to shrink data.d and dependencies
+
+        Args:
+            sel_features (list(str)): list of selected features
+        &#34;&#34;&#34;
+        self.data.shrink(sel_features)
+        self.__shrink_dependencies()
+    
+    
+    def save_validator_res(self):
+        &#34;&#34;&#34;
+        Saves dag plot if resfolder has been set otherwise it shows the figure
+        &#34;&#34;&#34;
+        if self.result:
+            self.validator.save_result()
+        else:
+            CP.warning(&#34;Result impossible to save: no feature selected&#34;)
+    
+    
+    def dag(self,
+            node_layout = &#39;dot&#39;,
+            min_width = 1,
+            max_width = 5,
+            min_score = 0,
+            max_score = 1,
+            node_size = 8,
+            node_color = &#39;orange&#39;,
+            edge_color = &#39;grey&#39;,
+            font_size = 12,
+            show_edge_labels = True,
+            label_type = LabelType.Lag):
+        &#34;&#34;&#34;
+        Saves dag plot if resfolder has been set otherwise it shows the figure
+        
+        Args:
+            node_layout (str, optional): Node layout. Defaults to &#39;dot.
+            min_width (int, optional): minimum linewidth. Defaults to 1.
+            max_width (int, optional): maximum linewidth. Defaults to 5.
+            min_score (int, optional): minimum score range. Defaults to 0.
+            max_score (int, optional): maximum score range. Defaults to 1.
+            node_size (int, optional): node size. Defaults to 8.
+            node_color (str, optional): node color. Defaults to &#39;orange&#39;.
+            edge_color (str, optional): edge color. Defaults to &#39;grey&#39;.
+            font_size (int, optional): font size. Defaults to 12.
+            show_edge_labels (bool, optional): bit to show the time-lag label of the dependency on the edge. Defaults to True.
+        &#34;&#34;&#34;
+        
+        if self.result:
+            self.validator.build_dag(node_layout,
+                                     min_width, 
+                                     max_width,
+                                     min_score,
+                                     max_score,
+                                     node_size,
+                                     node_color,
+                                     edge_color,
+                                     font_size,
+                                     show_edge_labels,
+                                     label_type)
+        else:
+            CP.warning(&#34;Dag impossible to create: no feature selected&#34;)
+    
+        
+    def timeseries_dag(self,
+                       min_width = 1,
+                       max_width = 5,
+                       min_score = 0,
+                       max_score = 1,
+                       node_size = 8,
+                       font_size = 12,
+                       node_color = &#39;orange&#39;,
+                       edge_color = &#39;grey&#39;):
+        &#34;&#34;&#34;
+        Saves timeseries dag plot if resfolder has been set otherwise it shows the figure
+        
+        Args:
+            min_width (int, optional): minimum linewidth. Defaults to 1.
+            max_width (int, optional): maximum linewidth. Defaults to 5.
+            min_score (int, optional): minimum score range. Defaults to 0.
+            max_score (int, optional): maximum score range. Defaults to 1.
+            node_size (int, optional): node size. Defaults to 8.
+            node_color (str, optional): node color. Defaults to &#39;orange&#39;.
+            edge_color (str, optional): edge color. Defaults to &#39;grey&#39;.
+            font_size (int, optional): font size. Defaults to 12.
+        &#34;&#34;&#34;
+        
+        if self.result:
+            self.validator.build_ts_dag(min_width,
+                                        max_width,
+                                        min_score,
+                                        max_score,
+                                        node_size,
+                                        node_color,
+                                        edge_color,
+                                        font_size)
+        else:
+            CP.warning(&#34;Timeseries dag impossible to create: no feature selected&#34;)
+
+
+    def get_selected_features(self):
+        &#34;&#34;&#34;
+        Defines the list of selected variables for d
+
+        Returns:
+            list(str): list of selected variable names
+        &#34;&#34;&#34;
+        f_list = list()
+        for t in self.dependencies:
+            sources_t = self.__get_dependencies_for_target(t)
+            if self.neglect_only_autodep and self.__is_only_autodep(sources_t, t):
+                sources_t.remove(t)
+            if sources_t: sources_t.append(t)
+            f_list = list(set(f_list + sources_t))
+        res = [f for f in self.data.features if f in f_list]
+
+        return res
+    
+    
+    def show_dependencies(self):
+        &#34;&#34;&#34;
+        Saves dependencies graph if resfolder is set otherwise it shows the figure
+        &#34;&#34;&#34;
+        # FIXME: LAG not considered
+        dependencies_matrix = self.__get_dependencies_matrix()
+
+        fig, ax = plt.subplots()
+        im = ax.imshow(dependencies_matrix, cmap=plt.cm.Greens, interpolation=&#39;nearest&#39;, vmin=0, vmax=1, origin=&#39;lower&#39;)
+        fig.colorbar(im, orientation=&#39;vertical&#39;, label=&#34;score&#34;)
+
+        plt.xlabel(&#34;Sources&#34;)
+        plt.ylabel(&#34;Targets&#34;)
+        plt.xticks(ticks = range(0, self.data.orig_N), labels = self.data.orig_pretty_features, fontsize = 8)
+        plt.yticks(ticks = range(0, self.data.orig_N), labels = self.data.orig_pretty_features, fontsize = 8)
+        plt.title(&#34;Dependencies&#34;)
+
+        if self.dependency_path is not None:
+            plt.savefig(self.dependency_path, dpi = 300)
+        else:
+            plt.show()
+
+
+    def print_dependencies(self):
+        &#34;&#34;&#34;
+        Print dependencies found by the selector
+        &#34;&#34;&#34;
+        for t in self.o_dependecies:
+            print()
+            print()
+            print(DASH)
+            print(&#34;Target&#34;, t)
+            print(DASH)
+            print(&#39;{:&lt;10s}{:&gt;15s}{:&gt;15s}{:&gt;15s}&#39;.format(&#39;SOURCE&#39;, &#39;SCORE&#39;, &#39;PVAL&#39;, &#39;LAG&#39;))
+            print(DASH)
+            for s in self.o_dependecies[t]:
+                print(&#39;{:&lt;10s}{:&gt;15.3f}{:&gt;15.3f}{:&gt;15d}&#39;.format(s[SOURCE], s[SCORE], s[PVAL], s[LAG]))      
+
+
+    def load_result(self, res_path):
+        with open(res_path, &#39;rb&#39;) as f:
+            self.validator.result = pickle.load(f)
+
+
+    def __shrink_dependencies(self):
+        &#34;&#34;&#34;
+        Shrinks dependencies based on the selected features
+
+        Args:
+            selected_features (list(str)): features selected by the selector
+        &#34;&#34;&#34;
+        difference_set = self.dependencies.keys() - self.data.features
+        for d in difference_set: del self.dependencies[d]
+        
+
+    def __get_dependencies_for_target(self, t):
+        &#34;&#34;&#34;
+        Returns list of sources for a specified target
+
+        Args:
+            t (str): target variable name
+
+        Returns:
+            list(str): list of sources for target t
+        &#34;&#34;&#34;
+        return [s[SOURCE] for s in self.dependencies[t]]
+    
+    
+    def __is_only_autodep(self, sources, t):
+        &#34;&#34;&#34;
+        Returns list of sources for a specified target
+
+        Args:
+            sources (list(str)): list of sources for the selected target
+            t (str): target variable name
+
+        Returns:
+            bool: True if sources list contains only the target. False otherwise
+        &#34;&#34;&#34;
+        if len(sources) == 1 and sources[0] == t: return True
+        return False
+
+
+    def __get_dependencies_matrix(self):
+        &#34;&#34;&#34;
+        Returns a matrix composed by scores for each target
+
+        Returns:
+            np.array: score matrix
+        &#34;&#34;&#34;
+        dep_mat = list()
+        for t in self.o_dependecies:
+            dep_vet = [0] * self.data.orig_N
+            for s in self.o_dependecies[t]:
+                dep_vet[self.data.orig_features.index(s[SOURCE])] = s[SCORE]
+            dep_mat.append(dep_vet)
+
+        dep_mat = np.array(dep_mat)
+        inf_mask = np.isinf(dep_mat)
+        neginf_mask = np.isneginf(dep_mat)
+        max_dep_mat = np.max(dep_mat[(dep_mat != -np.inf) &amp; (dep_mat != np.inf)])
+        min_dep_mat = np.min(dep_mat[(dep_mat != -np.inf) &amp; (dep_mat != np.inf)])
+
+        dep_mat[inf_mask] = max_dep_mat
+        dep_mat[neginf_mask] = min_dep_mat
+        dep_mat = (dep_mat - min_dep_mat) / (max_dep_mat - min_dep_mat)
+        return dep_mat
+
+
+    def __get_selected_links(self):
+        &#34;&#34;&#34;
+        Return selected links found by the selector
+        in this form: {0: [(0,-1), (2,-1)]}
+
+        Returns:
+            dict: selected links
+        &#34;&#34;&#34;
+        sel_links = {self.data.features.index(f):list() for f in self.data.features}
+        for t in self.dependencies:
+            
+            # add links
+            for s in self.dependencies[t]:
+                sel_links[self.data.features.index(t)].append((self.data.features.index(s[SOURCE]), -s[LAG]))
+
+        return sel_links
+    
+    
+    def __apply_validator_result(self, causal_model):
+        &#34;&#34;&#34;
+        Exclude dependencies based on validator result
+        &#34;&#34;&#34;
+        list_diffs = list()
+        tmp_dependencies = copy.deepcopy(self.dependencies)
+        for t in tmp_dependencies:
+            for s in tmp_dependencies[t]:
+                if (self.data.features.index(s[SOURCE]), -s[LAG]) not in causal_model[self.data.features.index(t)]:
+                    list_diffs.append((s[SOURCE], str(s[LAG]), t))
+                    self.dependencies[t].remove(s)
+        if list_diffs:
+            CP.debug(DASH)
+            CP.debug(&#34;Difference(s)&#34;)
+            CP.debug(DASH)
+            for diff in list_diffs:
+                CP.debug(&#34;Removing (&#34; + diff[0] + &#34; -&#34; + diff[1] +&#34;) --&gt; (&#34; + diff[2] + &#34;)&#34;)
+    </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="fpcmci.FSelector.FSelector"><code class="flex name class">
+<span>class <span class="ident">FSelector</span></span>
+<span>(</span><span>data: <a title="fpcmci.preprocessing.data.Data" href="preprocessing/data.html#fpcmci.preprocessing.data.Data">Data</a>, min_lag, max_lag, sel_method: <a title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="selection_methods/SelectionMethod.html#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a>, val_condtest: tigramite.independence_tests.independence_tests_base.CondIndTest, verbosity: <a title="fpcmci.CPrinter.CPLevel" href="CPrinter.html#fpcmci.CPrinter.CPLevel">CPLevel</a>, alpha=0.05, resfolder=None, neglect_only_autodep=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>FSelector class.</p>
+<p>FSelector is a causal feature selector framework for large-scale time series
+datasets. The framework starts from a Data object and outputs the main features
+responsible for the evolution of the analysed system. Based on the selected features,
+the framework outputs a causal model.</p>
+<p>FSelector contructor</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>d</code></strong> :&ensp;<code>Data</code></dt>
+<dd>data to analyse</dd>
+<dt><strong><code>min_lag</code></strong> :&ensp;<code>int</code></dt>
+<dd>minimum time lag</dd>
+<dt><strong><code>max_lag</code></strong> :&ensp;<code>int</code></dt>
+<dd>maximum time lag</dd>
+<dt><strong><code>sel_method</code></strong> :&ensp;<code>SelectionMethod</code></dt>
+<dd>selection method</dd>
+<dt><strong><code>val_condtest</code></strong> :&ensp;<code>CondIndTest</code></dt>
+<dd>validation method</dd>
+<dt><strong><code>verbosity</code></strong> :&ensp;<code>CPLevel</code></dt>
+<dd>verbosity level</dd>
+<dt><strong><code>alpha</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>significance level. Defaults to 0.05.</dd>
+<dt><strong><code>resfolder</code></strong> :&ensp;<code>string</code>, optional</dt>
+<dd>result folder to create. Defaults to None.</dd>
+<dt><strong><code>neglect_only_autodep</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Bit for neglecting variables with only autodependency. Defaults to False.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FSelector():
+    &#34;&#34;&#34;
+    FSelector class.
+
+    FSelector is a causal feature selector framework for large-scale time series
+    datasets. The framework starts from a Data object and outputs the main features
+    responsible for the evolution of the analysed system. Based on the selected features,
+    the framework outputs a causal model.
+    &#34;&#34;&#34;
+
+    def __init__(self, 
+                 data: Data, 
+                 min_lag, max_lag, 
+                 sel_method: SelectionMethod, val_condtest: CondIndTest, 
+                 verbosity: CPLevel, 
+                 alpha = 0.05, 
+                 resfolder = None,
+                 neglect_only_autodep = False):
+        &#34;&#34;&#34;
+        FSelector contructor
+
+        Args:
+            d (Data): data to analyse
+            min_lag (int): minimum time lag
+            max_lag (int): maximum time lag
+            sel_method (SelectionMethod): selection method
+            val_condtest (CondIndTest): validation method
+            verbosity (CPLevel): verbosity level
+            alpha (float, optional): significance level. Defaults to 0.05.
+            resfolder (string, optional): result folder to create. Defaults to None.
+            neglect_only_autodep (bool, optional): Bit for neglecting variables with only autodependency. Defaults to False.
+        &#34;&#34;&#34;
+        
+        self.data = data
+        self.alpha = alpha
+        self.min_lag = min_lag
+        self.max_lag = max_lag
+        self.sel_method = sel_method
+        self.dependencies = None
+        self.result = None
+        self.neglect_only_autodep = neglect_only_autodep
+
+        self.dependency_path = None
+        if resfolder is not None:
+            utils.create_results_folder()
+            logpath, self.dependency_path = utils.get_selectorpath(resfolder)
+            sys.stdout = log.Logger(logpath)
+        
+        self.validator = FValidator(data, alpha, min_lag, max_lag, val_condtest, resfolder, verbosity)       
+        CP.set_verbosity(verbosity)
+
+
+    def run_selector(self):
+        &#34;&#34;&#34;
+        Run selection method
+        &#34;&#34;&#34;
+        CP.info(&#34;\n&#34;)
+        CP.info(DASH)
+        CP.info(&#34;Selecting relevant features among: &#34; + str(self.data.features))
+        CP.info(&#34;Selection method: &#34; + self.sel_method.name)
+        CP.info(&#34;Significance level: &#34; + str(self.alpha))
+        CP.info(&#34;Max lag time: &#34; + str(self.max_lag))
+        CP.info(&#34;Min lag time: &#34; + str(self.min_lag))
+        CP.info(&#34;Data length: &#34; + str(self.data.T))
+
+        self.sel_method.initialise(self.data, self.alpha, self.min_lag, self.max_lag)
+        self.dependencies = self.sel_method.compute_dependencies()
+        self.o_dependecies = copy.deepcopy(self.dependencies)
+
+
+    def run_validator(self):
+        &#34;&#34;&#34;
+        Run Validator
+        
+        Returns:
+            list(str): list of selected variable names
+        &#34;&#34;&#34;
+        CP.info(&#34;Significance level: &#34; + str(self.alpha))
+        CP.info(&#34;Max lag time: &#34; + str(self.max_lag))
+        CP.info(&#34;Min lag time: &#34; + str(self.min_lag))
+        CP.info(&#34;Data length: &#34; + str(self.data.T))
+
+        # causal model
+        self.validator.data = self.data
+        pcmci_result = self.validator.run()
+        self.result = self.data.features
+        
+        self.save_validator_res()
+        
+        return self.result
+
+    
+    def run(self):
+        &#34;&#34;&#34;
+        Run Selector and Validator without feedback
+        
+        Returns:
+            list(str): list of selected variable names
+        &#34;&#34;&#34;
+        
+        self.run_selector()        
+            
+        # list of selected features based on dependencies
+        tmp_sel_features = self.get_selected_features()
+        if not tmp_sel_features:
+            return self.result
+
+        # shrink dataframe d and dependencies by the selector result
+        self.shrink(tmp_sel_features)
+        
+        # selected links to check by the validator
+        selected_links = self.__get_selected_links()
+            
+        # causal model on selected links
+        self.validator.data = self.data
+        pcmci_result = self.validator.run(selected_links)
+        self.__apply_validator_result(pcmci_result)
+        
+        self.result = self.get_selected_features()
+        # shrink dataframe d and dependencies by the validator result
+        self.shrink(self.result)
+        
+        self.save_validator_res()
+        
+        CP.info(&#34;\nFeature selected: &#34; + str(self.result))
+        return self.result
+    
+
+    def shrink(self, sel_features):
+        &#34;&#34;&#34;
+        Wrapper in order to shrink data.d and dependencies
+
+        Args:
+            sel_features (list(str)): list of selected features
+        &#34;&#34;&#34;
+        self.data.shrink(sel_features)
+        self.__shrink_dependencies()
+    
+    
+    def save_validator_res(self):
+        &#34;&#34;&#34;
+        Saves dag plot if resfolder has been set otherwise it shows the figure
+        &#34;&#34;&#34;
+        if self.result:
+            self.validator.save_result()
+        else:
+            CP.warning(&#34;Result impossible to save: no feature selected&#34;)
+    
+    
+    def dag(self,
+            node_layout = &#39;dot&#39;,
+            min_width = 1,
+            max_width = 5,
+            min_score = 0,
+            max_score = 1,
+            node_size = 8,
+            node_color = &#39;orange&#39;,
+            edge_color = &#39;grey&#39;,
+            font_size = 12,
+            show_edge_labels = True,
+            label_type = LabelType.Lag):
+        &#34;&#34;&#34;
+        Saves dag plot if resfolder has been set otherwise it shows the figure
+        
+        Args:
+            node_layout (str, optional): Node layout. Defaults to &#39;dot.
+            min_width (int, optional): minimum linewidth. Defaults to 1.
+            max_width (int, optional): maximum linewidth. Defaults to 5.
+            min_score (int, optional): minimum score range. Defaults to 0.
+            max_score (int, optional): maximum score range. Defaults to 1.
+            node_size (int, optional): node size. Defaults to 8.
+            node_color (str, optional): node color. Defaults to &#39;orange&#39;.
+            edge_color (str, optional): edge color. Defaults to &#39;grey&#39;.
+            font_size (int, optional): font size. Defaults to 12.
+            show_edge_labels (bool, optional): bit to show the time-lag label of the dependency on the edge. Defaults to True.
+        &#34;&#34;&#34;
+        
+        if self.result:
+            self.validator.build_dag(node_layout,
+                                     min_width, 
+                                     max_width,
+                                     min_score,
+                                     max_score,
+                                     node_size,
+                                     node_color,
+                                     edge_color,
+                                     font_size,
+                                     show_edge_labels,
+                                     label_type)
+        else:
+            CP.warning(&#34;Dag impossible to create: no feature selected&#34;)
+    
+        
+    def timeseries_dag(self,
+                       min_width = 1,
+                       max_width = 5,
+                       min_score = 0,
+                       max_score = 1,
+                       node_size = 8,
+                       font_size = 12,
+                       node_color = &#39;orange&#39;,
+                       edge_color = &#39;grey&#39;):
+        &#34;&#34;&#34;
+        Saves timeseries dag plot if resfolder has been set otherwise it shows the figure
+        
+        Args:
+            min_width (int, optional): minimum linewidth. Defaults to 1.
+            max_width (int, optional): maximum linewidth. Defaults to 5.
+            min_score (int, optional): minimum score range. Defaults to 0.
+            max_score (int, optional): maximum score range. Defaults to 1.
+            node_size (int, optional): node size. Defaults to 8.
+            node_color (str, optional): node color. Defaults to &#39;orange&#39;.
+            edge_color (str, optional): edge color. Defaults to &#39;grey&#39;.
+            font_size (int, optional): font size. Defaults to 12.
+        &#34;&#34;&#34;
+        
+        if self.result:
+            self.validator.build_ts_dag(min_width,
+                                        max_width,
+                                        min_score,
+                                        max_score,
+                                        node_size,
+                                        node_color,
+                                        edge_color,
+                                        font_size)
+        else:
+            CP.warning(&#34;Timeseries dag impossible to create: no feature selected&#34;)
+
+
+    def get_selected_features(self):
+        &#34;&#34;&#34;
+        Defines the list of selected variables for d
+
+        Returns:
+            list(str): list of selected variable names
+        &#34;&#34;&#34;
+        f_list = list()
+        for t in self.dependencies:
+            sources_t = self.__get_dependencies_for_target(t)
+            if self.neglect_only_autodep and self.__is_only_autodep(sources_t, t):
+                sources_t.remove(t)
+            if sources_t: sources_t.append(t)
+            f_list = list(set(f_list + sources_t))
+        res = [f for f in self.data.features if f in f_list]
+
+        return res
+    
+    
+    def show_dependencies(self):
+        &#34;&#34;&#34;
+        Saves dependencies graph if resfolder is set otherwise it shows the figure
+        &#34;&#34;&#34;
+        # FIXME: LAG not considered
+        dependencies_matrix = self.__get_dependencies_matrix()
+
+        fig, ax = plt.subplots()
+        im = ax.imshow(dependencies_matrix, cmap=plt.cm.Greens, interpolation=&#39;nearest&#39;, vmin=0, vmax=1, origin=&#39;lower&#39;)
+        fig.colorbar(im, orientation=&#39;vertical&#39;, label=&#34;score&#34;)
+
+        plt.xlabel(&#34;Sources&#34;)
+        plt.ylabel(&#34;Targets&#34;)
+        plt.xticks(ticks = range(0, self.data.orig_N), labels = self.data.orig_pretty_features, fontsize = 8)
+        plt.yticks(ticks = range(0, self.data.orig_N), labels = self.data.orig_pretty_features, fontsize = 8)
+        plt.title(&#34;Dependencies&#34;)
+
+        if self.dependency_path is not None:
+            plt.savefig(self.dependency_path, dpi = 300)
+        else:
+            plt.show()
+
+
+    def print_dependencies(self):
+        &#34;&#34;&#34;
+        Print dependencies found by the selector
+        &#34;&#34;&#34;
+        for t in self.o_dependecies:
+            print()
+            print()
+            print(DASH)
+            print(&#34;Target&#34;, t)
+            print(DASH)
+            print(&#39;{:&lt;10s}{:&gt;15s}{:&gt;15s}{:&gt;15s}&#39;.format(&#39;SOURCE&#39;, &#39;SCORE&#39;, &#39;PVAL&#39;, &#39;LAG&#39;))
+            print(DASH)
+            for s in self.o_dependecies[t]:
+                print(&#39;{:&lt;10s}{:&gt;15.3f}{:&gt;15.3f}{:&gt;15d}&#39;.format(s[SOURCE], s[SCORE], s[PVAL], s[LAG]))      
+
+
+    def load_result(self, res_path):
+        with open(res_path, &#39;rb&#39;) as f:
+            self.validator.result = pickle.load(f)
+
+
+    def __shrink_dependencies(self):
+        &#34;&#34;&#34;
+        Shrinks dependencies based on the selected features
+
+        Args:
+            selected_features (list(str)): features selected by the selector
+        &#34;&#34;&#34;
+        difference_set = self.dependencies.keys() - self.data.features
+        for d in difference_set: del self.dependencies[d]
+        
+
+    def __get_dependencies_for_target(self, t):
+        &#34;&#34;&#34;
+        Returns list of sources for a specified target
+
+        Args:
+            t (str): target variable name
+
+        Returns:
+            list(str): list of sources for target t
+        &#34;&#34;&#34;
+        return [s[SOURCE] for s in self.dependencies[t]]
+    
+    
+    def __is_only_autodep(self, sources, t):
+        &#34;&#34;&#34;
+        Returns list of sources for a specified target
+
+        Args:
+            sources (list(str)): list of sources for the selected target
+            t (str): target variable name
+
+        Returns:
+            bool: True if sources list contains only the target. False otherwise
+        &#34;&#34;&#34;
+        if len(sources) == 1 and sources[0] == t: return True
+        return False
+
+
+    def __get_dependencies_matrix(self):
+        &#34;&#34;&#34;
+        Returns a matrix composed by scores for each target
+
+        Returns:
+            np.array: score matrix
+        &#34;&#34;&#34;
+        dep_mat = list()
+        for t in self.o_dependecies:
+            dep_vet = [0] * self.data.orig_N
+            for s in self.o_dependecies[t]:
+                dep_vet[self.data.orig_features.index(s[SOURCE])] = s[SCORE]
+            dep_mat.append(dep_vet)
+
+        dep_mat = np.array(dep_mat)
+        inf_mask = np.isinf(dep_mat)
+        neginf_mask = np.isneginf(dep_mat)
+        max_dep_mat = np.max(dep_mat[(dep_mat != -np.inf) &amp; (dep_mat != np.inf)])
+        min_dep_mat = np.min(dep_mat[(dep_mat != -np.inf) &amp; (dep_mat != np.inf)])
+
+        dep_mat[inf_mask] = max_dep_mat
+        dep_mat[neginf_mask] = min_dep_mat
+        dep_mat = (dep_mat - min_dep_mat) / (max_dep_mat - min_dep_mat)
+        return dep_mat
+
+
+    def __get_selected_links(self):
+        &#34;&#34;&#34;
+        Return selected links found by the selector
+        in this form: {0: [(0,-1), (2,-1)]}
+
+        Returns:
+            dict: selected links
+        &#34;&#34;&#34;
+        sel_links = {self.data.features.index(f):list() for f in self.data.features}
+        for t in self.dependencies:
+            
+            # add links
+            for s in self.dependencies[t]:
+                sel_links[self.data.features.index(t)].append((self.data.features.index(s[SOURCE]), -s[LAG]))
+
+        return sel_links
+    
+    
+    def __apply_validator_result(self, causal_model):
+        &#34;&#34;&#34;
+        Exclude dependencies based on validator result
+        &#34;&#34;&#34;
+        list_diffs = list()
+        tmp_dependencies = copy.deepcopy(self.dependencies)
+        for t in tmp_dependencies:
+            for s in tmp_dependencies[t]:
+                if (self.data.features.index(s[SOURCE]), -s[LAG]) not in causal_model[self.data.features.index(t)]:
+                    list_diffs.append((s[SOURCE], str(s[LAG]), t))
+                    self.dependencies[t].remove(s)
+        if list_diffs:
+            CP.debug(DASH)
+            CP.debug(&#34;Difference(s)&#34;)
+            CP.debug(DASH)
+            for diff in list_diffs:
+                CP.debug(&#34;Removing (&#34; + diff[0] + &#34; -&#34; + diff[1] +&#34;) --&gt; (&#34; + diff[2] + &#34;)&#34;)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="fpcmci.FSelector.FSelector.dag"><code class="name flex">
+<span>def <span class="ident">dag</span></span>(<span>self, node_layout='dot', min_width=1, max_width=5, min_score=0, max_score=1, node_size=8, node_color='orange', edge_color='grey', font_size=12, show_edge_labels=True, label_type=LabelType.Lag)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves dag plot if resfolder has been set otherwise it shows the figure</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>node_layout</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Node layout. Defaults to 'dot.</dd>
+<dt><strong><code>min_width</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>minimum linewidth. Defaults to 1.</dd>
+<dt><strong><code>max_width</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>maximum linewidth. Defaults to 5.</dd>
+<dt><strong><code>min_score</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>minimum score range. Defaults to 0.</dd>
+<dt><strong><code>max_score</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>maximum score range. Defaults to 1.</dd>
+<dt><strong><code>node_size</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>node size. Defaults to 8.</dd>
+<dt><strong><code>node_color</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>node color. Defaults to 'orange'.</dd>
+<dt><strong><code>edge_color</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>edge color. Defaults to 'grey'.</dd>
+<dt><strong><code>font_size</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>font size. Defaults to 12.</dd>
+<dt><strong><code>show_edge_labels</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>bit to show the time-lag label of the dependency on the edge. Defaults to True.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dag(self,
+        node_layout = &#39;dot&#39;,
+        min_width = 1,
+        max_width = 5,
+        min_score = 0,
+        max_score = 1,
+        node_size = 8,
+        node_color = &#39;orange&#39;,
+        edge_color = &#39;grey&#39;,
+        font_size = 12,
+        show_edge_labels = True,
+        label_type = LabelType.Lag):
+    &#34;&#34;&#34;
+    Saves dag plot if resfolder has been set otherwise it shows the figure
+    
+    Args:
+        node_layout (str, optional): Node layout. Defaults to &#39;dot.
+        min_width (int, optional): minimum linewidth. Defaults to 1.
+        max_width (int, optional): maximum linewidth. Defaults to 5.
+        min_score (int, optional): minimum score range. Defaults to 0.
+        max_score (int, optional): maximum score range. Defaults to 1.
+        node_size (int, optional): node size. Defaults to 8.
+        node_color (str, optional): node color. Defaults to &#39;orange&#39;.
+        edge_color (str, optional): edge color. Defaults to &#39;grey&#39;.
+        font_size (int, optional): font size. Defaults to 12.
+        show_edge_labels (bool, optional): bit to show the time-lag label of the dependency on the edge. Defaults to True.
+    &#34;&#34;&#34;
+    
+    if self.result:
+        self.validator.build_dag(node_layout,
+                                 min_width, 
+                                 max_width,
+                                 min_score,
+                                 max_score,
+                                 node_size,
+                                 node_color,
+                                 edge_color,
+                                 font_size,
+                                 show_edge_labels,
+                                 label_type)
+    else:
+        CP.warning(&#34;Dag impossible to create: no feature selected&#34;)</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.get_selected_features"><code class="name flex">
+<span>def <span class="ident">get_selected_features</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Defines the list of selected variables for d</p>
+<h2 id="returns">Returns</h2>
+<p>list(str): list of selected variable names</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_selected_features(self):
+    &#34;&#34;&#34;
+    Defines the list of selected variables for d
+
+    Returns:
+        list(str): list of selected variable names
+    &#34;&#34;&#34;
+    f_list = list()
+    for t in self.dependencies:
+        sources_t = self.__get_dependencies_for_target(t)
+        if self.neglect_only_autodep and self.__is_only_autodep(sources_t, t):
+            sources_t.remove(t)
+        if sources_t: sources_t.append(t)
+        f_list = list(set(f_list + sources_t))
+    res = [f for f in self.data.features if f in f_list]
+
+    return res</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.load_result"><code class="name flex">
+<span>def <span class="ident">load_result</span></span>(<span>self, res_path)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_result(self, res_path):
+    with open(res_path, &#39;rb&#39;) as f:
+        self.validator.result = pickle.load(f)</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.print_dependencies"><code class="name flex">
+<span>def <span class="ident">print_dependencies</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print dependencies found by the selector</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_dependencies(self):
+    &#34;&#34;&#34;
+    Print dependencies found by the selector
+    &#34;&#34;&#34;
+    for t in self.o_dependecies:
+        print()
+        print()
+        print(DASH)
+        print(&#34;Target&#34;, t)
+        print(DASH)
+        print(&#39;{:&lt;10s}{:&gt;15s}{:&gt;15s}{:&gt;15s}&#39;.format(&#39;SOURCE&#39;, &#39;SCORE&#39;, &#39;PVAL&#39;, &#39;LAG&#39;))
+        print(DASH)
+        for s in self.o_dependecies[t]:
+            print(&#39;{:&lt;10s}{:&gt;15.3f}{:&gt;15.3f}{:&gt;15d}&#39;.format(s[SOURCE], s[SCORE], s[PVAL], s[LAG]))      </code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.run"><code class="name flex">
+<span>def <span class="ident">run</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run Selector and Validator without feedback</p>
+<h2 id="returns">Returns</h2>
+<p>list(str): list of selected variable names</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run(self):
+    &#34;&#34;&#34;
+    Run Selector and Validator without feedback
+    
+    Returns:
+        list(str): list of selected variable names
+    &#34;&#34;&#34;
+    
+    self.run_selector()        
+        
+    # list of selected features based on dependencies
+    tmp_sel_features = self.get_selected_features()
+    if not tmp_sel_features:
+        return self.result
+
+    # shrink dataframe d and dependencies by the selector result
+    self.shrink(tmp_sel_features)
+    
+    # selected links to check by the validator
+    selected_links = self.__get_selected_links()
+        
+    # causal model on selected links
+    self.validator.data = self.data
+    pcmci_result = self.validator.run(selected_links)
+    self.__apply_validator_result(pcmci_result)
+    
+    self.result = self.get_selected_features()
+    # shrink dataframe d and dependencies by the validator result
+    self.shrink(self.result)
+    
+    self.save_validator_res()
+    
+    CP.info(&#34;\nFeature selected: &#34; + str(self.result))
+    return self.result</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.run_selector"><code class="name flex">
+<span>def <span class="ident">run_selector</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run selection method</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_selector(self):
+    &#34;&#34;&#34;
+    Run selection method
+    &#34;&#34;&#34;
+    CP.info(&#34;\n&#34;)
+    CP.info(DASH)
+    CP.info(&#34;Selecting relevant features among: &#34; + str(self.data.features))
+    CP.info(&#34;Selection method: &#34; + self.sel_method.name)
+    CP.info(&#34;Significance level: &#34; + str(self.alpha))
+    CP.info(&#34;Max lag time: &#34; + str(self.max_lag))
+    CP.info(&#34;Min lag time: &#34; + str(self.min_lag))
+    CP.info(&#34;Data length: &#34; + str(self.data.T))
+
+    self.sel_method.initialise(self.data, self.alpha, self.min_lag, self.max_lag)
+    self.dependencies = self.sel_method.compute_dependencies()
+    self.o_dependecies = copy.deepcopy(self.dependencies)</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.run_validator"><code class="name flex">
+<span>def <span class="ident">run_validator</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run Validator</p>
+<h2 id="returns">Returns</h2>
+<p>list(str): list of selected variable names</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def run_validator(self):
+    &#34;&#34;&#34;
+    Run Validator
+    
+    Returns:
+        list(str): list of selected variable names
+    &#34;&#34;&#34;
+    CP.info(&#34;Significance level: &#34; + str(self.alpha))
+    CP.info(&#34;Max lag time: &#34; + str(self.max_lag))
+    CP.info(&#34;Min lag time: &#34; + str(self.min_lag))
+    CP.info(&#34;Data length: &#34; + str(self.data.T))
+
+    # causal model
+    self.validator.data = self.data
+    pcmci_result = self.validator.run()
+    self.result = self.data.features
+    
+    self.save_validator_res()
+    
+    return self.result</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.save_validator_res"><code class="name flex">
+<span>def <span class="ident">save_validator_res</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves dag plot if resfolder has been set otherwise it shows the figure</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_validator_res(self):
+    &#34;&#34;&#34;
+    Saves dag plot if resfolder has been set otherwise it shows the figure
+    &#34;&#34;&#34;
+    if self.result:
+        self.validator.save_result()
+    else:
+        CP.warning(&#34;Result impossible to save: no feature selected&#34;)</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.show_dependencies"><code class="name flex">
+<span>def <span class="ident">show_dependencies</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves dependencies graph if resfolder is set otherwise it shows the figure</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_dependencies(self):
+    &#34;&#34;&#34;
+    Saves dependencies graph if resfolder is set otherwise it shows the figure
+    &#34;&#34;&#34;
+    # FIXME: LAG not considered
+    dependencies_matrix = self.__get_dependencies_matrix()
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(dependencies_matrix, cmap=plt.cm.Greens, interpolation=&#39;nearest&#39;, vmin=0, vmax=1, origin=&#39;lower&#39;)
+    fig.colorbar(im, orientation=&#39;vertical&#39;, label=&#34;score&#34;)
+
+    plt.xlabel(&#34;Sources&#34;)
+    plt.ylabel(&#34;Targets&#34;)
+    plt.xticks(ticks = range(0, self.data.orig_N), labels = self.data.orig_pretty_features, fontsize = 8)
+    plt.yticks(ticks = range(0, self.data.orig_N), labels = self.data.orig_pretty_features, fontsize = 8)
+    plt.title(&#34;Dependencies&#34;)
+
+    if self.dependency_path is not None:
+        plt.savefig(self.dependency_path, dpi = 300)
+    else:
+        plt.show()</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.shrink"><code class="name flex">
+<span>def <span class="ident">shrink</span></span>(<span>self, sel_features)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Wrapper in order to shrink data.d and dependencies</p>
+<h2 id="args">Args</h2>
+<p>sel_features (list(str)): list of selected features</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def shrink(self, sel_features):
+    &#34;&#34;&#34;
+    Wrapper in order to shrink data.d and dependencies
+
+    Args:
+        sel_features (list(str)): list of selected features
+    &#34;&#34;&#34;
+    self.data.shrink(sel_features)
+    self.__shrink_dependencies()</code></pre>
+</details>
+</dd>
+<dt id="fpcmci.FSelector.FSelector.timeseries_dag"><code class="name flex">
+<span>def <span class="ident">timeseries_dag</span></span>(<span>self, min_width=1, max_width=5, min_score=0, max_score=1, node_size=8, font_size=12, node_color='orange', edge_color='grey')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Saves timeseries dag plot if resfolder has been set otherwise it shows the figure</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>min_width</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>minimum linewidth. Defaults to 1.</dd>
+<dt><strong><code>max_width</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>maximum linewidth. Defaults to 5.</dd>
+<dt><strong><code>min_score</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>minimum score range. Defaults to 0.</dd>
+<dt><strong><code>max_score</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>maximum score range. Defaults to 1.</dd>
+<dt><strong><code>node_size</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>node size. Defaults to 8.</dd>
+<dt><strong><code>node_color</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>node color. Defaults to 'orange'.</dd>
+<dt><strong><code>edge_color</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>edge color. Defaults to 'grey'.</dd>
+<dt><strong><code>font_size</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>font size. Defaults to 12.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def timeseries_dag(self,
+                   min_width = 1,
+                   max_width = 5,
+                   min_score = 0,
+                   max_score = 1,
+                   node_size = 8,
+                   font_size = 12,
+                   node_color = &#39;orange&#39;,
+                   edge_color = &#39;grey&#39;):
+    &#34;&#34;&#34;
+    Saves timeseries dag plot if resfolder has been set otherwise it shows the figure
+    
+    Args:
+        min_width (int, optional): minimum linewidth. Defaults to 1.
+        max_width (int, optional): maximum linewidth. Defaults to 5.
+        min_score (int, optional): minimum score range. Defaults to 0.
+        max_score (int, optional): maximum score range. Defaults to 1.
+        node_size (int, optional): node size. Defaults to 8.
+        node_color (str, optional): node color. Defaults to &#39;orange&#39;.
+        edge_color (str, optional): edge color. Defaults to &#39;grey&#39;.
+        font_size (int, optional): font size. Defaults to 12.
+    &#34;&#34;&#34;
+    
+    if self.result:
+        self.validator.build_ts_dag(min_width,
+                                    max_width,
+                                    min_score,
+                                    max_score,
+                                    node_size,
+                                    node_color,
+                                    edge_color,
+                                    font_size)
+    else:
+        CP.warning(&#34;Timeseries dag impossible to create: no feature selected&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="fpcmci" href="index.html">fpcmci</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="fpcmci.FSelector.FSelector" href="#fpcmci.FSelector.FSelector">FSelector</a></code></h4>
+<ul class="">
+<li><code><a title="fpcmci.FSelector.FSelector.dag" href="#fpcmci.FSelector.FSelector.dag">dag</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.get_selected_features" href="#fpcmci.FSelector.FSelector.get_selected_features">get_selected_features</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.load_result" href="#fpcmci.FSelector.FSelector.load_result">load_result</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.print_dependencies" href="#fpcmci.FSelector.FSelector.print_dependencies">print_dependencies</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.run" href="#fpcmci.FSelector.FSelector.run">run</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.run_selector" href="#fpcmci.FSelector.FSelector.run_selector">run_selector</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.run_validator" href="#fpcmci.FSelector.FSelector.run_validator">run_validator</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.save_validator_res" href="#fpcmci.FSelector.FSelector.save_validator_res">save_validator_res</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.show_dependencies" href="#fpcmci.FSelector.FSelector.show_dependencies">show_dependencies</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.shrink" href="#fpcmci.FSelector.FSelector.shrink">shrink</a></code></li>
+<li><code><a title="fpcmci.FSelector.FSelector.timeseries_dag" href="#fpcmci.FSelector.FSelector.timeseries_dag">timeseries_dag</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

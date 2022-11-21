@@ -4,11 +4,11 @@ from tigramite.pcmci import PCMCI
 from tigramite.independence_tests import CondIndTest
 import tigramite.data_processing as pp
 import numpy as np
-from .CPrinter import CPLevel, CP
-from .preprocessing.data import Data
-from .utilities import utilities as utils
+from fpcmci.CPrinter import CPLevel, CP
+from fpcmci.preprocessing.data import Data
+import fpcmci.utilities.utilities as utils
 from fpcmci.causal_graph import *
-from .utilities.constants import *
+from fpcmci.utilities.constants import *
 
 
 class FValidator():

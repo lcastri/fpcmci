@@ -1,5 +1,5 @@
 from enum import Enum
-from .SelectionMethod import SelectionMethod, CTest, _suppress_stdout
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod, CTest, _suppress_stdout
 from idtxl.multivariate_mi import MultivariateMI
 from idtxl.data import Data
 

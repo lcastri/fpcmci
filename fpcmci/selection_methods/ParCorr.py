@@ -1,4 +1,4 @@
-from .SelectionMethod import SelectionMethod, CTest
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod, CTest
 from fpcmci.CPrinter import CP
 from scipy import stats, linalg
 import numpy as np

@@ -1,4 +1,4 @@
-from .SelectionMethod import SelectionMethod, CTest
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod, CTest
 from sklearn.feature_selection import f_regression
 from fpcmci.CPrinter import CP
 
