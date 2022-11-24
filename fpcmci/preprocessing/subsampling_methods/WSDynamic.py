@@ -1,16 +1,22 @@
 import ruptures as rpt
-from .EntropyBasedMethod import EntropyBasedMethod
-from .SubsamplingMethod import SubsamplingMethod, SSMode
+from fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod import EntropyBasedMethod
+from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod, SSMode
 
 
-class EntropyBasedDynamic(SubsamplingMethod, EntropyBasedMethod):
+class WSDynamic(SubsamplingMethod, EntropyBasedMethod):
+    """
+    Subsampling method with dynamic window size based on entropy analysis
+    """
     def __init__(self, window_min_size, entropy_threshold):
         """
-        Subsampling method with static window size based on Fourier analysis
+        WSDynamic class constructor
 
         Args:
             window_min_size (int): minimun window size
             entropy_threshold (float): entropy threshold
+
+        Raises:
+            ValueError: if window_min_size == None
         """
         SubsamplingMethod.__init__(self, SSMode.WSDynamic)
         EntropyBasedMethod.__init__(self, entropy_threshold)
@@ -31,6 +37,12 @@ class EntropyBasedDynamic(SubsamplingMethod, EntropyBasedMethod):
 
 
     def run(self):
+        """
+        Run subsampler
+
+        Returns:
+            (list[int]): indexes of the remaining samples
+        """
         # build list of segment
         self.dataset_segmentation()
 

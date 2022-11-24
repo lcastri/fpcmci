@@ -1,6 +1,6 @@
 from enum import Enum
 import numpy as np
-from .SelectionMethod import SelectionMethod, CTest, _suppress_stdout
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod, CTest, _suppress_stdout
 from idtxl.multivariate_te import MultivariateTE
 from idtxl.bivariate_mi import BivariateMI
 from idtxl.data import Data
@@ -13,12 +13,27 @@ class TEestimator(Enum):
 
 
 class TE(SelectionMethod):
+    """
+    Feature selection method based on Trasfer Entropy analysis
+    """
     def __init__(self, estimator: TEestimator):
+        """
+        TE class contructor
+
+        Args:
+            estimator (TEestimator): Gaussian/Kraskov
+        """
         super().__init__(CTest.TE)
         self.estimator = estimator
 
 
     def compute_dependencies(self):
+        """
+        compute list of dependencies for each target by transfer entropy analysis
+
+        Returns:
+            (dict): dictonary(TARGET: list SOURCES)
+        """
         multi_network_analysis = MultivariateTE()
         bi_network_analysis = BivariateMI()
         settings = {'cmi_estimator': self.estimator.value,

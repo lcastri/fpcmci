@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from tigramite.independence_tests import CondIndTest
 import sys
-from .selection_methods.SelectionMethod import SelectionMethod
-from .CPrinter import CPLevel, CP
-from .utilities.constants import *
-from .utilities import utilities as utils, logger as log
-from .FValidator import FValidator
-from .preprocessing.data import Data 
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod
+from fpcmci.CPrinter import CPLevel, CP
+from fpcmci.basics.constants import *
+from fpcmci.basics.logger import Logger
+import fpcmci.basics.utils as utils
+from fpcmci.FValidator import FValidator
+from fpcmci.preprocessing.data import Data 
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -20,7 +21,7 @@ class FSelector():
     FSelector class.
 
     FSelector is a causal feature selector framework for large-scale time series
-    datasets. The framework starts from a Data object and outputs the main features
+    datasets. Sarting from a Data object and it selects the main features
     responsible for the evolution of the analysed system. Based on the selected features,
     the framework outputs a causal model.
     """
@@ -34,10 +35,10 @@ class FSelector():
                  resfolder = None,
                  neglect_only_autodep = False):
         """
-        FSelector contructor
+        FSelector class contructor
 
         Args:
-            d (Data): data to analyse
+            data (Data): data to analyse
             min_lag (int): minimum time lag
             max_lag (int): maximum time lag
             sel_method (SelectionMethod): selection method
@@ -61,7 +62,7 @@ class FSelector():
         if resfolder is not None:
             utils.create_results_folder()
             logpath, self.dependency_path = utils.get_selectorpath(resfolder)
-            sys.stdout = log.Logger(logpath)
+            sys.stdout = Logger(logpath)
         
         self.validator = FValidator(data, alpha, min_lag, max_lag, val_condtest, resfolder, verbosity)       
         CP.set_verbosity(verbosity)
@@ -310,9 +311,6 @@ class FSelector():
     def __shrink_dependencies(self):
         """
         Shrinks dependencies based on the selected features
-
-        Args:
-            selected_features (list(str)): features selected by the selector
         """
         difference_set = self.dependencies.keys() - self.data.features
         for d in difference_set: del self.dependencies[d]
@@ -340,7 +338,7 @@ class FSelector():
             t (str): target variable name
 
         Returns:
-            bool: True if sources list contains only the target. False otherwise
+            (bool): True if sources list contains only the target. False otherwise
         """
         if len(sources) == 1 and sources[0] == t: return True
         return False
@@ -351,7 +349,7 @@ class FSelector():
         Returns a matrix composed by scores for each target
 
         Returns:
-            np.array: score matrix
+            (np.array): score matrix
         """
         dep_mat = list()
         for t in self.o_dependecies:
@@ -378,7 +376,7 @@ class FSelector():
         in this form: {0: [(0,-1), (2,-1)]}
 
         Returns:
-            dict: selected links
+            (dict): selected links
         """
         sel_links = {self.data.features.index(f):list() for f in self.data.features}
         for t in self.dependencies:

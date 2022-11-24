@@ -1,14 +1,30 @@
-from .subsampling_methods.SubsamplingMethod import SubsamplingMethod
+from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
 import pandas as pd
 from matplotlib import gridspec
 import pylab as pl
 import numpy as np
 
 class Subsampler():
+    """
+    Subsampler class. 
+    
+    It subsamples the data by using a subsampling method chosen among:
+        - Static - subsamples data by taking one sample each step-samples
+        - WSDynamic - entropy based method with dynamic window size computed by breakpoint analysis
+        - WSFFTStatic - entropy based method with fixed window size computed by FFT analysis
+        - WSStatic - entropy base method with predefined window size
+    """
 
     def __init__(self, 
                  df: pd.DataFrame, 
                  ss_method: SubsamplingMethod):
+        """
+        Subsampler class constructor
+
+        Args:
+            df (pd.DataFrame): dataframe to subsample
+            ss_method (SubsamplingMethod): subsampling method
+        """
         self.df = df
         self.ss_method = ss_method
         self.ss_method.initialise(df)
@@ -16,10 +32,10 @@ class Subsampler():
 
     def subsample(self):
         """
-        Sabsamples dataframe
+        Runs the subsampling algorithm and returns the subsapled ndarray
 
         Returns:
-            type: Subsampled dataframe value
+            (ndarray): Subsampled dataframe value
         """
         self.result = self.ss_method.run()
         return self.df.values[self.result, :]

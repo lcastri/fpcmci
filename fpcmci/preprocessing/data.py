@@ -3,31 +3,30 @@ import pandas as pd
 from matplotlib import gridspec
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
-from .Subsampler import Subsampler
-from .subsampling_methods.SubsamplingMethod import SubsamplingMethod
+from fpcmci.preprocessing.Subsampler import Subsampler
+from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
 
 
 class Data():
+    """
+    Data class manages the preprocess of the data before the causal analysis
+    """
     def __init__(self, data, vars = None, fill_nan = True, stand = False, subsampling : SubsamplingMethod = None, show_subsampling = False):
         """
-        Data constructor
+        Data class constructor
 
         Args:
-            data (str/DataFrame/np.array): it can be: 
-                                          - string specifing the path of a csv file to load
-                                          - pandas.DataFrame
-                                          - numpy.array
-            vars (list(str), optional): List containing variable names. If unset then 
-                                        - vars = data columns name if data = (str/DataFrame)
-                                        - vars = [X_0 .. X_N] if data = np.array.
-                                        Defaults to None.
+            data (str/DataFrame/np.array): it can be a string specifing the path of a csv file to load/pandas.DataFrame/numpy.array
+            vars (list(str), optional): List containing variable names. If unset then, 
+                if data = (str/DataFrame) vars = data columns name elif data = np.array vars = [X_0 .. X_N]
+                Defaults to None.
             fill_nan (bool, optional): Fill NaNs bit. Defaults to True.
             stand (bool, optional): Standardization bit. Defaults to False.
-            subsample (SubsamplingMethod, optional): Subsampling method. If None not active. Defaults to None.
+            subsampling (SubsamplingMethod, optional): Subsampling method. If None not active. Defaults to None.
             show_subsampling (bool, optional): If True shows subsampling result. Defaults to False.
 
         Raises:
-            TypeError: if data is not str/DataFrame/ndarray
+            TypeError: if data is not str - DataFrame - ndarray
         """
         # Data handling
         if type(data) == np.ndarray:
@@ -96,7 +95,7 @@ class Data():
         Number of features
         
         Returns:
-            int: number of features
+            (int): number of features
         """
         return len(self.d.columns)
 
@@ -106,7 +105,7 @@ class Data():
         Dataframe length
         
         Returns:
-            int: dataframe length
+            (int): dataframe length
         """
         return len(self.d)
                        

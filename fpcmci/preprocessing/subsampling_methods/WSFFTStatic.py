@@ -1,16 +1,19 @@
 from scipy.fft import rfft, rfftfreq
-from .EntropyBasedMethod import EntropyBasedMethod
-from .SubsamplingMethod import SSMode, SubsamplingMethod
+from fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod import EntropyBasedMethod
+from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SSMode, SubsamplingMethod
 import numpy as np
 import pylab as pl
 from math import ceil
 import scipy.signal
 
 
-class EntropyBasedFFTStatic(SubsamplingMethod, EntropyBasedMethod):
+class WSFFTStatic(SubsamplingMethod, EntropyBasedMethod):
+    """
+    Subsampling method with static window size based on Fourier analysis
+    """
     def __init__(self, sampling_time, entropy_threshold):
         """
-        Subsampling method with static window size based on Fourier analysis
+        WSFFTStatic class constructor
 
         Args:
             sampling_time (float): timeseries sampling time
@@ -26,7 +29,7 @@ class EntropyBasedFFTStatic(SubsamplingMethod, EntropyBasedMethod):
         Compute window size based on Fourier analysis performed on dataframe
 
         Returns:
-            int: window size
+            (int): window size
         """
         N, dim = self.df.shape
         xf = rfftfreq(N, self.sampling_time)
@@ -37,10 +40,10 @@ class EntropyBasedFFTStatic(SubsamplingMethod, EntropyBasedMethod):
             peak_indices, _ = scipy.signal.find_peaks(yf)
             highest_peak_index = peak_indices[np.argmax(yf[peak_indices])]
             w_array.append(ceil(1 / (2 * xf[highest_peak_index]) / self.sampling_time))
-            fig, ax = pl.subplots()
-            ax.plot(xf, yf)
-            ax.plot(xf[highest_peak_index], np.abs(yf[highest_peak_index]), "x")
-            pl.show()
+            # fig, ax = pl.subplots()
+            # ax.plot(xf, yf)
+            # ax.plot(xf[highest_peak_index], np.abs(yf[highest_peak_index]), "x")
+            # pl.show()
         return min(w_array)
 
 
@@ -56,6 +59,12 @@ class EntropyBasedFFTStatic(SubsamplingMethod, EntropyBasedMethod):
 
     
     def run(self):
+        """
+        Run subsampler
+
+        Returns:
+            (list[int]): indexes of the remaining samples
+        """
         # define window size
         self.ws = self.__fourier_window()
 

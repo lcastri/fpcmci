@@ -3,7 +3,7 @@ from enum import Enum
 from contextlib import contextmanager
 import sys, os
 from fpcmci.preprocessing.data import Data
-from fpcmci.utilities.constants import *
+from fpcmci.basics.constants import *
 
 
 class CTest(Enum):
@@ -24,6 +24,9 @@ def _suppress_stdout():
 
 
 class SelectionMethod(ABC):
+    """
+    SelectionMethod abstract class
+    """
     def __init__(self, ctest):
         self.ctest = ctest
         self.data = None
@@ -39,7 +42,7 @@ class SelectionMethod(ABC):
         Returns Selection Method name
 
         Returns:
-            str: Selection Method name
+            (str): Selection Method name
         """
         return self.ctest.value
 
@@ -63,6 +66,9 @@ class SelectionMethod(ABC):
 
     @abstractmethod
     def compute_dependencies(self) -> dict:
+        """
+        abstract method
+        """
         pass
 
 

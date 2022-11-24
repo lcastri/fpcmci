@@ -1,5 +1,5 @@
 import sys
-from .utilities import cls
+from fpcmci.basics.utils import cls
 
 
 class Logger(object):

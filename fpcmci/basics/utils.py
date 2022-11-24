@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from fpcmci.utilities.constants import *
+from fpcmci.basics.constants import *
 
 
 def cls():

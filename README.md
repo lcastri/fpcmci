@@ -1,13 +1,13 @@
-# FPCMCI - Filtered PCMCI
+# <img src="https://github.com/lcastri/fpcmci/raw/developer/docs/assets/icon.png" width="25"> FPCMCI - Filtered PCMCI
 
-Extension of the state-of-the-art causal discovery method PCMCI augmented with a feature-selection method based on Transfer Entropy, that is able to identify the correct subset of variables involved in the causal analysis, starting from a prefixed set of them.
+Extension of the state-of-the-art causal discovery method [PCMCI](https://github.com/jakobrunge/tigramite) augmented with a feature-selection method based on Transfer Entropy. The algorithm, starting from a prefixed set of variables, identifies the correct subset of features and possible links between them which describe the observed process. Then, from the selected features and links, a causal model is built.
 
 
 ## Why FPCMCI?
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
-In the following it is presented an example showing a comparison between causal models obtained by [PCMCI](https://github.com/jakobrunge/tigramite) and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
+In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
 
 ``` python
 min_lag = 1
@@ -69,10 +69,12 @@ If you found this useful for your work, please cite these papers:
 
 
 ## Installation
+
 Before installing the FPCMCI package, you need to install the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the current release of `FPCMCI` with:
 ``` shell
 pip install fpcmci
 ```
 
-## Documentation
-Coming soon..
+## Useful links
+
+* [Documentation](https://lcastri.github.io/fpcmci/)

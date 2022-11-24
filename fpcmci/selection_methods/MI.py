@@ -1,5 +1,5 @@
 from enum import Enum
-from .SelectionMethod import SelectionMethod, CTest, _suppress_stdout
+from fpcmci.selection_methods.SelectionMethod import SelectionMethod, CTest, _suppress_stdout
 from idtxl.multivariate_mi import MultivariateMI
 from idtxl.data import Data
 
@@ -9,11 +9,26 @@ class MIestimator(Enum):
 
 
 class MI(SelectionMethod):
+    """
+    Feature selection method based on Mutual Information analysis
+    """
     def __init__(self, estimator: MIestimator):
+        """
+        MI class contructor
+
+        Args:
+            estimator (MIestimator): Gaussian/Kraskov
+        """
         super().__init__(CTest.MI)
         self.estimator = estimator
 
     def compute_dependencies(self):
+        """
+        compute list of dependencies for each target by mutual information analysis
+
+        Returns:
+            (dict): dictonary(TARGET: list SOURCES)
+        """
         with _suppress_stdout():
             data = Data(self.d.values, dim_order='sp') # sp = samples(row) x processes(col)
 

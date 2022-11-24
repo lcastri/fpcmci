@@ -1,9 +1,12 @@
 from abc import ABC, abstractmethod
 from copy import deepcopy
-from .moving_window import MovingWindow
+from fpcmci.preprocessing.subsampling_methods.moving_window import MovingWindow
 
     
 class EntropyBasedMethod(ABC):
+    """
+    EntropyBasedMethod abstract class
+    """
     def __init__(self, threshold):
         self.windows = list()
         self.segments = list()
@@ -15,7 +18,7 @@ class EntropyBasedMethod(ABC):
         Create deepcopy of the dataframe but with rounded values
 
         Returns:
-            DataFrame: rounded dataframe
+            (pd.DataFrame): rounded dataframe
         """
         de = deepcopy(self.df)
         de = de.round(1)
@@ -107,4 +110,7 @@ class EntropyBasedMethod(ABC):
 
     @abstractmethod
     def dataset_segmentation(self):
+        """
+        abstract method
+        """
         pass
