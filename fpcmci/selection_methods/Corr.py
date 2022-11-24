@@ -3,11 +3,23 @@ from sklearn.feature_selection import f_regression
 from fpcmci.CPrinter import CP
 
 class Corr(SelectionMethod):
+    """
+    Feature selection method based on Correlation analysis
+    """
     def __init__(self):
+        """
+        Corr contructor class
+        """
         super().__init__(CTest.Corr)
 
 
     def compute_dependencies(self):
+        """
+        compute list of dependencies for each target by correlation analysis
+
+        Returns:
+            (dict): dictonary(TARGET: list SOURCES)
+        """
         CP.info("\n##")
         CP.info("## " + self.name + " analysis")
         CP.info("##")

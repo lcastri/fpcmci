@@ -7,10 +7,13 @@ from math import ceil
 import scipy.signal
 
 
-class EntropyBasedFFTStatic(SubsamplingMethod, EntropyBasedMethod):
+class WSFFTStatic(SubsamplingMethod, EntropyBasedMethod):
+    """
+    Subsampling method with static window size based on Fourier analysis
+    """
     def __init__(self, sampling_time, entropy_threshold):
         """
-        Subsampling method with static window size based on Fourier analysis
+        WSFFTStatic class constructor
 
         Args:
             sampling_time (float): timeseries sampling time
@@ -26,7 +29,7 @@ class EntropyBasedFFTStatic(SubsamplingMethod, EntropyBasedMethod):
         Compute window size based on Fourier analysis performed on dataframe
 
         Returns:
-            int: window size
+            (int): window size
         """
         N, dim = self.df.shape
         xf = rfftfreq(N, self.sampling_time)
@@ -56,6 +59,12 @@ class EntropyBasedFFTStatic(SubsamplingMethod, EntropyBasedMethod):
 
     
     def run(self):
+        """
+        Run subsampler
+
+        Returns:
+            (list[int]): indexes of the remaining samples
+        """
         # define window size
         self.ws = self.__fourier_window()
 

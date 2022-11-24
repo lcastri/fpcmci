@@ -8,11 +8,24 @@ from fpcmci.preprocessing.subsampling_methods.WSDynamic import EntropyBasedDynam
 from fpcmci.preprocessing.subsampling_methods.WSFFTStatic import EntropyBasedFFTStatic
 from fpcmci.preprocessing.subsampling_methods.WSStatic import EntropyBasedStatic
 from fpcmci.selection_methods.TE import TE, TEestimator
+from fpcmci.basics.constants import LabelType
 import numpy as np
-from fpcmci.utilities.constants import LabelType
 
 from time import time
 from datetime import timedelta
+
+class CIAO:
+    """
+    CIAO CIAO
+    """
+    def __init__(self, a) -> None:
+        """
+        init
+
+        Args:
+            a (int): ciao A
+        """
+        pass
 
 
 if __name__ == '__main__':   

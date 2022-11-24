@@ -11,12 +11,21 @@ class SSMode(Enum):
     
 
 class SubsamplingMethod(ABC):
+    """
+    SubsamplingMethod abstract class
+    """
     def __init__(self, ssmode: SSMode):
         self.ssmode = ssmode
         self.df = None
 
     
     def initialise(self, dataframe: pd.DataFrame):
+        """
+        Initialise class by setting the dataframe to subsample
+
+        Args:
+            dataframe (pd.DataFrame): _description_
+        """
         self.df = dataframe
 
 

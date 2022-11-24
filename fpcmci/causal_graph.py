@@ -2,7 +2,7 @@ from matplotlib import pyplot as plt
 import numpy as np
 import networkx as nx
 from netgraph import Graph
-from fpcmci.utilities.constants import *
+from fpcmci.basics.constants import *
 
 
 def dag(res,
@@ -22,7 +22,7 @@ def dag(res,
     build a dag
 
     Args:
-        result (dict): dependencies result
+        res (dict): dependencies result
         node_layout (str, optional): Node layout. Defaults to 'dot'.
         min_width (int, optional): minimum linewidth. Defaults to 1.
         max_width (int, optional): maximum linewidth. Defaults to 5.
@@ -122,7 +122,7 @@ def ts_dag(res,
     build a timeseries dag
 
     Args:
-        result (dict): dependencies result
+        res (dict): dependencies result
         tau (int): max time lag
         min_width (int, optional): minimum linewidth. Defaults to 1.
         max_width (int, optional): maximum linewidth. Defaults to 5.
@@ -213,6 +213,6 @@ def __scale(score, min_width, max_width, min_score = 0, max_score = 1):
         max_score (int, optional): maximum score range. Defaults to 1.
 
     Returns:
-        float: scaled score
+        (float): scaled score
     """
     return ((score - min_score) / (max_score - min_score)) * (max_width - min_width) + min_width

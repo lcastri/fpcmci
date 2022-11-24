@@ -13,12 +13,27 @@ class TEestimator(Enum):
 
 
 class TE(SelectionMethod):
+    """
+    Feature selection method based on Trasfer Entropy analysis
+    """
     def __init__(self, estimator: TEestimator):
+        """
+        TE class contructor
+
+        Args:
+            estimator (TEestimator): Gaussian/Kraskov
+        """
         super().__init__(CTest.TE)
         self.estimator = estimator
 
 
     def compute_dependencies(self):
+        """
+        compute list of dependencies for each target by transfer entropy analysis
+
+        Returns:
+            (dict): dictonary(TARGET: list SOURCES)
+        """
         multi_network_analysis = MultivariateTE()
         bi_network_analysis = BivariateMI()
         settings = {'cmi_estimator': self.estimator.value,

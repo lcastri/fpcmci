@@ -1,4 +1,4 @@
-from .version import VERSION
+from fpcmci.version import VERSION
 
 """
 FPCMCI.
@@ -9,4 +9,3 @@ Extension of the PCMCI causal discovery algorithm augmented with a feature selec
 
 __version__ = VERSION
 __author__ = 'Luca Castri'
-

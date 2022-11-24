@@ -6,9 +6,9 @@ import tigramite.data_processing as pp
 import numpy as np
 from fpcmci.CPrinter import CPLevel, CP
 from fpcmci.preprocessing.data import Data
-import fpcmci.utilities.utilities as utils
+import fpcmci.basics.utils as utils
 from fpcmci.causal_graph import *
-from fpcmci.utilities.constants import *
+from fpcmci.basics.constants import *
 
 
 class FValidator():
@@ -17,12 +17,10 @@ class FValidator():
 
     FValidator works with FSelector in order to find the causal 
     model starting from a prefixed set of variables and links.
-    Based on the FValidator results, the FSelector deletes those 
-    links which have been removed by the FValidator.
     """
     def __init__(self, data: Data, alpha, min_lag, max_lag, val_condtest: CondIndTest, resfolder, verbosity: CPLevel):
         """
-        Validator constructor
+        Validator class constructor
 
         Args:
             data (Data): data to analyse
@@ -54,7 +52,7 @@ class FValidator():
         Run causal discovery algorithm
 
         Returns:
-            dict: estimated causal model
+            (dict): estimated causal model
         """
         CP.info('\n')
         CP.info(DASH)
@@ -195,8 +193,7 @@ class FValidator():
         Returns dictionary of parents sorted by val_matrix filtered by alpha
 
         Returns:
-            dict: Dictionary of form {0:[(0, -1), (3, -2), ...], 1:[], ...}
-            containing estimated parents.
+            (dict): Dictionary of form {0:[(0, -1), (3, -2), ...], 1:[], ...} containing estimated parents.
         """
         graph = self.result['graph']
         val_matrix = self.result['val_matrix']
@@ -220,11 +217,8 @@ class FValidator():
         """
         Re-elaborates the PCMCI result in a new dictionary
 
-        Args:
-            result (dict): pcmci result
-
         Returns:
-            dict: pcmci result re-elaborated
+            (dict): pcmci result re-elaborated
         """
         res_dict = {f:list() for f in self.result['var_names']}
         N, lags = self.result['graph'][0].shape
@@ -244,7 +238,7 @@ class FValidator():
         Applies alpha threshold to the pcmci result
 
         Returns:
-            ndarray: graph filtered by alpha 
+            (ndarray): graph filtered by alpha 
         """
         mask = np.ones(self.result['p_matrix'].shape, dtype='bool')
         
@@ -261,17 +255,17 @@ class FValidator():
     
     
     def __convert_to_string_graph(self, graph_bool):
-        """Converts the 0,1-based graph returned by PCMCI to a string array
-        with links '-->'.
-        Parameters
-        ----------
-        graph_bool : array
-            0,1-based graph array output by PCMCI.
-        Returns
-        -------
-        graph : array
-            graph as string array with links '-->'.
         """
+        Converts the 0,1-based graph returned by PCMCI to a string array
+        with links '-->'
+
+        Args:
+            graph_bool (array): 0,1-based graph array output by PCMCI
+
+        Returns:
+            (array): graph as string array with links '-->'.
+        """
+
         graph = np.zeros(graph_bool.shape, dtype='<U3')
         graph[:] = ""
         # Lagged links

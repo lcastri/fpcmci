@@ -2,12 +2,18 @@ from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import Subsampli
 
 
 class Static(SubsamplingMethod):
+    """
+    Subsamples data by taking one sample each step-samples
+    """
     def __init__(self, step):
         """
-        subsample data by taking one sample each step-samples
-
+        Static class constructor
+        
         Args:
-            step (int): step
+            step (int): integer subsampling step
+
+        Raises:
+            ValueError: if step == None
         """
         super().__init__(SSMode.Static)
         if step is None:

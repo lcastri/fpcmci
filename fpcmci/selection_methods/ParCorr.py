@@ -4,7 +4,13 @@ from scipy import stats, linalg
 import numpy as np
 
 class ParCorr(SelectionMethod):
+    """
+    Feature selection method based on Partial Correlation analysis
+    """
     def __init__(self):
+        """
+        ParCorr class contructor
+        """
         super().__init__(CTest.Corr)
 
 
@@ -17,7 +23,7 @@ class ParCorr(SelectionMethod):
             target (np.array): target variable
 
         Returns:
-            np.array: residual
+            (np.array): residual
         """
         beta = np.linalg.lstsq(covar, target, rcond=None)[0]
         return target - np.dot(covar, beta)
@@ -41,6 +47,12 @@ class ParCorr(SelectionMethod):
         return pcorr, pval
 
     def compute_dependencies(self):
+        """
+        compute list of dependencies for each target by partial correlation analysis
+
+        Returns:
+            (dict): dictonary(TARGET: list SOURCES)
+        """
         CP.info("\n##")
         CP.info("## " + self.name + " analysis")
         CP.info("##")

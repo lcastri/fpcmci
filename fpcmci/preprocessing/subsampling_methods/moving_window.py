@@ -14,7 +14,8 @@ class MovingWindow:
         """
         Compute the probability distribution function from an array of data
 
-        :return: probability distribution function
+        Returns:
+            list: probability distribution function
         """
 
         counts = {}
@@ -42,8 +43,12 @@ class MovingWindow:
         """
         Select sample to be taken from a moving window
 
-        :param step: subsampling frequency
-        :return: list of indexes corresponding to the sample to be taken
+
+        Args:
+            step (int): subsampling frequency
+
+        Returns:
+            list[int]: list of indexes corresponding to the sample to be taken
         """
         return [i for i in range(0, self.T, step)]
 
@@ -52,7 +57,9 @@ class MovingWindow:
         """
         Find the optimal number of sample for a particular moving window
 
-        :param thres: stopping criteria threshold
+
+        Args:
+            thres (float): stopping criteria threshold
         """
         converged = False
         _old_step = 0

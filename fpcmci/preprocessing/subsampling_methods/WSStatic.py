@@ -2,14 +2,20 @@ from fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod import EntropyB
 from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod, SSMode
 
 
-class EntropyBasedStatic(SubsamplingMethod, EntropyBasedMethod):
+class WSStatic(SubsamplingMethod, EntropyBasedMethod):
+    """
+    Entropy based subsampling method with static window size
+    """
     def __init__(self, window_size, entropy_threshold):
         """
-        Entropy based subsampling method with static window size
-
+        WSStatic class constructor
+        
         Args:
-            window_min_size (int): minimun window size
+            window_size (int): minimun window size
             entropy_threshold (float): entropy threshold
+
+        Raises:
+            ValueError: if window_size == None
         """
         
         SubsamplingMethod.__init__(self, SSMode.WSDynamic)
@@ -31,6 +37,12 @@ class EntropyBasedStatic(SubsamplingMethod, EntropyBasedMethod):
 
 
     def run(self):
+        """
+        Run subsampler
+
+        Returns:
+            (list[int]): indexes of the remaining samples
+        """
         # build list of segment
         self.dataset_segmentation()
 

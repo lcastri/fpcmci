@@ -1,4 +1,4 @@
-# FPCMCI - Filtered PCMCI
+# <img src="docs/assets/icon.png" width="25"> FPCMCI - Filtered PCMCI
 
 Extension of the state-of-the-art causal discovery method [PCMCI](https://github.com/jakobrunge/tigramite) augmented with a feature-selection method based on Transfer Entropy. The algorithm, starting from a prefixed set of variables, identifies the correct subset of features and possible links between them which describe the observed process. Then, from the selected features and links, a causal model is built.
 
@@ -69,10 +69,12 @@ If you found this useful for your work, please cite these papers:
 
 
 ## Installation
+
 Before installing the FPCMCI package, you need to install the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the current release of `FPCMCI` with:
 ``` shell
 pip install fpcmci
 ```
 
-## Documentation
-Coming soon..
+## Useful links
+
+* [Documentation](https://lcastri.github.io/fpcmci/)

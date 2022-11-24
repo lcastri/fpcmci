@@ -9,7 +9,7 @@ from fpcmci.preprocessing.subsampling_methods.WSFFTStatic import EntropyBasedFFT
 from fpcmci.preprocessing.subsampling_methods.WSStatic import EntropyBasedStatic
 from fpcmci.selection_methods.TE import TE, TEestimator
 import numpy as np
-from fpcmci.utilities.constants import LabelType
+from fpcmci.basics.constants import LabelType
 
 from time import time
 from datetime import timedelta
