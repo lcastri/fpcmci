@@ -78,3 +78,10 @@ pip install fpcmci
 ## Useful links
 
 * [Documentation](https://lcastri.github.io/fpcmci/)
+* [Tutorials] coming soon...
+
+
+## Recent changes
+
+* 4.0.1 online documentation and paths fixes
+* 4.0.0 package published
