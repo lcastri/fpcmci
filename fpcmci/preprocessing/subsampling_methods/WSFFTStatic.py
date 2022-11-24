@@ -40,10 +40,10 @@ class WSFFTStatic(SubsamplingMethod, EntropyBasedMethod):
             peak_indices, _ = scipy.signal.find_peaks(yf)
             highest_peak_index = peak_indices[np.argmax(yf[peak_indices])]
             w_array.append(ceil(1 / (2 * xf[highest_peak_index]) / self.sampling_time))
-            fig, ax = pl.subplots()
-            ax.plot(xf, yf)
-            ax.plot(xf[highest_peak_index], np.abs(yf[highest_peak_index]), "x")
-            pl.show()
+            # fig, ax = pl.subplots()
+            # ax.plot(xf, yf)
+            # ax.plot(xf[highest_peak_index], np.abs(yf[highest_peak_index]), "x")
+            # pl.show()
         return min(w_array)
 
 

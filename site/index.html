@@ -10,7 +10,7 @@
         <meta name="author" content="Luca Castri">
       
       
-      <link rel="icon" href="images/uscc_logo.png">
+      <link rel="icon" href="assets/icon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
@@ -86,8 +86,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="FPCMCI" class="md-header__button md-logo" aria-label="FPCMCI" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.73 12 3.98-3.96c.39-.39.39-1.04 0-1.41l-4.34-4.34c-.37-.39-1.02-.39-1.41 0L12 6.27 8 2.29a1.001 1.001 0 0 0-1.41 0L2.25 6.63c-.39.37-.39 1.02 0 1.41L6.23 12l-3.98 4c-.39.39-.39 1 0 1.41l4.34 4.34c.41.39 1.02.39 1.41 0l4-3.98 3.96 3.98c.2.2.45.29.71.29.26 0 .51-.1.71-.29l4.34-4.34c.39-.41.39-1.02 0-1.41l-3.99-4M12 9a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4.71 1.96L3.66 7.34l3.63-3.63 3.62 3.62-3.62 3.63M10 13a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1m2 2a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1m2-4a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m2.66 9.34-3.63-3.62 3.63-3.63 3.62 3.62-3.62 3.63Z"/></svg>
+  <img src="assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -196,8 +195,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="." title="FPCMCI" class="md-nav__button md-logo" aria-label="FPCMCI" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.73 12 3.98-3.96c.39-.39.39-1.04 0-1.41l-4.34-4.34c-.37-.39-1.02-.39-1.41 0L12 6.27 8 2.29a1.001 1.001 0 0 0-1.41 0L2.25 6.63c-.39.37-.39 1.02 0 1.41L6.23 12l-3.98 4c-.39.39-.39 1 0 1.41l4.34 4.34c.41.39 1.02.39 1.41 0l4-3.98 3.96 3.98c.2.2.45.29.71.29.26 0 .51-.1.71-.29l4.34-4.34c.39-.41.39-1.02 0-1.41l-3.99-4M12 9a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m-4.71 1.96L3.66 7.34l3.63-3.63 3.62 3.62-3.62 3.63M10 13a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1m2 2a1 1 0 0 1-1-1 1 1 0 0 1 1-1 1 1 0 0 1 1 1 1 1 0 0 1-1 1m2-4a1 1 0 0 1 1 1 1 1 0 0 1-1 1 1 1 0 0 1-1-1 1 1 0 0 1 1-1m2.66 9.34-3.63-3.62 3.63-3.63 3.62 3.62-3.62 3.63Z"/></svg>
+  <img src="assets/logo.png" alt="logo">
 
     </a>
     FPCMCI
@@ -275,8 +273,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    Documentation
+  <a href="#useful-links" class="md-nav__link">
+    Useful links
   </a>
   
 </li>
@@ -419,8 +417,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    Documentation
+  <a href="#useful-links" class="md-nav__link">
+    Useful links
   </a>
   
 </li>
@@ -440,7 +438,7 @@
                   
 
 
-<h1 id="fpcmci-filtered-pcmci">FPCMCI - Filtered PCMCI</h1>
+<h1 id="fpcmci-filtered-pcmci"><img src="assets/icon.png" width="25"> FPCMCI - Filtered PCMCI</h1>
 <p>Extension of the state-of-the-art causal discovery method <a href="https://github.com/jakobrunge/tigramite">PCMCI</a> augmented with a feature-selection method based on Transfer Entropy. The algorithm, starting from a prefixed set of variables, identifies the correct subset of features and possible links between them which describe the observed process. Then, from the selected features and links, a causal model is built.</p>
 <h2 id="why-fpcmci">Why FPCMCI?</h2>
 <p>Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results <strong>faster</strong> and <strong>more accurate</strong>.</p>
@@ -511,8 +509,10 @@ for t in range(max_lag, nsample):
 <p>Before installing the FPCMCI package, you need to install the <a href="https://github.com/pwollstadt/IDTxl">IDTxl package</a> used for the feature-selection process, following the guide described <a href="https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements">here</a>. Once complete, you can install the current release of <code>FPCMCI</code> with:</p>
 <pre><code class="language-shell">pip install fpcmci
 </code></pre>
-<h2 id="documentation">Documentation</h2>
-<p>Coming soon..</p>
+<h2 id="useful-links">Useful links</h2>
+<ul>
+<li><a href="https://lcastri.github.io/fpcmci/">Documentation</a></li>
+</ul>
 
 
 

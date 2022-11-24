@@ -23,8 +23,8 @@ theme:
         icon: material/weather-sunny
         name: Switch to light mode
 
-  logo: assets/logo.png #material/bandage #TODO: to change
-  favicon: assets/icon.png #TODO: to change
+  logo: assets/logo.png
+  favicon: assets/icon.png
 
 
 plugins:

@@ -4,15 +4,16 @@ from fpcmci.FSelector import FSelector
 from fpcmci.preprocessing.data import Data
 from fpcmci.preprocessing.subsampling_methods.Static import Static
 from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
-from fpcmci.preprocessing.subsampling_methods.WSDynamic import EntropyBasedDynamic
-from fpcmci.preprocessing.subsampling_methods.WSFFTStatic import EntropyBasedFFTStatic
-from fpcmci.preprocessing.subsampling_methods.WSStatic import EntropyBasedStatic
+from fpcmci.preprocessing.subsampling_methods.WSDynamic import WSDynamic
+from fpcmci.preprocessing.subsampling_methods.WSFFTStatic import WSFFTStatic
+from fpcmci.preprocessing.subsampling_methods.WSStatic import WSStatic
 from fpcmci.selection_methods.TE import TE, TEestimator
-import numpy as np
 from fpcmci.basics.constants import LabelType
+import numpy as np
 
 from time import time
 from datetime import timedelta
+
 
 if __name__ == '__main__':   
     alpha = 0.05
