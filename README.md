@@ -7,7 +7,7 @@ Extension of the state-of-the-art causal discovery method [PCMCI](https://github
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
-In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created as follows:
+In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created by defining a 6-variables system defined as follows:
 
 ``` python
 min_lag = 1
@@ -26,12 +26,22 @@ for t in range(max_lag, nsample):
 
 Causal Model by PCMCI       |  Causal Model by FPCMCI 
 :-------------------------:|:-------------------------:
-![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example.png "Causal model by FPCMCI")
+![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_1.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_1.png "Causal model by FPCMCI")
 Execution time ~ 6min 50sec | Execution time ~ 2min 45sec
 
-The causal analysis performed by the **FPCMCI** results not only faster but also more accurate. Indeed, the causal model derived by the FPCMCI agrees with the structure of the system of equations, instead the onoe derived by the PCMCI presents spurious links:
+The causal analysis performed by the **FPCMCI** results not only faster but also more accurate. Indeed, the causal model derived by the FPCMCI agrees with the structure of the system of equations, instead the one derived by the PCMCI presents spurious links:
 * $X_2$ &rarr; $X_4$
 * $X_2$ &rarr; $X_5$
+
+Note that, since all the 6 variables were involved in the evolution of the system, the FPCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6 = \eta_6(t)$. In the following the comparison between PCMCI and FPCMCI with this new system configuration:
+
+Causal Model by PCMCI       |  Causal Model by FPCMCI 
+:-------------------------:|:-------------------------:
+![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_2.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_2.png "Causal model by FPCMCI")
+Execution time ~ 8min 40sec | Execution time ~ 3min 00sec
+
+In this case the FPCMCI removes the $X_6$ variable from the causal graph leading to generate exactly the same causal model as in the previous example, with comparable executional time. Instead, the PCMCI suffers the presence of $X_6$ in terms of time and accuracy of the causal structure.
+Indeed, a spurious link $X_6$ &rarr; $X_5$ appears in the causal graph derived by the PCMCI.
 
 
 ## Citation

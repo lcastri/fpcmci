@@ -18,3 +18,4 @@ RESULTS_FILENAME = "results"
 class LabelType(Enum):
     Lag = "lag"
     Score = "Score"
+    NoLabels = "NoLabels"

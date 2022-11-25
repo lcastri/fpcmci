@@ -175,7 +175,6 @@ class FSelector():
             node_color = 'orange',
             edge_color = 'grey',
             font_size = 12,
-            show_edge_labels = True,
             label_type = LabelType.Lag):
         """
         Saves dag plot if resfolder has been set otherwise it shows the figure
@@ -190,7 +189,7 @@ class FSelector():
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
             font_size (int, optional): font size. Defaults to 12.
-            show_edge_labels (bool, optional): bit to show the time-lag label of the dependency on the edge. Defaults to True.
+            label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
         """
         
         if self.result:
@@ -203,7 +202,6 @@ class FSelector():
                                      node_color,
                                      edge_color,
                                      font_size,
-                                     show_edge_labels,
                                      label_type)
         else:
             CP.warning("Dag impossible to create: no feature selected")

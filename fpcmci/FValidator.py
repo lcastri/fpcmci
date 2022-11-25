@@ -134,7 +134,6 @@ class FValidator():
                   node_color,
                   edge_color,
                   font_size,
-                  show_edge_labels,
                   label_type):
         """
         Saves dag plot if resfolder is set otherwise it shows the figure
@@ -149,7 +148,8 @@ class FValidator():
             node_color (str): node color
             edge_color (str): edge color
             font_size (int): font size
-            show_edge_labels (bool): bit to show the time-lag label of the dependency on the edge
+            label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
+
         """               
         
         # convert to dictionary
@@ -169,7 +169,6 @@ class FValidator():
             font_size = font_size,
             node_color = node_color,
             edge_color = edge_color,
-            show_edge_labels = show_edge_labels,
             label_type = label_type,
             save_name = self.dag_path)
         
