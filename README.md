@@ -33,7 +33,7 @@ The causal analysis performed by the **FPCMCI** results not only faster but also
 * $X_2$ &rarr; $X_4$
 * $X_2$ &rarr; $X_5$
 
-Note that, since all the 6 variables were involved in the evolution of the system, the FPCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6 = \eta_6(t)$. In the following the comparison between PCMCI and FPCMCI with this new system configuration:
+Note that, since all the 6 variables were involved in the evolution of the system, the FPCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6(t) = \eta_6(t)$. In the following the comparison between PCMCI and FPCMCI with this new system configuration:
 
 Causal Model by PCMCI       |  Causal Model by FPCMCI 
 :-------------------------:|:-------------------------:
