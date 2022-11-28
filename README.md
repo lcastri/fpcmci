@@ -3,6 +3,12 @@
 Extension of the state-of-the-art causal discovery method [PCMCI](https://github.com/jakobrunge/tigramite) augmented with a feature-selection method based on Transfer Entropy. The algorithm, starting from a prefixed set of variables, identifies the correct subset of features and possible links between them which describe the observed process. Then, from the selected features and links, a causal model is built.
 
 
+## Useful links
+
+* [Documentation](https://lcastri.github.io/fpcmci/)
+* [Tutorials](https://github.com/lcastri/fpcmci/tree/main/tutorials)
+
+
 ## Why FPCMCI?
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
@@ -84,11 +90,6 @@ Before installing the FPCMCI package, you need to install the [IDTxl package](ht
 ``` shell
 pip install fpcmci
 ```
-
-## Useful links
-
-* [Documentation](https://lcastri.github.io/fpcmci/)
-* [Tutorials] coming soon...
 
 
 ## Recent changes
