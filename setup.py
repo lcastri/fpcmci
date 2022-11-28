@@ -15,7 +15,8 @@ INSTALL_REQUIRES = ["numpy==1.21.5",
                     "scikit_learn==1.1.3",
                     "torch>=1.11.0",       # GPDC torch version
                     "gpytorch>=1.4",       # GPDC gpytorch version
-                    "dcor>=0.5.3",         # GPDC distance correlation version  
+                    "dcor>=0.5.3",         # GPDC distance correlation version 
+                    "h5py==3.7.0",
                     ]
 # EXTRA_REQUIRES = {"all": ["matplotlib==3.6.1",
 #                           "netgraph==4.10.2",

@@ -1,6 +1,6 @@
 from tigramite.independence_tests import GPDC
 from fpcmci.CPrinter import CPLevel
-from fpcmci.FSelector import FSelector
+from fpcmci.FPCMCI import FPCMCI
 from fpcmci.preprocessing.data import Data
 from fpcmci.preprocessing.subsampling_methods.Static import Static
 from fpcmci.preprocessing.subsampling_methods.SubsamplingMethod import SubsamplingMethod
@@ -32,7 +32,7 @@ if __name__ == '__main__':
         
     df = Data(d)
     start = time()
-    FS = FSelector(df, 
+    FS = FPCMCI(df, 
                    alpha = alpha, 
                    min_lag = min_lag, 
                    max_lag = max_lag, 

@@ -9,18 +9,18 @@ from fpcmci.CPrinter import CPLevel, CP
 from fpcmci.basics.constants import *
 from fpcmci.basics.logger import Logger
 import fpcmci.basics.utils as utils
-from fpcmci.FValidator import FValidator
+from fpcmci.PCMCI import PCMCI
 from fpcmci.preprocessing.data import Data 
 
 import warnings
 warnings.filterwarnings('ignore')
 
 
-class FSelector():
+class FPCMCI():
     """
-    FSelector class.
+    FPCMCI class.
 
-    FSelector is a causal feature selector framework for large-scale time series
+    FPCMCI is a causal feature selector framework for large-scale time series
     datasets. Sarting from a Data object and it selects the main features
     responsible for the evolution of the analysed system. Based on the selected features,
     the framework outputs a causal model.
@@ -35,7 +35,7 @@ class FSelector():
                  resfolder = None,
                  neglect_only_autodep = False):
         """
-        FSelector class contructor
+        FPCMCI class contructor
 
         Args:
             data (Data): data to analyse
@@ -64,13 +64,13 @@ class FSelector():
             logpath, self.dependency_path = utils.get_selectorpath(resfolder)
             sys.stdout = Logger(logpath)
         
-        self.validator = FValidator(data, alpha, min_lag, max_lag, val_condtest, resfolder, verbosity)       
+        self.validator = PCMCI(data, alpha, min_lag, max_lag, val_condtest, resfolder, verbosity)       
         CP.set_verbosity(verbosity)
 
 
-    def run_selector(self):
+    def run_filter(self):
         """
-        Run selection method
+        Run filter method
         """
         CP.info("\n")
         CP.info(DASH)
@@ -86,9 +86,9 @@ class FSelector():
         self.o_dependecies = copy.deepcopy(self.dependencies)
 
 
-    def run_validator(self):
+    def run_pcmci(self):
         """
-        Run Validator
+        Run PCMCI
         
         Returns:
             list(str): list of selected variable names
@@ -110,13 +110,13 @@ class FSelector():
     
     def run(self):
         """
-        Run Selector and Validator without feedback
+        Run Selector and Validator
         
         Returns:
             list(str): list of selected variable names
         """
         
-        self.run_selector()        
+        self.run_filter()        
             
         # list of selected features based on dependencies
         tmp_sel_features = self.get_selected_features()
@@ -180,7 +180,7 @@ class FSelector():
         Saves dag plot if resfolder has been set otherwise it shows the figure
         
         Args:
-            node_layout (str, optional): Node layout. Defaults to 'dot.
+            node_layout (str, optional): Node layout. Defaults to 'dot'.
             min_width (int, optional): minimum linewidth. Defaults to 1.
             max_width (int, optional): maximum linewidth. Defaults to 5.
             min_score (int, optional): minimum score range. Defaults to 0.
