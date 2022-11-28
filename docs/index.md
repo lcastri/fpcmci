@@ -71,16 +71,22 @@ If you found this useful for your work, please cite these papers:
 
 ## Requirements
 
-* matplotlib==3.6.1
+* matplotlib>=3.6.1
 * netgraph==4.10.2
-* networkx==2.8.6
+* networkx>=2.8.6
 * numpy==1.21.5
 * pandas==1.5.0
 * ruptures==1.1.7
 * scikit_learn==1.1.3
 * scipy==1.8.0
 * setuptools==56.0.0
-* tigramite==5.1.0.3
+* pandas>=1.5.0
+* ruptures>=1.1.7
+* scikit_learn>=1.1.3
+* torch>=1.11.0
+* gpytorch>=1.4
+* dcor>=0.5.3
+* h5py==3.7.0
 
 
 ## Installation
@@ -93,5 +99,6 @@ pip install fpcmci
 
 ## Recent changes
 
-* 4.0.1 online documentation and paths fixes
-* 4.0.0 package published
+* 4.1.0 FSelector and FValidator turned into FPCMCI and PCMCI, show_edge_label removed and dag optimized, new package included in the setup.py, added tutorials, and new example in README.md. 
+* 4.0.1 online documentation and paths fixes.
+* 4.0.0 package published.
