@@ -46,7 +46,7 @@ class PCMCI():
         if resfolder is not None:
             self.respath, self.dag_path, self.ts_dag_path = utils.get_validatorpaths(resfolder)  
         
-        
+
     def run(self, selected_links = None):
         """
         Run causal discovery algorithm

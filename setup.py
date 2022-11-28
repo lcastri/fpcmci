@@ -7,12 +7,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 INSTALL_REQUIRES = ["numpy==1.21.5", 
                     "scipy==1.8.0",
                     "tigramite==5.1.0.3",
-                    "matplotlib==3.6.1",
+                    "matplotlib>=3.6.1",
                     "netgraph==4.10.2",
-                    "networkx==2.8.6",
-                    "pandas==1.5.0",
-                    "ruptures==1.1.7",
-                    "scikit_learn==1.1.3",
+                    "networkx>=2.8.6",
+                    "pandas>=1.5.0",
+                    "ruptures>=1.1.7",
+                    "scikit_learn>=1.1.3",
                     "torch>=1.11.0",       # GPDC torch version
                     "gpytorch>=1.4",       # GPDC gpytorch version
                     "dcor>=0.5.3",         # GPDC distance correlation version 

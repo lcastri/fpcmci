@@ -12,9 +12,6 @@ import fpcmci.basics.utils as utils
 from fpcmci.PCMCI import PCMCI
 from fpcmci.preprocessing.data import Data 
 
-import warnings
-warnings.filterwarnings('ignore')
-
 
 class FPCMCI():
     """
