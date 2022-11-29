@@ -15,7 +15,6 @@ def dag(res,
         node_color = 'orange',
         edge_color = 'grey',
         font_size = 12,
-        show_edge_labels = True,
         label_type = LabelType.Lag,
         save_name = None):
     """
@@ -32,43 +31,69 @@ def dag(res,
         node_color (str, optional): node color. Defaults to 'orange'.
         edge_color (str, optional): edge color. Defaults to 'grey'.
         font_size (int, optional): font size. Defaults to 12.
-        show_edge_labels (bool, optional): bit to show the label of the dependency on the edge/node border. Defaults to True.
-        label_type (Enum, optional): LAG/SCORE information of the dependency on the edge/node border. Defaults to LAG.
+        label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
         save_name (str, optional): Filename path. If None, plot is shown and not saved. Defaults to None.
     """
 
     G = nx.DiGraph()
 
-    # add nodes
+    # NODES DEFINITION
     G.add_nodes_from(res.keys())
     
+    # BORDER LINE
     border = dict()
     for t in res.keys():
         border[t] = 0
         for s in res[t]:
             if t == s[SOURCE]:
-                border[t] = __scale(s[SCORE], min_width, max_width, min_score, max_score)
+                border[t] = max(__scale(s[SCORE], min_width, max_width, min_score, max_score), border[t])
     
-    if show_edge_labels:
-        if label_type == LabelType.Lag:
-            node_label = {t: s[LAG] for t in res.keys() for s in res[t] if t == s[SOURCE]}
-        elif label_type == LabelType.Score:
-            node_label = {t: round(s[SCORE], 3) for t in res.keys() for s in res[t] if t == s[SOURCE]}
-    else:
-        node_label = None
+    # BORDER LABEL
+    node_label = None
+    if label_type == LabelType.Lag or label_type == LabelType.Score:
+        node_label = {t: [] for t in res.keys()}
+        for t in res.keys():
+            for s in res[t]:
+                if t == s[SOURCE]:
+                    if label_type == LabelType.Lag:
+                        node_label[t].append(s[LAG])
+                    elif label_type == LabelType.Score:
+                        node_label[t].append(round(s[SCORE], 3))
+            node_label[t] = ",".join(str(s) for s in node_label[t])
+        # node_label = {t: s[LAG] for t in res.keys() for s in res[t] if t == s[SOURCE]}
+    # elif label_type == LabelType.Score:
+    #     node_label = {t: round(s[SCORE], 3) for t in res.keys() for s in res[t] if t == s[SOURCE]}
 
-    # edges definition
+
+    # EDGE DEFINITION
     edges = [(s[SOURCE], t) for t in res.keys() for s in res[t] if t != s[SOURCE]]
     G.add_edges_from(edges)
     
-    edge_width = {(s[SOURCE], t): __scale(s[SCORE], min_width, max_width, min_score, max_score) for t in res.keys() for s in res[t] if t != s[SOURCE]}
-    if show_edge_labels:
-        if label_type == LabelType.Lag:
-            edge_label = {(s[SOURCE], t): s[LAG] for t in res.keys() for s in res[t] if t != s[SOURCE]}
-        elif label_type == LabelType.Score:
-            edge_label = {(s[SOURCE], t): round(s[SCORE], 3) for t in res.keys() for s in res[t] if t != s[SOURCE]}
-    else:
-        edge_label = None
+    # EDGE LINE
+    edge_width = {(s[SOURCE], t): 0 for t in res.keys() for s in res[t] if t != s[SOURCE]}
+    for t in res.keys():
+        for s in res[t]:
+            if t != s[SOURCE]:
+                edge_width[(s[SOURCE], t)] = max(__scale(s[SCORE], min_width, max_width, min_score, max_score), edge_width[(s[SOURCE], t)])
+    # edge_width = {(s[SOURCE], t): __scale(s[SCORE], min_width, max_width, min_score, max_score) for t in res.keys() for s in res[t] if t != s[SOURCE]}
+    
+    # EDGE LABEL
+    edge_label = None
+    if label_type == LabelType.Lag or label_type == LabelType.Score:
+        edge_label = {(s[SOURCE], t): [] for t in res.keys() for s in res[t] if t != s[SOURCE]}
+        for t in res.keys():
+            for s in res[t]:
+                if t != s[SOURCE]:
+                    if label_type == LabelType.Lag:
+                        edge_label[(s[SOURCE], t)].append(s[LAG])
+                    elif label_type == LabelType.Score:
+                        edge_label[(s[SOURCE], t)].append(round(s[SCORE], 3))
+        for k in edge_label.keys():
+            edge_label[k] = ",".join(str(s) for s in edge_label[k])
+
+    #     edge_label = {(s[SOURCE], t): s[LAG] for t in res.keys() for s in res[t] if t != s[SOURCE]}
+    # elif label_type == LabelType.Score:
+    #     edge_label = {(s[SOURCE], t): round(s[SCORE], 3) for t in res.keys() for s in res[t] if t != s[SOURCE]}
 
     fig, ax = plt.subplots(figsize=(8,6))
 
@@ -86,7 +111,7 @@ def dag(res,
                 
                 arrows = True,
                 edge_layout = 'curved',
-                edge_label = show_edge_labels,
+                edge_label = label_type != LabelType.NoLabels,
                 edge_labels = edge_label,
                 edge_label_fontdict = dict(size=font_size),
                 edge_color = edge_color, 
