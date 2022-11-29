@@ -72,22 +72,16 @@ If you found this useful for your work, please cite these papers:
 
 ## Requirements
 
-* matplotlib>=3.6.1
+* tigramite==5.1.0.3
+* pandas==1.5.2
 * netgraph==4.10.2
 * networkx>=2.8.6
-* numpy==1.21.5
-* pandas==1.5.0
 * ruptures==1.1.7
 * scikit_learn==1.1.3
-* scipy==1.8.0
-* setuptools==56.0.0
-* pandas>=1.5.0
-* ruptures>=1.1.7
-* scikit_learn>=1.1.3
 * torch>=1.11.0
-* gpytorch>=1.4
+* gpytorch>=1.4       
 * dcor>=0.5.3
-* h5py==3.7.0
+* h5py==3.7.0   
 
 
 ## Installation
