@@ -73,7 +73,7 @@ If you found this useful for your work, please cite these papers:
 
 * tigramite==5.1.0.3
 * pandas==1.5.2
-* netgraph==4.10.2
+* netgraph>=4.10.2
 * networkx>=2.8.6
 * ruptures==1.1.7
 * scikit_learn==1.1.3

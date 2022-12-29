@@ -21,8 +21,8 @@ if __name__ == '__main__':
     max_lag = 1
     
     np.random.seed(1)
-    nsample = 1500
-    nfeature = 7
+    nsample = 500
+    nfeature = 6
     d = np.random.random(size = (nsample, nfeature))
     for t in range(max_lag, nsample):
         d[t, 0] += 2 * d[t-1, 1] + 3 * d[t-1, 3]
@@ -43,6 +43,7 @@ if __name__ == '__main__':
                    resfolder = 'ex_PCMCI')
     
     selector_res = FS.run_pcmci()
+    print(FS.filter_dependencies)
     elapsed_PCMCI = time() - start
     print(str(timedelta(seconds = elapsed_PCMCI)))
     FS.dag(label_type = LabelType.NoLabels, node_layout = 'circular')

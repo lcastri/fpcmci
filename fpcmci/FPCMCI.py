@@ -51,7 +51,9 @@ class FPCMCI():
         self.min_lag = min_lag
         self.max_lag = max_lag
         self.sel_method = sel_method
-        self.dependencies = None
+        self.filter_dependencies = None
+        self.o_filter_dependencies = None
+        self.causal_model = None
         self.result = None
         self.neglect_only_autodep = neglect_only_autodep
 
@@ -79,8 +81,8 @@ class FPCMCI():
         CP.info("Data length: " + str(self.data.T))
 
         self.sel_method.initialise(self.data, self.alpha, self.min_lag, self.max_lag)
-        self.dependencies = self.sel_method.compute_dependencies()
-        self.o_dependecies = copy.deepcopy(self.dependencies)
+        self.filter_dependencies = self.sel_method.compute_dependencies()
+        self.o_filter_dependecies = copy.deepcopy(self.filter_dependencies)
 
 
     def run_pcmci(self):
@@ -97,7 +99,9 @@ class FPCMCI():
 
         # causal model
         self.validator.data = self.data
-        pcmci_result = self.validator.run()
+        self.validator.run()
+        self.causal_model = self.validator.dependencies
+        
         self.result = self.data.features
         
         self.save_validator_res()
@@ -129,7 +133,11 @@ class FPCMCI():
         # causal model on selected links
         self.validator.data = self.data
         pcmci_result = self.validator.run(selected_links)
+        
+        # application of the validator result to the filter_dependencies field
         self.__apply_validator_result(pcmci_result)
+        # final causal model
+        self.causal_model = self.validator.dependencies
         
         self.result = self.get_selected_features()
         # shrink dataframe d and dependencies by the validator result
@@ -138,7 +146,7 @@ class FPCMCI():
         self.save_validator_res()
         
         CP.info("\nFeature selected: " + str(self.result))
-        return self.result
+        return self.result, self.causal_model
     
 
     def shrink(self, sel_features):
@@ -248,7 +256,7 @@ class FPCMCI():
             list(str): list of selected variable names
         """
         f_list = list()
-        for t in self.dependencies:
+        for t in self.filter_dependencies:
             sources_t = self.__get_dependencies_for_target(t)
             if self.neglect_only_autodep and self.__is_only_autodep(sources_t, t):
                 sources_t.remove(t)
@@ -286,7 +294,7 @@ class FPCMCI():
         """
         Print dependencies found by the selector
         """
-        for t in self.o_dependecies:
+        for t in self.o_filter_dependecies:
             print()
             print()
             print(DASH)
@@ -294,7 +302,7 @@ class FPCMCI():
             print(DASH)
             print('{:<10s}{:>15s}{:>15s}{:>15s}'.format('SOURCE', 'SCORE', 'PVAL', 'LAG'))
             print(DASH)
-            for s in self.o_dependecies[t]:
+            for s in self.o_filter_dependecies[t]:
                 print('{:<10s}{:>15.3f}{:>15.3f}{:>15d}'.format(s[SOURCE], s[SCORE], s[PVAL], s[LAG]))      
 
 
@@ -307,8 +315,8 @@ class FPCMCI():
         """
         Shrinks dependencies based on the selected features
         """
-        difference_set = self.dependencies.keys() - self.data.features
-        for d in difference_set: del self.dependencies[d]
+        difference_set = self.filter_dependencies.keys() - self.data.features
+        for d in difference_set: del self.filter_dependencies[d]
         
 
     def __get_dependencies_for_target(self, t):
@@ -321,7 +329,7 @@ class FPCMCI():
         Returns:
             list(str): list of sources for target t
         """
-        return [s[SOURCE] for s in self.dependencies[t]]
+        return [s[SOURCE] for s in self.filter_dependencies[t]]
     
     
     def __is_only_autodep(self, sources, t):
@@ -347,9 +355,9 @@ class FPCMCI():
             (np.array): score matrix
         """
         dep_mat = list()
-        for t in self.o_dependecies:
+        for t in self.o_filter_dependecies:
             dep_vet = [0] * self.data.orig_N
-            for s in self.o_dependecies[t]:
+            for s in self.o_filter_dependecies[t]:
                 dep_vet[self.data.orig_features.index(s[SOURCE])] = s[SCORE]
             dep_mat.append(dep_vet)
 
@@ -374,10 +382,10 @@ class FPCMCI():
             (dict): selected links
         """
         sel_links = {self.data.features.index(f):list() for f in self.data.features}
-        for t in self.dependencies:
+        for t in self.filter_dependencies:
             
             # add links
-            for s in self.dependencies[t]:
+            for s in self.filter_dependencies[t]:
                 sel_links[self.data.features.index(t)].append((self.data.features.index(s[SOURCE]), -s[LAG]))
 
         return sel_links
@@ -386,14 +394,15 @@ class FPCMCI():
     def __apply_validator_result(self, causal_model):
         """
         Exclude dependencies based on validator result
+        It does not overwrite the filter_dependencies' inference/p-values matrix with the ones found by the validator
         """
         list_diffs = list()
-        tmp_dependencies = copy.deepcopy(self.dependencies)
+        tmp_dependencies = copy.deepcopy(self.filter_dependencies)
         for t in tmp_dependencies:
             for s in tmp_dependencies[t]:
                 if (self.data.features.index(s[SOURCE]), -s[LAG]) not in causal_model[self.data.features.index(t)]:
                     list_diffs.append((s[SOURCE], str(s[LAG]), t))
-                    self.dependencies[t].remove(s)
+                    self.filter_dependencies[t].remove(s)
         if list_diffs:
             CP.debug(DASH)
             CP.debug("Difference(s)")
