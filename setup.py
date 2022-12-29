@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 INSTALL_REQUIRES = ["tigramite==5.1.0.3",
                     "pandas==1.5.2",
-                    "netgraph==4.10.2",
+                    "netgraph>=4.10.2",
                     "networkx>=2.8.6",
                     "ruptures==1.1.7",
                     "scikit_learn==1.1.3",

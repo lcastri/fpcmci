@@ -60,9 +60,6 @@ def dag(res,
                     elif label_type == LabelType.Score:
                         node_label[t].append(round(s[SCORE], 3))
             node_label[t] = ",".join(str(s) for s in node_label[t])
-        # node_label = {t: s[LAG] for t in res.keys() for s in res[t] if t == s[SOURCE]}
-    # elif label_type == LabelType.Score:
-    #     node_label = {t: round(s[SCORE], 3) for t in res.keys() for s in res[t] if t == s[SOURCE]}
 
 
     # EDGE DEFINITION
@@ -75,7 +72,6 @@ def dag(res,
         for s in res[t]:
             if t != s[SOURCE]:
                 edge_width[(s[SOURCE], t)] = max(__scale(s[SCORE], min_width, max_width, min_score, max_score), edge_width[(s[SOURCE], t)])
-    # edge_width = {(s[SOURCE], t): __scale(s[SCORE], min_width, max_width, min_score, max_score) for t in res.keys() for s in res[t] if t != s[SOURCE]}
     
     # EDGE LABEL
     edge_label = None
@@ -90,10 +86,6 @@ def dag(res,
                         edge_label[(s[SOURCE], t)].append(round(s[SCORE], 3))
         for k in edge_label.keys():
             edge_label[k] = ",".join(str(s) for s in edge_label[k])
-
-    #     edge_label = {(s[SOURCE], t): s[LAG] for t in res.keys() for s in res[t] if t != s[SOURCE]}
-    # elif label_type == LabelType.Score:
-    #     edge_label = {(s[SOURCE], t): round(s[SCORE], 3) for t in res.keys() for s in res[t] if t != s[SOURCE]}
 
     fig, ax = plt.subplots(figsize=(8,6))
 

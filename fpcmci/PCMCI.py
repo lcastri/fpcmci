@@ -36,6 +36,7 @@ class PCMCI():
         self.min_lag = min_lag
         self.max_lag = max_lag
         self.result = None
+        self.dependencies = None
         self.val_method = None
         self.val_condtest = val_condtest
         self.verbosity = verbosity.value
@@ -77,7 +78,7 @@ class PCMCI():
         self.result['var_names'] = self.data.pretty_features
         # apply significance level
         self.result['graph'] = self.__apply_alpha()
-        
+        self.dependencies = self.__PCMCIres_converter()
         return self.__return_parents_dict()
     
     
@@ -104,14 +105,14 @@ class PCMCI():
             font_size (int): font size
         """
         
-        # convert to dictionary
-        res = self.__PCMCIres_converter()
+        # # convert to dictionary
+        # res = self.__PCMCIres_converter()
         
-        # filter only dependencies
-        tmp_res = {k: res[k] for k in self.data.pretty_features}
-        res = tmp_res
+        # # filter only dependencies
+        # tmp_res = {k: res[k] for k in self.data.pretty_features}
+        # res = tmp_res
         
-        ts_dag(res, 
+        ts_dag(self.dependencies, 
                tau = self.max_lag,
                min_width = min_width,
                max_width = max_width,
@@ -152,14 +153,14 @@ class PCMCI():
 
         """               
         
-        # convert to dictionary
-        res = self.__PCMCIres_converter()
+        # # convert to dictionary
+        # res = self.__PCMCIres_converter()
         
-        # filter only dependencies
-        tmp_res = {k: res[k] for k in self.data.pretty_features}
-        res = tmp_res
+        # # filter only dependencies
+        # tmp_res = {k: res[k] for k in self.data.pretty_features}
+        # res = tmp_res
         
-        dag(res,
+        dag(self.dependencies,
             node_layout = node_layout,
             min_width = min_width,
             max_width = max_width,
@@ -178,7 +179,9 @@ class PCMCI():
         Save causal discovery results as pickle file if resfolder is set
         """
         if self.respath is not None:
-            res = copy.deepcopy(self.result)
+            res = dict()
+            res['dependencies'] = copy.deepcopy(self.dependencies)
+            # res = copy.deepcopy(self.result)
             res['alpha'] = self.alpha
             res['var_names'] = self.data.pretty_features
             res['dag_path'] = self.dag_path

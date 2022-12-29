@@ -42,7 +42,7 @@ if __name__ == '__main__':
                    neglect_only_autodep = False,
                    resfolder = 'ex_FPCMCI')
     
-    selector_res = FS.run()
+    features, CM = FS.run()
     elapsed_FPCMCI = time() - start
     print(str(timedelta(seconds = elapsed_FPCMCI)))
     FS.dag(label_type = LabelType.NoLabels, node_layout = 'circular')
