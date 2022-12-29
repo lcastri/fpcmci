@@ -91,6 +91,26 @@ Before installing the FPCMCI package, you need to install the [IDTxl package](ht
 pip install fpcmci
 ```
 
+For a complete installation (IDTxl and FPCMCI) you can run the following commands:
+```shell
+# IDTxl
+git clone https://github.com/pwollstadt/IDTxl.git
+conda create --name fpcmci python=3 pip matplotlib h5py scipy networkx
+conda activate fpcmci
+conda install -c conda-forge jpype1    # required by CPU JIDT estimators
+conda install -c conda-forge pyopencl  # required by GPU OpenCL estimators
+conda install -c anaconda ecos         # required by Tartu PID estimator
+conda install numba                    # required by NumbaCuda estimators
+conda install cudatoolkit              # required by NumbaCuda estimators
+conda install mpmath
+
+cd IDTxl
+pip install -e .
+
+# FPCMCI
+pip install fpcmci
+```
+
 
 ## Recent changes
 
