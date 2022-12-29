@@ -1234,7 +1234,16 @@ the framework outputs a causal model.</p>
 <span class="normal">399</span>
 <span class="normal">400</span>
 <span class="normal">401</span>
-<span class="normal">402</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">FPCMCI</span><span class="p">():</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">FPCMCI</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    FPCMCI class.</span>
 
@@ -1272,7 +1281,9 @@ the framework outputs a causal model.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span> <span class="o">=</span> <span class="n">min_lag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span> <span class="o">=</span> <span class="n">max_lag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span> <span class="o">=</span> <span class="n">sel_method</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependencies</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">neglect_only_autodep</span> <span class="o">=</span> <span class="n">neglect_only_autodep</span>
 
@@ -1300,8 +1311,8 @@ the framework outputs a causal model.</p>
         <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Data length: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span><span class="o">.</span><span class="n">initialise</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span><span class="o">.</span><span class="n">compute_dependencies</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span><span class="o">.</span><span class="n">compute_dependencies</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">run_pcmci</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1318,12 +1329,14 @@ the framework outputs a causal model.</p>
 
         <span class="c1"># causal model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
-        <span class="n">pcmci_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">dependencies</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">save_validator_res</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span>
 
 
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1350,7 +1363,11 @@ the framework outputs a causal model.</p>
         <span class="c1"># causal model on selected links</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
         <span class="n">pcmci_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">selected_links</span><span class="p">)</span>
+
+        <span class="c1"># application of the validator result to the filter_dependencies field</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__apply_validator_result</span><span class="p">(</span><span class="n">pcmci_result</span><span class="p">)</span>
+        <span class="c1"># final causal model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">dependencies</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_features</span><span class="p">()</span>
         <span class="c1"># shrink dataframe d and dependencies by the validator result</span>
@@ -1359,7 +1376,7 @@ the framework outputs a causal model.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">save_validator_res</span><span class="p">()</span>
 
         <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Feature selected: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span>
 
 
     <span class="k">def</span> <span class="nf">shrink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sel_features</span><span class="p">):</span>
@@ -1469,7 +1486,7 @@ the framework outputs a causal model.</p>
 <span class="sd">            list(str): list of selected variable names</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">:</span>
             <span class="n">sources_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_dependencies_for_target</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neglect_only_autodep</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_only_autodep</span><span class="p">(</span><span class="n">sources_t</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
                 <span class="n">sources_t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -1507,7 +1524,7 @@ the framework outputs a causal model.</p>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print dependencies found by the selector</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
@@ -1515,7 +1532,7 @@ the framework outputs a causal model.</p>
             <span class="nb">print</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:&lt;10s}{:&gt;15s}{:&gt;15s}{:&gt;15s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;SOURCE&#39;</span><span class="p">,</span> <span class="s1">&#39;SCORE&#39;</span><span class="p">,</span> <span class="s1">&#39;PVAL&#39;</span><span class="p">,</span> <span class="s1">&#39;LAG&#39;</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:&lt;10s}{:&gt;15.3f}{:&gt;15.3f}{:&gt;15d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">SCORE</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">PVAL</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">]))</span>      
 
 
@@ -1528,8 +1545,8 @@ the framework outputs a causal model.</p>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shrinks dependencies based on the selected features</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">difference_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span>
-        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">difference_set</span><span class="p">:</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
+        <span class="n">difference_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">difference_set</span><span class="p">:</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
 
 
     <span class="k">def</span> <span class="nf">__get_dependencies_for_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -1542,7 +1559,7 @@ the framework outputs a causal model.</p>
 <span class="sd">        Returns:</span>
 <span class="sd">            list(str): list of sources for target t</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>
 
 
     <span class="k">def</span> <span class="nf">__is_only_autodep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -1568,9 +1585,9 @@ the framework outputs a causal model.</p>
 <span class="sd">            (np.array): score matrix</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dep_mat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">:</span>
             <span class="n">dep_vet</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orig_N</span>
-            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
                 <span class="n">dep_vet</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orig_features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">])]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">SCORE</span><span class="p">]</span>
             <span class="n">dep_mat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dep_vet</span><span class="p">)</span>
 
@@ -1595,10 +1612,10 @@ the framework outputs a causal model.</p>
 <span class="sd">            (dict): selected links</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sel_links</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">f</span><span class="p">):</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">}</span>
-        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">:</span>
 
             <span class="c1"># add links</span>
-            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
                 <span class="n">sel_links</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">t</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]),</span> <span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">]))</span>
 
         <span class="k">return</span> <span class="n">sel_links</span>
@@ -1607,14 +1624,15 @@ the framework outputs a causal model.</p>
     <span class="k">def</span> <span class="nf">__apply_validator_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">causal_model</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Exclude dependencies based on validator result</span>
+<span class="sd">        It does not overwrite the filter_dependencies&#39; inference/p-values matrix with the ones found by the validator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">list_diffs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="n">tmp_dependencies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
+        <span class="n">tmp_dependencies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tmp_dependencies</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">tmp_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]),</span> <span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">causal_model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">t</span><span class="p">)]:</span>
                     <span class="n">list_diffs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">]),</span> <span class="n">t</span><span class="p">))</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">list_diffs</span><span class="p">:</span>
             <span class="n">CP</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
             <span class="n">CP</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Difference(s)&quot;</span><span class="p">)</span>
@@ -1648,19 +1666,12 @@ the framework outputs a causal model.</p>
 
   <div class="doc doc-contents ">
   
-      <p>Exclude dependencies based on validator result</p>
+      <p>Exclude dependencies based on validator result
+It does not overwrite the filter_dependencies' inference/p-values matrix with the ones found by the validator</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">394</span>
 <span class="normal">395</span>
 <span class="normal">396</span>
 <span class="normal">397</span>
@@ -1668,17 +1679,27 @@ the framework outputs a causal model.</p>
 <span class="normal">399</span>
 <span class="normal">400</span>
 <span class="normal">401</span>
-<span class="normal">402</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__apply_validator_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">causal_model</span><span class="p">):</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__apply_validator_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">causal_model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Exclude dependencies based on validator result</span>
+<span class="sd">    It does not overwrite the filter_dependencies&#39; inference/p-values matrix with the ones found by the validator</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">list_diffs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="n">tmp_dependencies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
+    <span class="n">tmp_dependencies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tmp_dependencies</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">tmp_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
             <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]),</span> <span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">])</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">causal_model</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">t</span><span class="p">)]:</span>
                 <span class="n">list_diffs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">]),</span> <span class="n">t</span><span class="p">))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">list_diffs</span><span class="p">:</span>
         <span class="n">CP</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
         <span class="n">CP</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Difference(s)&quot;</span><span class="p">)</span>
@@ -1749,17 +1770,17 @@ the framework outputs a causal model.</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">314</span>
-<span class="normal">315</span>
-<span class="normal">316</span>
-<span class="normal">317</span>
-<span class="normal">318</span>
-<span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">322</span>
 <span class="normal">323</span>
-<span class="normal">324</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_dependencies_for_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_dependencies_for_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns list of sources for a specified target</span>
 
@@ -1769,7 +1790,7 @@ the framework outputs a causal model.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        list(str): list of sources for target t</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1810,15 +1831,7 @@ the framework outputs a causal model.</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">342</span>
-<span class="normal">343</span>
-<span class="normal">344</span>
-<span class="normal">345</span>
-<span class="normal">346</span>
-<span class="normal">347</span>
-<span class="normal">348</span>
-<span class="normal">349</span>
-<span class="normal">350</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">350</span>
 <span class="normal">351</span>
 <span class="normal">352</span>
 <span class="normal">353</span>
@@ -1833,7 +1846,15 @@ the framework outputs a causal model.</p>
 <span class="normal">362</span>
 <span class="normal">363</span>
 <span class="normal">364</span>
-<span class="normal">365</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_dependencies_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_dependencies_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a matrix composed by scores for each target</span>
 
@@ -1841,9 +1862,9 @@ the framework outputs a causal model.</p>
 <span class="sd">        (np.array): score matrix</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">dep_mat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">:</span>
         <span class="n">dep_vet</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orig_N</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
             <span class="n">dep_vet</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">orig_features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">])]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">SCORE</span><span class="p">]</span>
         <span class="n">dep_mat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dep_vet</span><span class="p">)</span>
 
@@ -1898,22 +1919,22 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">368</span>
-<span class="normal">369</span>
-<span class="normal">370</span>
-<span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">376</span>
 <span class="normal">377</span>
 <span class="normal">378</span>
 <span class="normal">379</span>
 <span class="normal">380</span>
 <span class="normal">381</span>
 <span class="normal">382</span>
-<span class="normal">383</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_selected_links</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__get_selected_links</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return selected links found by the selector</span>
 <span class="sd">    in this form: {0: [(0,-1), (2,-1)]}</span>
@@ -1922,10 +1943,10 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="sd">        (dict): selected links</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sel_links</span> <span class="o">=</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">f</span><span class="p">):</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">}</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">:</span>
 
         <span class="c1"># add links</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
             <span class="n">sel_links</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">t</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]),</span> <span class="o">-</span><span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">]))</span>
 
     <span class="k">return</span> <span class="n">sel_links</span>
@@ -2094,7 +2115,9 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
              <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> 
              <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">,</span> 
              <span class="n">sel_method</span><span class="p">:</span> <span class="n">SelectionMethod</span><span class="p">,</span> <span class="n">val_condtest</span><span class="p">:</span> <span class="n">CondIndTest</span><span class="p">,</span> 
@@ -2122,7 +2145,9 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span> <span class="o">=</span> <span class="n">min_lag</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span> <span class="o">=</span> <span class="n">max_lag</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span> <span class="o">=</span> <span class="n">sel_method</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependencies</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">neglect_only_autodep</span> <span class="o">=</span> <span class="n">neglect_only_autodep</span>
 
@@ -2208,19 +2233,19 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">327</span>
-<span class="normal">328</span>
-<span class="normal">329</span>
-<span class="normal">330</span>
-<span class="normal">331</span>
-<span class="normal">332</span>
-<span class="normal">333</span>
-<span class="normal">334</span>
-<span class="normal">335</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">335</span>
 <span class="normal">336</span>
 <span class="normal">337</span>
 <span class="normal">338</span>
-<span class="normal">339</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__is_only_autodep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__is_only_autodep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns list of sources for a specified target</span>
 
@@ -2255,17 +2280,17 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
-<span class="normal">311</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__shrink_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__shrink_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Shrinks dependencies based on the selected features</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">difference_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span>
-    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">difference_set</span><span class="p">:</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
+    <span class="n">difference_set</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">difference_set</span><span class="p">:</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -2402,15 +2427,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">173</span>
 <span class="normal">174</span>
 <span class="normal">175</span>
 <span class="normal">176</span>
@@ -2441,7 +2458,15 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">201</span>
 <span class="normal">202</span>
 <span class="normal">203</span>
-<span class="normal">204</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
         <span class="n">node_layout</span> <span class="o">=</span> <span class="s1">&#39;dot&#39;</span><span class="p">,</span>
         <span class="n">min_width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">max_width</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
@@ -2521,15 +2546,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">243</span>
-<span class="normal">244</span>
-<span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span>
-<span class="normal">248</span>
-<span class="normal">249</span>
-<span class="normal">250</span>
-<span class="normal">251</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">251</span>
 <span class="normal">252</span>
 <span class="normal">253</span>
 <span class="normal">254</span>
@@ -2537,7 +2554,15 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">256</span>
 <span class="normal">257</span>
 <span class="normal">258</span>
-<span class="normal">259</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_selected_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_selected_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Defines the list of selected variables for d</span>
 
@@ -2545,7 +2570,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="sd">        list(str): list of selected variable names</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">:</span>
         <span class="n">sources_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_dependencies_for_target</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">neglect_only_autodep</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_only_autodep</span><span class="p">(</span><span class="n">sources_t</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
             <span class="n">sources_t</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -2576,24 +2601,24 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">293</span>
 <span class="normal">294</span>
 <span class="normal">295</span>
 <span class="normal">296</span>
 <span class="normal">297</span>
-<span class="normal">298</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">print_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">print_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print dependencies found by the selector</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
@@ -2601,7 +2626,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
         <span class="nb">print</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:&lt;10s}{:&gt;15s}{:&gt;15s}{:&gt;15s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;SOURCE&#39;</span><span class="p">,</span> <span class="s1">&#39;SCORE&#39;</span><span class="p">,</span> <span class="s1">&#39;PVAL&#39;</span><span class="p">,</span> <span class="s1">&#39;LAG&#39;</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">DASH</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span><span class="p">[</span><span class="n">t</span><span class="p">]:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:&lt;10s}{:&gt;15.3f}{:&gt;15.3f}{:&gt;15d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">SCORE</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">PVAL</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="n">LAG</span><span class="p">]))</span>      
 </code></pre></div></td></tr></table></div>
       </details>
@@ -2643,11 +2668,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
@@ -2676,7 +2697,15 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">138</span>
 <span class="normal">139</span>
 <span class="normal">140</span>
-<span class="normal">141</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run Selector and Validator</span>
 
@@ -2700,7 +2729,11 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
     <span class="c1"># causal model on selected links</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
     <span class="n">pcmci_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">selected_links</span><span class="p">)</span>
+
+    <span class="c1"># application of the validator result to the filter_dependencies field</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">__apply_validator_result</span><span class="p">(</span><span class="n">pcmci_result</span><span class="p">)</span>
+    <span class="c1"># final causal model</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">dependencies</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_selected_features</span><span class="p">()</span>
     <span class="c1"># shrink dataframe d and dependencies by the validator result</span>
@@ -2709,7 +2742,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">save_validator_res</span><span class="p">()</span>
 
     <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Feature selected: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">))</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -2732,9 +2765,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
 <span class="normal">73</span>
@@ -2747,7 +2778,9 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run filter method</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2761,8 +2794,8 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
     <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Data length: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span><span class="o">.</span><span class="n">initialise</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span><span class="o">.</span><span class="n">compute_dependencies</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">o_dependecies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sel_method</span><span class="o">.</span><span class="n">compute_dependencies</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">o_filter_dependecies</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filter_dependencies</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -2803,9 +2836,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 86</span>
-<span class="normal"> 87</span>
-<span class="normal"> 88</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 88</span>
 <span class="normal"> 89</span>
 <span class="normal"> 90</span>
 <span class="normal"> 91</span>
@@ -2822,7 +2853,11 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">102</span>
 <span class="normal">103</span>
 <span class="normal">104</span>
-<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run_pcmci</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run_pcmci</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run PCMCI</span>
 
@@ -2836,12 +2871,14 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
     <span class="c1"># causal model</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">pcmci_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">dependencies</span>
+
     <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">save_validator_res</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">causal_model</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -2864,14 +2901,14 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save_validator_res</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save_validator_res</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Saves dag plot if resfolder has been set otherwise it shows the figure</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2901,15 +2938,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">262</span>
-<span class="normal">263</span>
-<span class="normal">264</span>
-<span class="normal">265</span>
-<span class="normal">266</span>
-<span class="normal">267</span>
-<span class="normal">268</span>
-<span class="normal">269</span>
-<span class="normal">270</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">270</span>
 <span class="normal">271</span>
 <span class="normal">272</span>
 <span class="normal">273</span>
@@ -2921,7 +2950,15 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">279</span>
 <span class="normal">280</span>
 <span class="normal">281</span>
-<span class="normal">282</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">show_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">show_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Saves dependencies graph if resfolder is set otherwise it shows the figure</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2988,15 +3025,15 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">shrink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sel_features</span><span class="p">):</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">shrink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sel_features</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper in order to shrink data.d and dependencies</span>
 
@@ -3121,15 +3158,7 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/FPCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
-<span class="normal">210</span>
-<span class="normal">211</span>
-<span class="normal">212</span>
-<span class="normal">213</span>
-<span class="normal">214</span>
-<span class="normal">215</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span>
 <span class="normal">218</span>
@@ -3154,7 +3183,15 @@ in this form: {0: [(0,-1), (2,-1)]}</p>
 <span class="normal">237</span>
 <span class="normal">238</span>
 <span class="normal">239</span>
-<span class="normal">240</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">timeseries_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">timeseries_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                    <span class="n">min_width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
                    <span class="n">max_width</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
                    <span class="n">min_score</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
@@ -3518,7 +3555,10 @@ model starting from a prefixed set of variables and links.</p>
 <span class="normal">280</span>
 <span class="normal">281</span>
 <span class="normal">282</span>
-<span class="normal">283</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PCMCI</span><span class="p">():</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PCMCI</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    PCMCI class.</span>
 
@@ -3543,6 +3583,7 @@ model starting from a prefixed set of variables and links.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span> <span class="o">=</span> <span class="n">min_lag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span> <span class="o">=</span> <span class="n">max_lag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">val_method</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">val_condtest</span> <span class="o">=</span> <span class="n">val_condtest</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">verbosity</span> <span class="o">=</span> <span class="n">verbosity</span><span class="o">.</span><span class="n">value</span>
@@ -3584,7 +3625,7 @@ model starting from a prefixed set of variables and links.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;var_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span>
         <span class="c1"># apply significance level</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apply_alpha</span><span class="p">()</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__PCMCIres_converter</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__return_parents_dict</span><span class="p">()</span>
 
 
@@ -3611,14 +3652,14 @@ model starting from a prefixed set of variables and links.</p>
 <span class="sd">            font_size (int): font size</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="c1"># convert to dictionary</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__PCMCIres_converter</span><span class="p">()</span>
+        <span class="c1"># # convert to dictionary</span>
+        <span class="c1"># res = self.__PCMCIres_converter()</span>
 
-        <span class="c1"># filter only dependencies</span>
-        <span class="n">tmp_res</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span><span class="p">}</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">tmp_res</span>
+        <span class="c1"># # filter only dependencies</span>
+        <span class="c1"># tmp_res = {k: res[k] for k in self.data.pretty_features}</span>
+        <span class="c1"># res = tmp_res</span>
 
-        <span class="n">ts_dag</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> 
+        <span class="n">ts_dag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">,</span> 
                <span class="n">tau</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span><span class="p">,</span>
                <span class="n">min_width</span> <span class="o">=</span> <span class="n">min_width</span><span class="p">,</span>
                <span class="n">max_width</span> <span class="o">=</span> <span class="n">max_width</span><span class="p">,</span>
@@ -3659,14 +3700,14 @@ model starting from a prefixed set of variables and links.</p>
 
 <span class="sd">        &quot;&quot;&quot;</span>               
 
-        <span class="c1"># convert to dictionary</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__PCMCIres_converter</span><span class="p">()</span>
+        <span class="c1"># # convert to dictionary</span>
+        <span class="c1"># res = self.__PCMCIres_converter()</span>
 
-        <span class="c1"># filter only dependencies</span>
-        <span class="n">tmp_res</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span><span class="p">}</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">tmp_res</span>
+        <span class="c1"># # filter only dependencies</span>
+        <span class="c1"># tmp_res = {k: res[k] for k in self.data.pretty_features}</span>
+        <span class="c1"># res = tmp_res</span>
 
-        <span class="n">dag</span><span class="p">(</span><span class="n">res</span><span class="p">,</span>
+        <span class="n">dag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">,</span>
             <span class="n">node_layout</span> <span class="o">=</span> <span class="n">node_layout</span><span class="p">,</span>
             <span class="n">min_width</span> <span class="o">=</span> <span class="n">min_width</span><span class="p">,</span>
             <span class="n">max_width</span> <span class="o">=</span> <span class="n">max_width</span><span class="p">,</span>
@@ -3685,7 +3726,9 @@ model starting from a prefixed set of variables and links.</p>
 <span class="sd">        Save causal discovery results as pickle file if resfolder is set</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">respath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">res</span><span class="p">[</span><span class="s1">&#39;dependencies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
+            <span class="c1"># res = copy.deepcopy(self.result)</span>
             <span class="n">res</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span>
             <span class="n">res</span><span class="p">[</span><span class="s1">&#39;var_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span>
             <span class="n">res</span><span class="p">[</span><span class="s1">&#39;dag_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dag_path</span>
@@ -3837,10 +3880,7 @@ model starting from a prefixed set of variables and links.</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">215</span>
-<span class="normal">216</span>
-<span class="normal">217</span>
-<span class="normal">218</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">218</span>
 <span class="normal">219</span>
 <span class="normal">220</span>
 <span class="normal">221</span>
@@ -3854,7 +3894,10 @@ model starting from a prefixed set of variables and links.</p>
 <span class="normal">229</span>
 <span class="normal">230</span>
 <span class="normal">231</span>
-<span class="normal">232</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__PCMCIres_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__PCMCIres_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Re-elaborates the PCMCI result in a new dictionary</span>
 
@@ -3912,10 +3955,7 @@ model starting from a prefixed set of variables and links.</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">235</span>
-<span class="normal">236</span>
-<span class="normal">237</span>
-<span class="normal">238</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">238</span>
 <span class="normal">239</span>
 <span class="normal">240</span>
 <span class="normal">241</span>
@@ -3930,7 +3970,10 @@ model starting from a prefixed set of variables and links.</p>
 <span class="normal">250</span>
 <span class="normal">251</span>
 <span class="normal">252</span>
-<span class="normal">253</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__apply_alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__apply_alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Applies alpha threshold to the pcmci result</span>
 
@@ -4014,10 +4057,7 @@ with links '--&gt;'</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span>
-<span class="normal">259</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">259</span>
 <span class="normal">260</span>
 <span class="normal">261</span>
 <span class="normal">262</span>
@@ -4041,7 +4081,10 @@ with links '--&gt;'</p>
 <span class="normal">280</span>
 <span class="normal">281</span>
 <span class="normal">282</span>
-<span class="normal">283</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__convert_to_string_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph_bool</span><span class="p">):</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__convert_to_string_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph_bool</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts the 0,1-based graph returned by PCMCI to a string array</span>
 <span class="sd">    with links &#39;--&gt;&#39;</span>
@@ -4201,7 +4244,8 @@ with links '--&gt;'</p>
 <span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span>
-<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">,</span> <span class="n">val_condtest</span><span class="p">:</span> <span class="n">CondIndTest</span><span class="p">,</span> <span class="n">resfolder</span><span class="p">,</span> <span class="n">verbosity</span><span class="p">:</span> <span class="n">CPLevel</span><span class="p">):</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">,</span> <span class="n">val_condtest</span><span class="p">:</span> <span class="n">CondIndTest</span><span class="p">,</span> <span class="n">resfolder</span><span class="p">,</span> <span class="n">verbosity</span><span class="p">:</span> <span class="n">CPLevel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    PCMCI class constructor</span>
 
@@ -4219,6 +4263,7 @@ with links '--&gt;'</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span> <span class="o">=</span> <span class="n">min_lag</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span> <span class="o">=</span> <span class="n">max_lag</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">val_method</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">val_condtest</span> <span class="o">=</span> <span class="n">val_condtest</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">verbosity</span> <span class="o">=</span> <span class="n">verbosity</span><span class="o">.</span><span class="n">value</span>
@@ -4268,10 +4313,7 @@ with links '--&gt;'</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">190</span>
-<span class="normal">191</span>
-<span class="normal">192</span>
-<span class="normal">193</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
 <span class="normal">196</span>
@@ -4290,7 +4332,10 @@ with links '--&gt;'</p>
 <span class="normal">209</span>
 <span class="normal">210</span>
 <span class="normal">211</span>
-<span class="normal">212</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__return_parents_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">__return_parents_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns dictionary of parents sorted by val_matrix filtered by alpha</span>
 
@@ -4449,8 +4494,7 @@ with links '--&gt;'</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
-<span class="normal">128</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">128</span>
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span>
@@ -4495,7 +4539,8 @@ with links '--&gt;'</p>
 <span class="normal">170</span>
 <span class="normal">171</span>
 <span class="normal">172</span>
-<span class="normal">173</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="normal">173</span>
+<span class="normal">174</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
               <span class="n">node_layout</span><span class="p">,</span>
               <span class="n">min_width</span><span class="p">,</span>
               <span class="n">max_width</span><span class="p">,</span>
@@ -4523,14 +4568,14 @@ with links '--&gt;'</p>
 
 <span class="sd">    &quot;&quot;&quot;</span>               
 
-    <span class="c1"># convert to dictionary</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__PCMCIres_converter</span><span class="p">()</span>
+    <span class="c1"># # convert to dictionary</span>
+    <span class="c1"># res = self.__PCMCIres_converter()</span>
 
-    <span class="c1"># filter only dependencies</span>
-    <span class="n">tmp_res</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span><span class="p">}</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">tmp_res</span>
+    <span class="c1"># # filter only dependencies</span>
+    <span class="c1"># tmp_res = {k: res[k] for k in self.data.pretty_features}</span>
+    <span class="c1"># res = tmp_res</span>
 
-    <span class="n">dag</span><span class="p">(</span><span class="n">res</span><span class="p">,</span>
+    <span class="n">dag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">,</span>
         <span class="n">node_layout</span> <span class="o">=</span> <span class="n">node_layout</span><span class="p">,</span>
         <span class="n">min_width</span> <span class="o">=</span> <span class="n">min_width</span><span class="p">,</span>
         <span class="n">max_width</span> <span class="o">=</span> <span class="n">max_width</span><span class="p">,</span>
@@ -4658,8 +4703,7 @@ with links '--&gt;'</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 84</span>
-<span class="normal"> 85</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
 <span class="normal"> 86</span>
 <span class="normal"> 87</span>
 <span class="normal"> 88</span>
@@ -4698,7 +4742,8 @@ with links '--&gt;'</p>
 <span class="normal">121</span>
 <span class="normal">122</span>
 <span class="normal">123</span>
-<span class="normal">124</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build_ts_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<span class="normal">124</span>
+<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build_ts_dag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">min_width</span><span class="p">,</span>
                  <span class="n">max_width</span><span class="p">,</span>
                  <span class="n">min_score</span><span class="p">,</span>
@@ -4721,14 +4766,14 @@ with links '--&gt;'</p>
 <span class="sd">        font_size (int): font size</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c1"># convert to dictionary</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__PCMCIres_converter</span><span class="p">()</span>
+    <span class="c1"># # convert to dictionary</span>
+    <span class="c1"># res = self.__PCMCIres_converter()</span>
 
-    <span class="c1"># filter only dependencies</span>
-    <span class="n">tmp_res</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">res</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span><span class="p">}</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">tmp_res</span>
+    <span class="c1"># # filter only dependencies</span>
+    <span class="c1"># tmp_res = {k: res[k] for k in self.data.pretty_features}</span>
+    <span class="c1"># res = tmp_res</span>
 
-    <span class="n">ts_dag</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> 
+    <span class="n">ts_dag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">,</span> 
            <span class="n">tau</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span><span class="p">,</span>
            <span class="n">min_width</span> <span class="o">=</span> <span class="n">min_width</span><span class="p">,</span>
            <span class="n">max_width</span> <span class="o">=</span> <span class="n">max_width</span><span class="p">,</span>
@@ -4779,8 +4824,7 @@ with links '--&gt;'</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
-<span class="normal">51</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -4810,7 +4854,8 @@ with links '--&gt;'</p>
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selected_links</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="normal">81</span>
+<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selected_links</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run causal discovery algorithm</span>
 
@@ -4840,7 +4885,7 @@ with links '--&gt;'</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;var_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span>
     <span class="c1"># apply significance level</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__apply_alpha</span><span class="p">()</span>
-
+    <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__PCMCIres_converter</span><span class="p">()</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__return_parents_dict</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
       </details>
@@ -4864,8 +4909,7 @@ with links '--&gt;'</p>
 
       <details class="quote">
         <summary>Source code in <code>fpcmci/PCMCI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">176</span>
-<span class="normal">177</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">177</span>
 <span class="normal">178</span>
 <span class="normal">179</span>
 <span class="normal">180</span>
@@ -4875,12 +4919,17 @@ with links '--&gt;'</p>
 <span class="normal">184</span>
 <span class="normal">185</span>
 <span class="normal">186</span>
-<span class="normal">187</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">save_result</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Save causal discovery results as pickle file if resfolder is set</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">respath</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;dependencies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
+        <span class="c1"># res = copy.deepcopy(self.result)</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;alpha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;var_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pretty_features</span>
         <span class="n">res</span><span class="p">[</span><span class="s1">&#39;dag_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dag_path</span>
