@@ -106,7 +106,7 @@ class FPCMCI():
         
         self.save_validator_res()
         
-        return self.result
+        return self.result, self.causal_model
 
     
     def run(self):

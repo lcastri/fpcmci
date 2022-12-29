@@ -113,6 +113,7 @@ pip install fpcmci
 
 ## Recent changes
 
+* 4.1.1 PCMCI dependencies fix: FPCMCI causal model field added, FPCMCI.run() and .run_pcmci() outputs the selected variables and the corresponding causal model
 * 4.1.0 FSelector and FValidator turned into FPCMCI and PCMCI, show_edge_label removed and dag optimized, new package included in the setup.py, added tutorials, and new example in README.md. 
 * 4.0.1 online documentation and paths fixes.
 * 4.0.0 package published.
