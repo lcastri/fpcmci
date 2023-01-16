@@ -51,20 +51,13 @@ In this case the FPCMCI removes the $X_6$ variable from the causal graph leading
 
 ## Citation
 
-If you found this useful for your work, please cite these papers:
+If you found this useful for your work, please cite this papers:
 ```
-@article{ghidoni2022human,
-  title={From Human Perception and Action Recognition to Causal Understanding of Human-Robot Interaction in Industrial Environments},
-  author={Ghidoni, Stefano and Terreran, Matteo and Evangelista, Daniele and Menegatti, Emanuele and Eitzinger, Christian and Villagrossi, Enrico and Pedrocchi, Nicola and Castaman, Nicola and Malecha, Marcin and Mghames, Sariah and others},
-  year={2022}
-}
-```
-```
-@inproceedings{castri2022causal,
-    title={Causal Discovery of Dynamic Models for Predicting Human Spatial Interactions},
+@inproceedings{castri2023fpcmci,
+    title={Enhancing Causal Discovery from Robot Sensor Data in Dynamic Scenarios},
     author={Castri, Luca and Mghames, Sariah and Hanheide, Marc and Bellotto, Nicola},
-    booktitle={International Conference on Social Robotics (ICSR)},
-    year={2022},
+    booktitle={Proceedings of the Conference on Causal Learning and Reasoning (CLeaR)},
+    year={2023},
 }
 ```
 
@@ -113,6 +106,7 @@ pip install fpcmci
 
 ## Recent changes
 
+* 4.1.2 tutorials adapted to 4.1.1 and get_SCM method added in FPCMCI
 * 4.1.1 PCMCI dependencies fix: FPCMCI causal model field added, FPCMCI.run() and .run_pcmci() outputs the selected variables and the corresponding causal model
 * 4.1.0 FSelector and FValidator turned into FPCMCI and PCMCI, show_edge_label removed and dag optimized, new package included in the setup.py, added tutorials, and new example in README.md. 
 * 4.0.1 online documentation and paths fixes.
