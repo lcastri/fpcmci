@@ -91,6 +91,7 @@ class FPCMCI():
         
         Returns:
             list(str): list of selected variable names
+            dict(str:list(tuple)): causal model
         """
         CP.info("Significance level: " + str(self.alpha))
         CP.info("Max lag time: " + str(self.max_lag))
@@ -115,6 +116,7 @@ class FPCMCI():
         
         Returns:
             list(str): list of selected variable names
+            dict(str:list(tuple)): causal model
         """
         
         self.run_filter()        
@@ -147,6 +149,25 @@ class FPCMCI():
         
         CP.info("\nFeature selected: " + str(self.result))
         return self.result, self.causal_model
+    
+    
+    def get_SCM(self):
+        """
+        Return Structural Causal Model
+
+        Raises:
+            ValueError: "Causal Model not estimated yet" if self.causal_model is None
+
+        Returns:
+            dict(str:list(tuple)): SCM of the causal model in the format "target": [(source, lag) ...] (e.g. "$X0$" : [("$X0$", -1), ("$X1$", -2)]) 
+        """
+        if self.causal_model is None:
+            raise ValueError("Causal Model not estimated yet.")
+        scm = {v: list() for v in self.data.pretty_features}
+        for t in self.causal_model.keys():
+            for s in self.causal_model[t]:
+                scm[t].append((s[SOURCE], -s[LAG])) 
+        return scm
     
 
     def shrink(self, sel_features):
