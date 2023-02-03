@@ -57,7 +57,7 @@ If you found this useful for your work, please cite this papers:
 @inproceedings{castri2023fpcmci,
     title={Enhancing Causal Discovery from Robot Sensor Data in Dynamic Scenarios},
     author={Castri, Luca and Mghames, Sariah and Hanheide, Marc and Bellotto, Nicola},
-    booktitle={Proceedings of the Conference on Causal Learning and Reasoning (CLeaR)},
+    booktitle={Conference on Causal Learning and Reasoning (CLeaR)},
     year={2023},
 }
 ```
