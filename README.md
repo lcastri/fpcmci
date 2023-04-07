@@ -79,16 +79,37 @@ If you found this useful for your work, please cite this papers:
 
 ## Installation
 
-Before installing the FPCMCI package, you need to install the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the current release of `FPCMCI` with:
+Before installing the FPCMCI package, you need to install Java and the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the current release of `FPCMCI` with:
 ``` shell
 pip install fpcmci
 ```
 
-For a complete installation (IDTxl and FPCMCI) you can run the following commands:
+For a complete installation Java - IDTxl - FPCMCI, follow the following procedure.
+
+### 1 - Java installation
+Verify that you have not already installed Java:
+```shell
+java -version
+```
+if the latter returns `Command 'java' not found, ...`, you can install Java by the following commands, otherwise you can jump to IDTxl installation.
+```shell
+# Java
+sudo apt-get update
+sudo apt install default-jdk
+```
+
+Then, you need to add JAVA_HOME to the environment
+```shell
+sudo nano /etc/environment
+JAVA_HOME="/lib/jvm/java-11-openjdk-amd64/bin/java" # Paste the JAVA_HOME assignment at the bottom of the file
+source /etc/environment
+```
+
+### 2 - IDTxl installation
 ```shell
 # IDTxl
 git clone https://github.com/pwollstadt/IDTxl.git
-conda create --name fpcmci python=3 pip matplotlib h5py scipy networkx
+conda create --name fpcmci python=3.8 pip matplotlib h5py scipy networkx
 conda activate fpcmci
 conda install -c conda-forge jpype1    # required by CPU JIDT estimators
 conda install -c conda-forge pyopencl  # required by GPU OpenCL estimators
@@ -99,8 +120,10 @@ conda install mpmath
 
 cd IDTxl
 pip install -e .
+```
 
-# FPCMCI
+### 3 - FPCMCI installation
+```shell
 pip install fpcmci
 ```
 
