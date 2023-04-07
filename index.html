@@ -10,8 +10,12 @@
         <meta name="author" content="Luca Castri">
       
       
+      
+      
+        <link rel="next" href="preprocessing/">
+      
       <link rel="icon" href="assets/icon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
     
     
       
@@ -19,11 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.472b142f.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.7a7fce14.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.08040f6c.min.css">
-        
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -82,7 +85,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="FPCMCI" class="md-header__button md-logo" aria-label="FPCMCI" data-md-component="logo">
       
@@ -112,8 +117,6 @@
       <form class="md-header__option" data-md-component="palette">
         
           
-          
-          
           <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="light-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
           
             <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
@@ -121,8 +124,6 @@
             </label>
           
         
-          
-          
           
           <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="light-blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
           
@@ -161,7 +162,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -214,7 +215,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -276,6 +277,33 @@
   <a href="#installation" class="md-nav__link">
     Installation
   </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-java-installation" class="md-nav__link">
+    1 - Java installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-idtxl-installation" class="md-nav__link">
+    2 - IDTxl installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-fpcmci-installation" class="md-nav__link">
+    3 - FPCMCI installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -428,6 +456,33 @@
     Installation
   </a>
   
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-java-installation" class="md-nav__link">
+    1 - Java installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-idtxl-installation" class="md-nav__link">
+    2 - IDTxl installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-fpcmci-installation" class="md-nav__link">
+    3 - FPCMCI installation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -539,13 +594,28 @@ for t in range(max_lag, nsample):
 <li>h5py==3.7.0   </li>
 </ul>
 <h2 id="installation">Installation</h2>
-<p>Before installing the FPCMCI package, you need to install the <a href="https://github.com/pwollstadt/IDTxl">IDTxl package</a> used for the feature-selection process, following the guide described <a href="https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements">here</a>. Once complete, you can install the current release of <code>FPCMCI</code> with:</p>
+<p>Before installing the FPCMCI package, you need to install Java and the <a href="https://github.com/pwollstadt/IDTxl">IDTxl package</a> used for the feature-selection process, following the guide described <a href="https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements">here</a>. Once complete, you can install the current release of <code>FPCMCI</code> with:</p>
 <pre><code class="language-shell">pip install fpcmci
 </code></pre>
-<p>For a complete installation (IDTxl and FPCMCI) you can run the following commands:</p>
+<p>For a complete installation Java - IDTxl - FPCMCI, follow the following procedure.</p>
+<h3 id="1-java-installation">1 - Java installation</h3>
+<p>Verify that you have not already installed Java:</p>
+<pre><code class="language-shell">java -version
+</code></pre>
+<p>if the latter returns <code>Command 'java' not found, ...</code>, you can install Java by the following commands, otherwise you can jump to IDTxl installation.</p>
+<pre><code class="language-shell"># Java
+sudo apt-get update
+sudo apt install default-jdk
+</code></pre>
+<p>Then, you need to add JAVA_HOME to the environment</p>
+<pre><code class="language-shell">sudo nano /etc/environment
+JAVA_HOME=&quot;/lib/jvm/java-11-openjdk-amd64/bin/java&quot; # Paste the JAVA_HOME assignment at the bottom of the file
+source /etc/environment
+</code></pre>
+<h3 id="2-idtxl-installation">2 - IDTxl installation</h3>
 <pre><code class="language-shell"># IDTxl
 git clone https://github.com/pwollstadt/IDTxl.git
-conda create --name fpcmci python=3 pip matplotlib h5py scipy networkx
+conda create --name fpcmci python=3.8 pip matplotlib h5py scipy networkx
 conda activate fpcmci
 conda install -c conda-forge jpype1    # required by CPU JIDT estimators
 conda install -c conda-forge pyopencl  # required by GPU OpenCL estimators
@@ -556,9 +626,9 @@ conda install mpmath
 
 cd IDTxl
 pip install -e .
-
-# FPCMCI
-pip install fpcmci
+</code></pre>
+<h3 id="3-fpcmci-installation">3 - FPCMCI installation</h3>
+<pre><code class="language-shell">pip install fpcmci
 </code></pre>
 <h2 id="recent-changes">Recent changes</h2>
 <ul>
@@ -584,27 +654,6 @@ pip install fpcmci
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-      
-        
-        <a href="preprocessing/" class="md-footer__link md-footer__link--next" aria-label="Next: Preprocessing" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              Preprocessing
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -626,10 +675,10 @@ pip install fpcmci
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.d6c3db9e.min.js"></script>
+      <script src="assets/javascripts/bundle.407015b8.min.js"></script>
       
     
   </body>
