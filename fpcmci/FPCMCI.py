@@ -138,13 +138,13 @@ class FPCMCI():
         
         # application of the validator result to the filter_dependencies field
         self.__apply_validator_result(pcmci_result)
-        # final causal model
-        self.causal_model = self.validator.dependencies
         
         self.result = self.get_selected_features()
         # shrink dataframe d and dependencies by the validator result
         self.shrink(self.result)
         
+        # final causal model
+        self.causal_model = self.validator.dependencies
         self.save_validator_res()
         
         CP.info("\nFeature selected: " + str(self.result))
@@ -337,8 +337,10 @@ class FPCMCI():
         Shrinks dependencies based on the selected features
         """
         difference_set = self.filter_dependencies.keys() - self.data.features
-        for d in difference_set: del self.filter_dependencies[d]
-        
+        for d in difference_set: 
+            del self.filter_dependencies[d]
+            if self.validator.dependencies is not None: del self.validator.dependencies['$' + d + '$']
+ 
 
     def __get_dependencies_for_target(self, t):
         """
