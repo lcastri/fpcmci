@@ -1,7 +1,7 @@
 import copy
 import pickle
 from tigramite.pcmci import PCMCI as VAL
-from tigramite.independence_tests import CondIndTest
+from tigramite.independence_tests.independence_tests_base import CondIndTest
 import tigramite.data_processing as pp
 import numpy as np
 from fpcmci.CPrinter import CPLevel, CP
@@ -48,7 +48,7 @@ class PCMCI():
             self.respath, self.dag_path, self.ts_dag_path = utils.get_validatorpaths(resfolder)  
         
 
-    def run(self, selected_links = None):
+    def run(self, link_assumptions = None):
         """
         Run causal discovery algorithm
 
@@ -70,10 +70,9 @@ class PCMCI():
                                 cond_ind_test = self.val_condtest,
                                 verbosity = self.verbosity)
 
-        self.result = self.val_method.run_pcmci(selected_links = selected_links,
+        self.result = self.val_method.run_pcmci(link_assumptions = link_assumptions,
                                                 tau_max = self.max_lag,
-                                                tau_min = self.min_lag,
-                                                pc_alpha = 0.05)
+                                                tau_min = self.min_lag)
         
         self.result['var_names'] = self.data.pretty_features
         # apply significance level
