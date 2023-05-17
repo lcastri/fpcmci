@@ -131,18 +131,11 @@ pip install fpcmci
 ## Recent changes
 
 | Version | Changes |
-| --- | ----------- |
-| 4.2.0  | causal model with only selected features fix  
-          adapted to tigramite 5.2  
-          get_causal_matrix FPCMCI method added  
-          f_alpha and pcmci_alpha instead of alpha |
+| :---: | ----------- |
+| 4.2.0 | causal model with only selected features fix<br>adapted to tigramite 5.2<br>get_causal_matrix FPCMCI method added<br>f_alpha and pcmci_alpha instead of alpha |
 | 4.1.2 | tutorials adapted to 4.1.1 and get_SCM method added in FPCMCI |
 | 4.1.1 | PCMCI dependencies fix: FPCMCI causal model field added, FPCMCI.run() and .run_pcmci() outputs the selected variables and the corresponding causal model |
-| 4.1.0 | FSelector and FValidator turned into FPCMCI and PCMCI  
-          show_edge_label removed and dag optimized  
-          new package included in the setup.py  
-          added tutorials  
-          new example in README.md |
+| 4.1.0 | FSelector and FValidator turned into FPCMCI and PCMCI<br>show_edge_label removed and dag optimized<br>new package included in the setup.py<br>added tutorials<br>new example in README.md |
 | 4.0.1 | online documentation and paths fixes |
 | 4.0.0 | package published |
 
