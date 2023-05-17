@@ -64,16 +64,16 @@ If you found this useful for your work, please cite this papers:
 
 ## Requirements
 
-* tigramite==5.1.0.3
-* pandas==1.5.2
+* tigramite>=5.1.0.3
+* pandas>=1.5.2
 * netgraph>=4.10.2
 * networkx>=2.8.6
-* ruptures==1.1.7
-* scikit_learn==1.1.3
+* ruptures>=1.1.7
+* scikit_learn>=1.1.3
 * torch>=1.11.0
-* gpytorch>=1.4       
+* gpytorch>=1.4
 * dcor>=0.5.3
-* h5py==3.7.0   
+* h5py>=3.7.0    
 
 
 ## Installation
@@ -129,8 +129,12 @@ pip install fpcmci
 
 ## Recent changes
 
-* 4.1.2 tutorials adapted to 4.1.1 and get_SCM method added in FPCMCI
-* 4.1.1 PCMCI dependencies fix: FPCMCI causal model field added, FPCMCI.run() and .run_pcmci() outputs the selected variables and the corresponding causal model
-* 4.1.0 FSelector and FValidator turned into FPCMCI and PCMCI, show_edge_label removed and dag optimized, new package included in the setup.py, added tutorials, and new example in README.md. 
-* 4.0.1 online documentation and paths fixes.
-* 4.0.0 package published.
+* 4.2.0 - causal model with only selected features fix
+          adapted to tigramite 5.2 
+          get_causal_matrix FPCMCI method added
+          f_alpha and pcmci_alpha instead of alpha
+* 4.1.2 - tutorials adapted to 4.1.1 and get_SCM method added in FPCMCI
+* 4.1.1 - PCMCI dependencies fix: FPCMCI causal model field added, FPCMCI.run() and .run_pcmci() outputs the selected variables and the corresponding causal model
+* 4.1.0 - FSelector and FValidator turned into FPCMCI and PCMCI, show_edge_label removed and dag optimized, new package included in the setup.py, added tutorials, and new example in README.md. 
+* 4.0.1 - online documentation and paths fixes.
+* 4.0.0 - package published.

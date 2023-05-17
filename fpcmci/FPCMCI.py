@@ -2,7 +2,7 @@ import copy
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
-from tigramite.independence_tests import CondIndTest
+from tigramite.independence_tests.independence_tests_base import CondIndTest
 import sys
 from fpcmci.selection_methods.SelectionMethod import SelectionMethod
 from fpcmci.CPrinter import CPLevel, CP
@@ -28,7 +28,8 @@ class FPCMCI():
                  min_lag, max_lag, 
                  sel_method: SelectionMethod, val_condtest: CondIndTest, 
                  verbosity: CPLevel, 
-                 alpha = 0.05, 
+                 f_alpha = 0.05, 
+                 pcmci_alpha = 0.05, 
                  resfolder = None,
                  neglect_only_autodep = False):
         """
@@ -41,13 +42,15 @@ class FPCMCI():
             sel_method (SelectionMethod): selection method
             val_condtest (CondIndTest): validation method
             verbosity (CPLevel): verbosity level
-            alpha (float, optional): significance level. Defaults to 0.05.
+            f_alpha (float, optional): filter significance level. Defaults to 0.05.
+            pcmci_alpha (float, optional): PCMCI significance level. Defaults to 0.05.
             resfolder (string, optional): result folder to create. Defaults to None.
             neglect_only_autodep (bool, optional): Bit for neglecting variables with only autodependency. Defaults to False.
         """
         
         self.data = data
-        self.alpha = alpha
+        self.f_alpha = f_alpha
+        self.pcmci_alpha = pcmci_alpha
         self.min_lag = min_lag
         self.max_lag = max_lag
         self.sel_method = sel_method
@@ -63,7 +66,7 @@ class FPCMCI():
             logpath, self.dependency_path = utils.get_selectorpath(resfolder)
             sys.stdout = Logger(logpath)
         
-        self.validator = PCMCI(data, alpha, min_lag, max_lag, val_condtest, resfolder, verbosity)       
+        self.validator = PCMCI(data, self.pcmci_alpha, min_lag, max_lag, val_condtest, resfolder, verbosity)       
         CP.set_verbosity(verbosity)
 
 
@@ -75,12 +78,12 @@ class FPCMCI():
         CP.info(DASH)
         CP.info("Selecting relevant features among: " + str(self.data.features))
         CP.info("Selection method: " + self.sel_method.name)
-        CP.info("Significance level: " + str(self.alpha))
+        CP.info("Significance level: " + str(self.f_alpha))
         CP.info("Max lag time: " + str(self.max_lag))
         CP.info("Min lag time: " + str(self.min_lag))
         CP.info("Data length: " + str(self.data.T))
 
-        self.sel_method.initialise(self.data, self.alpha, self.min_lag, self.max_lag)
+        self.sel_method.initialise(self.data, self.f_alpha, self.min_lag, self.max_lag)
         self.filter_dependencies = self.sel_method.compute_dependencies()
         self.o_filter_dependecies = copy.deepcopy(self.filter_dependencies)
 
@@ -93,7 +96,7 @@ class FPCMCI():
             list(str): list of selected variable names
             dict(str:list(tuple)): causal model
         """
-        CP.info("Significance level: " + str(self.alpha))
+        CP.info("Significance level: " + str(self.pcmci_alpha))
         CP.info("Max lag time: " + str(self.max_lag))
         CP.info("Min lag time: " + str(self.min_lag))
         CP.info("Data length: " + str(self.data.T))
@@ -130,11 +133,11 @@ class FPCMCI():
         self.shrink(tmp_sel_features)
         
         # selected links to check by the validator
-        selected_links = self.__get_selected_links()
+        link_assumptions = self.__get_link_assumptions()
             
         # causal model on selected links
         self.validator.data = self.data
-        pcmci_result = self.validator.run(selected_links)
+        pcmci_result = self.validator.run(link_assumptions)
         
         # application of the validator result to the filter_dependencies field
         self.__apply_validator_result(pcmci_result)
@@ -149,6 +152,23 @@ class FPCMCI():
         
         CP.info("\nFeature selected: " + str(self.result))
         return self.result, self.causal_model
+    
+    
+    def get_causal_matrix(self):
+        """
+        Returns a dictionary with keys the lags and values the causal matrix containing the causal weights between targets (rows) and sources (columns)
+
+        Returns:
+            dict/np.ndarray: causal matrix per 
+        """
+        cm_per_lag = {lag : np.zeros((len(self.result), len(self.result))) for lag in range(self.min_lag, self.max_lag + 1)}
+        vars = ['$' + var +'$' for var in self.result]
+        for lag in cm_per_lag:
+            for var in vars:
+                for source in self.causal_model[var]:
+                    if source[LAG] == lag: cm_per_lag[lag][vars.index(var)][vars.index(source[SOURCE])] = source[SCORE]
+        if len(cm_per_lag) == 1: return list(cm_per_lag.values())[0]
+        return cm_per_lag
     
     
     def get_SCM(self):
@@ -396,20 +416,20 @@ class FPCMCI():
         return dep_mat
 
 
-    def __get_selected_links(self):
+    def __get_link_assumptions(self):
         """
         Return selected links found by the selector
-        in this form: {0: [(0,-1), (2,-1)]}
+        in this form: {0: {(0,-1) : "-?>", (2,-1) : "-?>"}}
 
         Returns:
             (dict): selected links
         """
-        sel_links = {self.data.features.index(f):list() for f in self.data.features}
+        sel_links = {self.data.features.index(f):dict() for f in self.data.features}
         for t in self.filter_dependencies:
             
             # add links
             for s in self.filter_dependencies[t]:
-                sel_links[self.data.features.index(t)].append((self.data.features.index(s[SOURCE]), -s[LAG]))
+                sel_links[self.data.features.index(t)][(self.data.features.index(s[SOURCE]), -s[LAG])] = '-?>'
 
         return sel_links
     
