@@ -72,7 +72,8 @@ class PCMCI():
 
         self.result = self.val_method.run_pcmci(link_assumptions = link_assumptions,
                                                 tau_max = self.max_lag,
-                                                tau_min = self.min_lag)
+                                                tau_min = self.min_lag,
+                                                alpha_level = self.alpha)
         
         self.result['var_names'] = self.data.pretty_features
         # apply significance level
