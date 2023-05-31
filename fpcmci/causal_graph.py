@@ -170,10 +170,17 @@ def ts_dag(res,
         for s in res[t]:
             s_index = len(res.keys())-1 - list(res.keys()).index(s[SOURCE])
             t_index = len(res.keys())-1 - list(res.keys()).index(t)
-            s_node = (tau - s[LAG], s_index)
-            t_node = (tau, t_index)
-            edges.append((s_node, t_node))
-            edge_width[(s_node, t_node)] = __scale(s[SCORE], min_width, max_width, min_score, max_score)
+            
+            s_lag = tau - s[LAG]
+            t_lag = tau
+            while s_lag >= 0:
+                s_node = (s_lag, s_index)
+                t_node = (t_lag, t_index)
+                edges.append((s_node, t_node))
+                edge_width[(s_node, t_node)] = __scale(s[SCORE], min_width, max_width, min_score, max_score)
+                s_lag -= s[LAG]
+                t_lag -= s[LAG]
+                
     G.add_edges_from(edges)
 
     # label definition
