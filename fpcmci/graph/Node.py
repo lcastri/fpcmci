@@ -20,7 +20,7 @@ class Node():
     
     
     @property
-    def is_autodependent(self):
+    def is_autodependent(self) -> bool:
         """
         Returns True if the node is autodependent
 
@@ -31,7 +31,7 @@ class Node():
     
     
     @property
-    def is_isolated(self):
+    def is_isolated(self) -> bool:
         """
         Returns True if the node is isolated
 
@@ -45,7 +45,7 @@ class Node():
     
     
     @property
-    def is_only_autodep(self):
+    def is_only_autodep(self) -> bool:
         """
         Returns True if the node is ONLY auto-dependent
 
@@ -56,7 +56,7 @@ class Node():
     
     
     @property
-    def has_only_context(self):
+    def has_only_context(self) -> bool:
         """
         Returns True if the node has ONLY the context variable as parent
 
@@ -67,7 +67,7 @@ class Node():
     
     
     @property
-    def is_only_autodep_context(self):
+    def is_only_autodep_context(self) -> bool:
         """
         Returns True if the node has ONLY the context variable and itself as parent
 
@@ -78,7 +78,7 @@ class Node():
     
     
     @property
-    def is_exogenous(self):
+    def is_exogenous(self) -> bool:
         """
         Returns True if the node has no parents
 
@@ -89,7 +89,7 @@ class Node():
         
         
     @property
-    def has_child(self):
+    def has_child(self) -> bool:
         """
         Returns True if the node has at least one child
 
@@ -100,7 +100,7 @@ class Node():
     
     
     @property
-    def sourcelist(self):
+    def sourcelist(self) -> list(str):
         """
         Returns list of source names
 
@@ -111,7 +111,14 @@ class Node():
     
     
     @property
-    def autodependency_links(self):
+    def autodependency_links(self) -> list:
+        """
+        Returns list of autodependency links
+
+        Returns:
+            list: Returns list of autodependency links
+
+        """
         autodep_links = list()
         if self.is_autodependent:
             for s in self.sources: 
@@ -121,7 +128,13 @@ class Node():
     
     
     @property
-    def get_max_autodependent(self):
+    def get_max_autodependent(self) -> float:
+        """
+        Returns max score of autodependent link
+
+        Returns:
+            float: Returns max score of autodependent link
+        """
         max_score = 0
         max_s = None
         if self.is_autodependent:

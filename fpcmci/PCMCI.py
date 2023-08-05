@@ -112,13 +112,12 @@ class PCMCI():
         return self.__PC_to_DAG(parents, data.features)
     
     
-    def __my_mci(self, autodep_dag: DAG):#, link_assumptions=None, parents=None):
+    def __my_mci(self, autodep_dag: DAG):
         """
         Performs MCI test
 
         Args:
-            link_assumptions (dict, optional): link assumptions. Defaults to None.
-            parents (dict, optional): parents dictionary. Defaults to None.
+            autodep_dag (DAG): current DAG to check via MCI
 
         Returns:
             (dict): MCI result
@@ -268,8 +267,7 @@ class PCMCI():
 
         Args:
             data (Data): Data obj to analyse
-            link_assumptions (dict): prior assumptions on causal model links. Defaults to None.
-            parents (dict): causal structure
+            autodep_dag (DAG): current DAG to check via MCI
 
         Returns:
             (DAG): estimated causal model

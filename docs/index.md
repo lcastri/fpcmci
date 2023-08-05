@@ -131,6 +131,7 @@ pip install fpcmci
 
 | Version | Changes |
 | :---: | ----------- |
+| 4.3.2 | documentation improved |
 | 4.3.1 | README and index.md updated |
 | 4.3.0 | alpha level fix in PCMCI<br>timeseries_dag fix<br>adaptation to DAG structure |
 | 4.2.1 | fixed dependency error in setup.py |

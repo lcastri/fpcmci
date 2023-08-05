@@ -2,6 +2,7 @@ site_name: FPCMCI
 site_author: 'Luca Castri'
 
 theme:
+  # name: 'mkdocs'
   name: 'material'
   palette:
     
@@ -30,6 +31,11 @@ theme:
 plugins:
   - search
   - mkdocstrings
+  # - mkdocstrings:
+  #     default_handler: python
+  #     handlers:
+  #       python:
+  #         paths: [fpcmci]
 
 
 nav:
@@ -38,4 +44,4 @@ nav:
   - Subsampling: subsampling_method.md
   - Feature Selection Methods: feature_selection_method.md
   - FPCMCI: fpcmci.md
-  - Causal Graph: causal_graph.md
+  - DAG: DAG.md

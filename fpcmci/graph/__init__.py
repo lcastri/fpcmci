@@ -1,2 +1,2 @@
-from .DAG import DAG
-from .Node import Node
+from .DAG import *
+from .Node import *

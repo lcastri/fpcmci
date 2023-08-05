@@ -9,6 +9,16 @@ from netgraph import Graph
 
 class DAG():
     def __init__(self, var_names, min_lag, max_lag, neglect_autodep = False, scm = None):
+        """
+        DAG constructor
+
+        Args:
+            var_names (list): _description_
+            min_lag (int): _description_
+            max_lag (int): _description_
+            neglect_autodep (bool, optional): _description_. Defaults to False.
+            scm (dict, optional): _description_. Defaults to None.
+        """
         self.g = {var: Node(var, neglect_autodep) for var in var_names}
         self.neglect_autodep = neglect_autodep
         self.sys_context = dict()
@@ -21,12 +31,24 @@ class DAG():
 
 
     @property
-    def features(self):
+    def features(self) -> list:
+        """
+        Features list
+
+        Returns:
+            list: Features list
+        """
         return list(self.g)
 
     
     @property
-    def autodep_nodes(self):
+    def autodep_nodes(self) -> list:
+        """
+        Autodependent nodes list
+
+        Returns:
+            list: Autodependent nodes list
+        """
         autodeps = list()
         for t in self.g:
             # NOTE: I commented this because I want to check all the auto-dep nodes with obs data
@@ -36,7 +58,13 @@ class DAG():
     
     
     @property
-    def interventions_links(self):
+    def interventions_links(self) -> list:
+        """
+        Intervention links list
+
+        Returns:
+            list: Intervention link list
+        """
         int_links = list()
         for t in self.g:
             for s in self.g[t].sources:
@@ -46,22 +74,46 @@ class DAG():
     
     
     def fully_connected_dag(self):
+        """
+        Build a fully connected DAG
+        """
         for t in self.g:
             for s in self.g:
                 for l in range(1, self.max_lag + 1): self.add_source(t, s, 1, 0, l)
     
     
     def add_source(self, t, s, score, pval, lag):
+        """
+        Adds source node to a target node
+
+        Args:
+            t (str): target node name
+            s (str): source node name
+            score (float): dependency score
+            pval (float): dependency p-value
+            lag (int): dependency lag
+        """
         self.g[t].sources[(s, abs(lag))] = {SCORE: score, PVAL: pval}
         self.g[s].children.append(t)
        
         
     def del_source(self, t, s, lag):
+        """
+        Removes source node from a target node
+
+        Args:
+            t (str): target node name
+            s (str): source node name
+            lag (int): dependency lag
+        """
         del self.g[t].sources[(s, lag)]
         self.g[s].children.remove(t)
         
         
     def remove_unneeded_features(self):
+        """
+        Removes isolated nodes
+        """
         tmp = copy.deepcopy(self.g)
         for t in self.g.keys():
             if self.g[t].is_isolated: 
@@ -71,6 +123,9 @@ class DAG():
             
             
     def add_context(self):
+        """
+        Adds context variables
+        """
         for sys_var, context_var in self.sys_context.items():
             if sys_var in self.features:
                 
@@ -84,6 +139,9 @@ class DAG():
                 
     
     def remove_context(self):
+        """
+        Remove context variables
+        """
         for sys_var, context_var in self.sys_context.items():
             if sys_var in self.g:
                 
@@ -96,7 +154,16 @@ class DAG():
                 del self.g[context_var]
                 
                 
-    def get_link_assumptions(self, autodep_ok = False):
+    def get_link_assumptions(self, autodep_ok = False) -> dict:
+        """
+        Returnes link assumption dictionary
+
+        Args:
+            autodep_ok (bool, optional): If true, autodependecy link assumption = -->. Otherwise -?>. Defaults to False.
+
+        Returns:
+            dict: link assumption dictionary
+        """
         link_assump = {self.features.index(f): dict() for f in self.features}
         for t in self.g:
             for s in self.g[t].sources:
@@ -112,7 +179,13 @@ class DAG():
         return link_assump
 
 
-    def get_SCM(self):   
+    def get_SCM(self) -> dict:   
+        """
+        Returns SCM
+
+        Returns:
+            dict: SCM
+        """
         scm = {v: list() for v in self.features}
         for t in self.g:
             for s in self.g[t].sources:
@@ -120,7 +193,13 @@ class DAG():
         return scm
     
     
-    def get_parents(self):        
+    def get_parents(self) -> dict:
+        """
+        Returns Parents dict
+
+        Returns:
+            dict: Parents dict
+        """
         scm = {self.features.index(v): list() for v in self.features}
         for t in self.g:
             for s in self.g[t].sources:
@@ -144,7 +223,13 @@ class DAG():
         return cm_per_lag
     
     
-    def make_pretty(self):
+    def make_pretty(self) -> dict:
+        """
+        Makes variables' names pretty, i.e. $ varname $
+
+        Returns:
+            dict: pretty DAG
+        """
         pretty = dict()
         for t in self.g:
             p_t = '$' + t + '$'
@@ -172,7 +257,6 @@ class DAG():
         build a dag
 
         Args:
-            res (DAG): causal model
             node_layout (str, optional): Node layout. Defaults to 'dot'.
             min_width (int, optional): minimum linewidth. Defaults to 1.
             max_width (int, optional): maximum linewidth. Defaults to 5.
@@ -291,7 +375,6 @@ class DAG():
         build a timeseries dag
 
         Args:
-            res (DAG): causal model
             tau (int): max time lag
             min_width (int, optional): minimum linewidth. Defaults to 1.
             max_width (int, optional): maximum linewidth. Defaults to 5.

@@ -17,7 +17,7 @@
         <link rel="next" href="../fpcmci/">
       
       <link rel="icon" href="../assets/icon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -25,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -516,8 +516,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../causal_graph/" class="md-nav__link">
-        Causal Graph
+      <a href="../DAG/" class="md-nav__link">
+        DAG
       </a>
     </li>
   
@@ -777,25 +777,22 @@
 
 
 <h2 id="fpcmci.selection_methods.SelectionMethod.SelectionMethod" class="doc doc-heading">
-        <code>SelectionMethod</code>
+          <code>SelectionMethod</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="abc.ABC">ABC</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="abc.ABC">ABC</span></code></p>
 
   
       <p>SelectionMethod abstract class</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/selection_methods/SelectionMethod.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 26</span>
-<span class="normal"> 27</span>
-<span class="normal"> 28</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/selection_methods/SelectionMethod.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 28</span>
 <span class="normal"> 29</span>
 <span class="normal"> 30</span>
 <span class="normal"> 31</span>
@@ -892,20 +889,7 @@
 <span class="normal">122</span>
 <span class="normal">123</span>
 <span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SelectionMethod</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">SelectionMethod</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    SelectionMethod abstract class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -915,7 +899,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
 
 
     <span class="nd">@property</span>
@@ -929,7 +913,8 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctest</span><span class="o">.</span><span class="n">value</span>
 
 
-    <span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">):</span>
+    <span class="c1"># def initialise(self, data: Data, alpha, min_lag, max_lag):</span>
+    <span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialises the selection method</span>
 
@@ -943,11 +928,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span> <span class="o">=</span> <span class="n">min_lag</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span> <span class="o">=</span> <span class="n">max_lag</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">graph</span>
 
 
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">compute_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">compute_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DAG</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        abstract method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -983,20 +968,7 @@
         <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
 
 
-    <span class="k">def</span> <span class="nf">_get_sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return target sources</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            t (str): target variable name</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            list(str): list of target sources</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="n">SOURCE</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">t</span><span class="p">]]</span>
-
-
-    <span class="k">def</span> <span class="nf">_add_dependecies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_add_dependecy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds found dependency from source (s) to target (t) specifying the </span>
 <span class="sd">        score, pval and the lag</span>
@@ -1008,18 +980,15 @@
 <span class="sd">            pval (float): pval associated to the dependency</span>
 <span class="sd">            lag (int): lag time of the dependency</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">SOURCE</span><span class="p">:</span><span class="n">s</span><span class="p">,</span> 
-                               <span class="n">SCORE</span><span class="p">:</span><span class="n">score</span><span class="p">,</span>
-                               <span class="n">PVAL</span><span class="p">:</span><span class="n">pval</span><span class="p">,</span> 
-                               <span class="n">LAG</span><span class="p">:</span><span class="n">lag</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">add_source</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+
         <span class="n">str_s</span> <span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s2">&quot; -&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
-        <span class="n">str_arrow</span> <span class="o">=</span> <span class="s2">&quot; --&gt; &quot;</span>
         <span class="n">str_t</span> <span class="o">=</span> <span class="s2">&quot;(&quot;</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
-        <span class="n">str_score</span> <span class="o">=</span> <span class="s2">&quot;|score: &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
-        <span class="n">str_pval</span> <span class="o">=</span> <span class="s2">&quot;|pval: &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:&lt;20s}{:&lt;10s}{:&lt;10s}{:&lt;20s}{:&lt;20s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">str_s</span><span class="p">,</span> <span class="n">str_arrow</span><span class="p">,</span> <span class="n">str_t</span><span class="p">,</span> <span class="n">str_score</span><span class="p">,</span> <span class="n">str_pval</span><span class="p">))</span>
+
+        <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">link: &quot;</span> <span class="o">+</span> <span class="n">str_s</span> <span class="o">+</span> <span class="s2">&quot; -?&gt; &quot;</span> <span class="o">+</span> <span class="n">str_t</span><span class="p">)</span>
+        <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">|val = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">score</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; |pval = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">pval</span><span class="p">,</span><span class="mi">3</span><span class="p">))))</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -1049,6 +1018,8 @@
   
       <p>Returns Selection Method name</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1062,13 +1033,18 @@
           <td>
                 <code>str</code>
           </td>
-          <td><p>Selection Method name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Selection Method name</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
   </div>
 
 </div>
+
 
 
 
@@ -1090,31 +1066,32 @@
   
       <p>abstract method</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/SelectionMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/SelectionMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
 <span class="normal">71</span>
-<span class="normal">72</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
-<span class="k">def</span> <span class="nf">compute_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abstractmethod</span>
+<span class="k">def</span> <span class="nf">compute_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DAG</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    abstract method</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
 
 
 <h3 id="fpcmci.selection_methods.SelectionMethod.SelectionMethod.initialise" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">initialise</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">initialise</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">,</span> <span class="n">graph</span><span class="p">)</span></code>
 
 </h3>
 
@@ -1122,6 +1099,8 @@
   <div class="doc doc-contents ">
   
       <p>Initialises the selection method</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1139,7 +1118,11 @@
           <td>
                 <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.data.Data" href="../preprocessing/#fpcmci.preprocessing.data.Data">Data</a></code>
           </td>
-          <td><p>Data</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Data</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1149,7 +1132,11 @@
           <td>
                 <code>float</code>
           </td>
-          <td><p>significance threshold</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>significance threshold</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1159,7 +1146,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>min lag time</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>min lag time</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1169,7 +1160,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>max lag time</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>max lag time</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1177,12 +1172,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/SelectionMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/SelectionMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
 <span class="normal">56</span>
@@ -1193,7 +1185,10 @@
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">):</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">initialise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">min_lag</span><span class="p">,</span> <span class="n">max_lag</span><span class="p">,</span> <span class="n">graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Initialises the selection method</span>
 
@@ -1207,9 +1202,9 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">min_lag</span> <span class="o">=</span> <span class="n">min_lag</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_lag</span> <span class="o">=</span> <span class="n">max_lag</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">f</span><span class="p">:</span><span class="nb">list</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">}</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">graph</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1253,23 +1248,22 @@
 
 
 <h2 id="fpcmci.selection_methods.Corr.Corr" class="doc doc-heading">
-        <code>Corr</code>
+          <code>Corr</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
 
   
       <p>Feature selection method based on Correlation analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/selection_methods/Corr.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/selection_methods/Corr.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
 <span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
@@ -1343,15 +1337,16 @@
                 <span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">scores</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">pval</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
                 <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -1375,9 +1370,9 @@
   
       <p>Corr contructor class</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/Corr.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/Corr.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
@@ -1387,10 +1382,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">CTest</span><span class="o">.</span><span class="n">Corr</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1406,6 +1402,8 @@
   
       <p>compute list of dependencies for each target by correlation analysis</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1419,14 +1417,18 @@
           <td>
                 <code>dict</code>
           </td>
-          <td><p>dictonary(TARGET: list SOURCES)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>dictonary(TARGET: list SOURCES)</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/Corr.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/Corr.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
@@ -1478,11 +1480,11 @@
             <span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">scores</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">pval</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
             <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1526,23 +1528,22 @@
 
 
 <h2 id="fpcmci.selection_methods.ParCorr.ParCorr" class="doc doc-heading">
-        <code>ParCorr</code>
+          <code>ParCorr</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
 
   
       <p>Feature selection method based on Partial Correlation analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
@@ -1692,17 +1693,18 @@
                             <span class="n">tmp_res</span> <span class="o">=</span> <span class="p">(</span><span class="n">candidate</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">)</span>
 
                     <span class="k">if</span> <span class="n">tmp_res</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">lag</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">lag</span><span class="p">)</span>
                         <span class="n">candidates</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_res</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">break</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -1726,9 +1728,9 @@
   
       <p>ParCorr class contructor</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
@@ -1738,10 +1740,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">CTest</span><span class="o">.</span><span class="n">Corr</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1757,6 +1760,8 @@
   
       <p>compute list of dependencies for each target by partial correlation analysis</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1770,14 +1775,18 @@
           <td>
                 <code>dict</code>
           </td>
-          <td><p>dictonary(TARGET: list SOURCES)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>dictonary(TARGET: list SOURCES)</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">49</span>
 <span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
@@ -1841,16 +1850,17 @@
                         <span class="n">tmp_res</span> <span class="o">=</span> <span class="p">(</span><span class="n">candidate</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="n">tmp_res</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> 
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">lag</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tmp_res</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">lag</span><span class="p">)</span>
                     <span class="n">candidates</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">tmp_res</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">break</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1865,6 +1875,8 @@
   <div class="doc doc-contents ">
   
       <p>Calculate residual of the target variable obtaining conditioning on the covar variables</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1882,7 +1894,11 @@
           <td>
                 <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
           </td>
-          <td><p>conditioning variables</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>conditioning variables</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1892,13 +1908,19 @@
           <td>
                 <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
           </td>
-          <td><p>target variable</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>target variable</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Returns:</strong></p>
   <table>
@@ -1913,14 +1935,18 @@
           <td>
                 <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
           </td>
-          <td><p>residual</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>residual</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
@@ -1946,10 +1972,11 @@
     <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">covar</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">target</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">covar</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1964,6 +1991,8 @@
   <div class="doc doc-contents ">
   
       <p>Calculate Partial correlation between X and Y conditioning on Z</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1981,7 +2010,11 @@
           <td>
                 <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
           </td>
-          <td><p>source candidate variable</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>source candidate variable</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1991,7 +2024,11 @@
           <td>
                 <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
           </td>
-          <td><p>target variable</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>target variable</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2001,13 +2038,19 @@
           <td>
                 <code><span title="numpy">np</span>.<span title="numpy.array">array</span></code>
           </td>
-          <td><p>conditioning variable</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>conditioning variable</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Returns:</strong></p>
   <table>
@@ -2020,16 +2063,20 @@
     <tbody>
         <tr>
           <td>
-                <code>float, float</code>
+                <code>(float, float)</code>
           </td>
-          <td><p>partial correlation, p-value</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>partial correlation, p-value</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/ParCorr.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -2061,7 +2108,7 @@
 
     <span class="k">return</span> <span class="n">pcorr</span><span class="p">,</span> <span class="n">pval</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2105,23 +2152,22 @@
 
 
 <h2 id="fpcmci.selection_methods.MI.MI" class="doc doc-heading">
-        <code>MI</code>
+          <code>MI</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
 
   
       <p>Feature selection method based on Mutual Information analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/selection_methods/MI.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/selection_methods/MI.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
@@ -2207,15 +2253,16 @@
                 <span class="n">sel_sources_score</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_mi&#39;</span><span class="p">]</span>
                 <span class="n">sel_sources_pval</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_pval&#39;</span><span class="p">]</span>
                 <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span><span class="p">,</span> <span class="n">sel_sources_lag</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -2239,6 +2286,8 @@
   
       <p>MI class contructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2255,7 +2304,11 @@
           <td>
                 <code><span title="fpcmci.selection_methods.MI.MIestimator">MIestimator</span></code>
           </td>
-          <td><p>Gaussian/Kraskov</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Gaussian/Kraskov</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2263,9 +2316,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/MI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/MI.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
@@ -2283,10 +2336,11 @@
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">CTest</span><span class="o">.</span><span class="n">MI</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2302,6 +2356,8 @@
   
       <p>compute list of dependencies for each target by mutual information analysis</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2315,14 +2371,18 @@
           <td>
                 <code>dict</code>
           </td>
-          <td><p>dictonary(TARGET: list SOURCES)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>dictonary(TARGET: list SOURCES)</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/MI.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/MI.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
 <span class="normal">28</span>
@@ -2380,11 +2440,11 @@
             <span class="n">sel_sources_score</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_mi&#39;</span><span class="p">]</span>
             <span class="n">sel_sources_pval</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_pval&#39;</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span><span class="p">,</span> <span class="n">sel_sources_lag</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2428,23 +2488,22 @@
 
 
 <h2 id="fpcmci.selection_methods.TE.TE" class="doc doc-heading">
-        <code>TE</code>
+          <code>TE</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.selection_methods.SelectionMethod.SelectionMethod" href="#fpcmci.selection_methods.SelectionMethod.SelectionMethod">SelectionMethod</a></code></p>
 
   
       <p>Feature selection method based on Trasfer Entropy analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/selection_methods/TE.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/selection_methods/TE.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
@@ -2574,7 +2633,7 @@
             <span class="n">auto_pval</span> <span class="o">=</span> <span class="n">res_auto</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;selected_sources_pval&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">auto_score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">auto_score</span><span class="p">,</span> <span class="n">auto_pval</span><span class="p">,</span> <span class="n">auto_lag</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
             <span class="c1"># Cross-dependencies handling    </span>
             <span class="n">sel_sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">res_cross</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_vars_sources&#39;</span><span class="p">]]</span>
@@ -2583,18 +2642,19 @@
                 <span class="n">sel_sources_score</span> <span class="o">=</span> <span class="n">res_cross</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_te&#39;</span><span class="p">]</span>
                 <span class="n">sel_sources_pval</span> <span class="o">=</span> <span class="n">res_cross</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_pval&#39;</span><span class="p">]</span>
                 <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span><span class="p">,</span> <span class="n">sel_sources_lag</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">auto_score</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sel_sources</span><span class="p">:</span>
-                <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;no sources selected&quot;</span><span class="p">)</span>
+                <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">no sources selected&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -2618,6 +2678,8 @@
   
       <p>TE class contructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2634,7 +2696,11 @@
           <td>
                 <code><span title="fpcmci.selection_methods.TE.TEestimator">TEestimator</span></code>
           </td>
-          <td><p>Gaussian/Kraskov</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Gaussian/Kraskov</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2642,9 +2708,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/TE.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/TE.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span>
@@ -2662,10 +2728,11 @@
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">CTest</span><span class="o">.</span><span class="n">TE</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">estimator</span> <span class="o">=</span> <span class="n">estimator</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2681,6 +2748,8 @@
   
       <p>compute list of dependencies for each target by transfer entropy analysis</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2694,14 +2763,18 @@
           <td>
                 <code>dict</code>
           </td>
-          <td><p>dictonary(TARGET: list SOURCES)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>dictonary(TARGET: list SOURCES)</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/selection_methods/TE.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/selection_methods/TE.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
@@ -2801,7 +2874,7 @@
         <span class="n">auto_pval</span> <span class="o">=</span> <span class="n">res_auto</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;selected_sources_pval&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">auto_score</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">auto_score</span><span class="p">,</span> <span class="n">auto_pval</span><span class="p">,</span> <span class="n">auto_lag</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
         <span class="c1"># Cross-dependencies handling    </span>
         <span class="n">sel_sources</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">res_cross</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_vars_sources&#39;</span><span class="p">]]</span>
@@ -2810,14 +2883,14 @@
             <span class="n">sel_sources_score</span> <span class="o">=</span> <span class="n">res_cross</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_te&#39;</span><span class="p">]</span>
             <span class="n">sel_sources_pval</span> <span class="o">=</span> <span class="n">res_cross</span><span class="o">.</span><span class="n">_single_target</span><span class="p">[</span><span class="n">t</span><span class="p">][</span><span class="s1">&#39;selected_sources_pval&#39;</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sel_sources</span><span class="p">,</span> <span class="n">sel_sources_score</span><span class="p">,</span> <span class="n">sel_sources_pval</span><span class="p">,</span> <span class="n">sel_sources_lag</span><span class="p">):</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_add_dependecy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">score</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">lag</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">auto_score</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sel_sources</span><span class="p">:</span>
-            <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;no sources selected&quot;</span><span class="p">)</span>
+            <span class="n">CP</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">no sources selected&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2875,10 +2948,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
     
   </body>

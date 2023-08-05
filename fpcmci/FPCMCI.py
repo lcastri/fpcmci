@@ -262,8 +262,8 @@ class FPCMCI():
         Print difference between old and new dependencies
 
         Args:
-            old_dep (DAG): old dag
-            new_dep (DAG): new dag
+            old_dag (DAG): old dag
+            new_dag (DAG): new dag
         """
         # Check difference(s) between validator and filter dependencies
         list_diffs = list()
