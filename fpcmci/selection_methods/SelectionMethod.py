@@ -4,6 +4,8 @@ from contextlib import contextmanager
 import sys, os
 from fpcmci.preprocessing.data import Data
 from fpcmci.basics.constants import *
+from fpcmci.CPrinter import CP
+from fpcmci.graph.DAG import DAG
 
 
 class CTest(Enum):
@@ -33,7 +35,7 @@ class SelectionMethod(ABC):
         self.alpha = None
         self.min_lag = None
         self.max_lag = None
-        self.result = dict()
+        self.result = None
 
 
     @property
@@ -47,7 +49,8 @@ class SelectionMethod(ABC):
         return self.ctest.value
 
 
-    def initialise(self, data: Data, alpha, min_lag, max_lag):
+    # def initialise(self, data: Data, alpha, min_lag, max_lag):
+    def initialise(self, data: Data, alpha, min_lag, max_lag, graph):
         """
         Initialises the selection method
 
@@ -61,16 +64,16 @@ class SelectionMethod(ABC):
         self.alpha = alpha
         self.min_lag = min_lag
         self.max_lag = max_lag
-        self.result = {f:list() for f in self.data.features}
+        self.result = graph
 
 
     @abstractmethod
-    def compute_dependencies(self) -> dict:
+    def compute_dependencies(self) -> DAG:
         """
         abstract method
         """
         pass
-
+    
 
     def _prepare_ts(self, target, lag, apply_lag = True, consider_autodep = True):
         """
@@ -101,20 +104,7 @@ class SelectionMethod(ABC):
         return X, Y
 
 
-    def _get_sources(self, t):
-        """
-        Return target sources
-
-        Args:
-            t (str): target variable name
-
-        Returns:
-            list(str): list of target sources
-        """
-        return [s[SOURCE] for s in self.result[t]]
-
-
-    def _add_dependecies(self, t, s, score, pval, lag):
+    def _add_dependecy(self, t, s, score, pval, lag):
         """
         Adds found dependency from source (s) to target (t) specifying the 
         score, pval and the lag
@@ -126,13 +116,13 @@ class SelectionMethod(ABC):
             pval (float): pval associated to the dependency
             lag (int): lag time of the dependency
         """
-        self.result[t].append({SOURCE:s, 
-                               SCORE:score,
-                               PVAL:pval, 
-                               LAG:lag})
+        self.result.add_source(t, s, score, pval, lag)
+        
         str_s = "(" + s + " -" + str(lag) + ")"
-        str_arrow = " --> "
         str_t = "(" + t + ")"
-        str_score = "|score: " + "{:.3f}".format(score)
-        str_pval = "|pval: " + "{:.3f}".format(pval)
-        print('{:<20s}{:<10s}{:<10s}{:<20s}{:<20s}'.format(str_s, str_arrow, str_t, str_score, str_pval))
+
+        CP.info("\tlink: " + str_s + " -?> " + str_t)
+        CP.info("\t|val = " + str(round(score,3)) + " |pval = " + str(str(round(pval,3))))
+        # CP.info("\n")
+
+
