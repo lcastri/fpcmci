@@ -1,4 +1,4 @@
-from tigramite.independence_tests import GPDC
+from tigramite.independence_tests.gpdc import GPDC
 from fpcmci.CPrinter import CPLevel
 from fpcmci.FPCMCI import FPCMCI
 from fpcmci.preprocessing.data import Data
@@ -16,7 +16,8 @@ from datetime import timedelta
 
 
 if __name__ == '__main__':   
-    alpha = 0.05
+    f_alpha = 0.1
+    pcmci_alpha = 0.05
     min_lag = 1
     max_lag = 1
     
@@ -33,20 +34,22 @@ if __name__ == '__main__':
     df = Data(d)
     start = time()
     FS = FPCMCI(df, 
-                   alpha = alpha, 
-                   min_lag = min_lag, 
-                   max_lag = max_lag, 
-                   sel_method = TE(TEestimator.Gaussian), 
-                   val_condtest = GPDC(significance = 'analytic', gp_params = None),
-                   verbosity = CPLevel.DEBUG,
-                   neglect_only_autodep = False,
-                   resfolder = 'ex_PCMCI')
+                f_alpha = f_alpha, 
+                pcmci_alpha = pcmci_alpha, 
+                min_lag = min_lag, 
+                max_lag = max_lag, 
+                sel_method = TE(TEestimator.Gaussian), 
+                val_condtest = GPDC(significance = 'analytic', gp_params = None),
+                verbosity = CPLevel.DEBUG,
+                neglect_only_autodep = False,
+                resfolder = 'ex_PCMCI')
     
-    selector_res = FS.run_pcmci()
-    print(FS.filter_dependencies)
-    elapsed_PCMCI = time() - start
-    print(str(timedelta(seconds = elapsed_PCMCI)))
-    FS.dag(label_type = LabelType.NoLabels, node_layout = 'circular')
+    features, CM = FS.run_pcmci()
+    elapsed_FPCMCI = time() - start
+    print(str(timedelta(seconds = elapsed_FPCMCI)))
+    print(CM.get_causal_matrix())
+    FS.dag(label_type = LabelType.NoLabels, node_layout = 'dot')
+    FS.timeseries_dag()
 
 
     

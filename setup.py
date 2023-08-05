@@ -26,7 +26,7 @@ setup(
     url = 'https://github.com/lcastri/fpcmci',
     author = 'Luca Castri',
     author_email = 'lucacastri94@gmail.com',
-    packages = ['fpcmci', "fpcmci.preprocessing", "fpcmci.preprocessing.subsampling_methods", "fpcmci.basics", "fpcmci.selection_methods"],
+    packages = ['fpcmci', "fpcmci.preprocessing", "fpcmci.preprocessing.subsampling_methods", "fpcmci.basics", "fpcmci.selection_methods", "fpcmci.graph"],
     python_requires='>=3',
     install_requires = INSTALL_REQUIRES,
 
