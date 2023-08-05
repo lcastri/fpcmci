@@ -100,12 +100,12 @@ class Node():
     
     
     @property
-    def sourcelist(self) -> list(str):
+    def sourcelist(self) -> list:
         """
         Returns list of source names
 
         Returns:
-            list(str): Returns list of source names
+            list: Returns list of source names
         """
         return [s[0] for s in self.sources]
     
