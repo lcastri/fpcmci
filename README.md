@@ -132,6 +132,7 @@ pip install fpcmci
 
 | Version | Changes |
 | :---: | ----------- |
+| 4.3.0 | alpha level fix in PCMCI<br>timeseries_dag fix<br>adaptation to DAG structure |
 | 4.2.1 | fixed dependency error in setup.py |
 | 4.2.0 | causal model with only selected features fix<br>adapted to tigramite 5.2<br>get_causal_matrix FPCMCI method added<br>f_alpha and pcmci_alpha instead of alpha<br>requirements changed<br>tutorials adapted to new version |
 | 4.1.2 | tutorials adapted to 4.1.1 and get_SCM method added in FPCMCI |
