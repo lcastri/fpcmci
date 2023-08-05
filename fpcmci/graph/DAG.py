@@ -139,7 +139,7 @@ class DAG():
         for lag in cm_per_lag:
             for t in self.g:
                 for s in self.g[t].sources:
-                    if self.g[t].sources[s][LAG] == lag: cm_per_lag[lag][self.features.index(t)][self.features.index(s)] = self.g[t].sources[s][SCORE]
+                    if s[1] == lag: cm_per_lag[lag][self.features.index(t)][self.features.index(s[0])] = self.g[t].sources[s][SCORE]
         if len(cm_per_lag) == 1: return list(cm_per_lag.values())[0]
         return cm_per_lag
     

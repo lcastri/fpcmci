@@ -22,7 +22,7 @@ if __name__ == '__main__':
     max_lag = 1
     
     np.random.seed(1)
-    nsample = 1500
+    nsample = 500
     nfeature = 7
     d = np.random.random(size = (nsample, nfeature))
     for t in range(max_lag, nsample):
@@ -47,8 +47,9 @@ if __name__ == '__main__':
     features, CM = FS.run()
     elapsed_FPCMCI = time() - start
     print(str(timedelta(seconds = elapsed_FPCMCI)))
-    print(FS.get_causal_matrix())
+    print(CM.get_causal_matrix())
     FS.dag(label_type = LabelType.NoLabels, node_layout = 'dot')
+    FS.timeseries_dag()
     
     
 
