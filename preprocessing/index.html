@@ -17,7 +17,7 @@
         <link rel="next" href="../subsampling_method/">
       
       <link rel="icon" href="../assets/icon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -25,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -394,8 +394,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../causal_graph/" class="md-nav__link">
-        Causal Graph
+      <a href="../DAG/" class="md-nav__link">
+        DAG
       </a>
     </li>
   
@@ -533,7 +533,7 @@
 
 
 <h2 id="fpcmci.preprocessing.data.Data" class="doc doc-heading">
-        <code>Data</code>
+          <code>Data</code>
 
 
 </h2>
@@ -544,10 +544,9 @@
   
       <p>Data class manages the preprocess of the data before the causal analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 10</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 10</span>
 <span class="normal"> 11</span>
 <span class="normal"> 12</span>
 <span class="normal"> 13</span>
@@ -807,7 +806,7 @@
 
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -837,6 +836,8 @@
   
       <p>Number of features</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -850,7 +851,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>number of features</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>number of features</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -876,6 +881,8 @@
   
       <p>Dataframe length</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -889,7 +896,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>dataframe length</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>dataframe length</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -915,6 +926,8 @@
   
       <p>Returns list of features</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -928,7 +941,11 @@
 <td><code>list</code></td>          <td>
                 <code>str</code>
           </td>
-          <td><p>list of feature names</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>list of feature names</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -954,6 +971,8 @@
   
       <p>Returns list of features with LATEX symbols</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -967,13 +986,18 @@
 <td><code>list</code></td>          <td>
                 <code>str</code>
           </td>
-          <td><p>list of feature names</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>list of feature names</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
   </div>
 
 </div>
+
 
 
 
@@ -991,6 +1015,8 @@
   
       <p>Data class constructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -1005,9 +1031,13 @@
         <tr>
           <td><code>data</code></td>
           <td>
-                <code>str/DataFrame/np.array</code>
+                <code>str / DataFrame / <span title="numpy">np</span>.<span title="numpy.array">array</span></code>
           </td>
-          <td><p>it can be a string specifing the path of a csv file to load/pandas.DataFrame/numpy.array</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>it can be a string specifing the path of a csv file to load/pandas.DataFrame/numpy.array</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1017,9 +1047,13 @@
           <td>
                 <code>list(str)</code>
           </td>
-          <td><p>List containing variable names. If unset then, 
+          <td>
+            <div class="doc-md-description">
+              <p>List containing variable names. If unset then, 
 if data = (str/DataFrame) vars = data columns name elif data = np.array vars = [X_0 .. X_N]
-Defaults to None.</p></td>
+Defaults to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1029,7 +1063,11 @@ Defaults to None.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Fill NaNs bit. Defaults to True.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Fill NaNs bit. Defaults to True.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1039,7 +1077,11 @@ Defaults to None.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Standardization bit. Defaults to False.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Standardization bit. Defaults to False.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1049,7 +1091,11 @@ Defaults to None.</p></td>
           <td>
                 <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="../subsampling_method/#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>
           </td>
-          <td><p>Subsampling method. If None not active. Defaults to None.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Subsampling method. If None not active. Defaults to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1059,13 +1105,19 @@ Defaults to None.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>If True shows subsampling result. Defaults to False.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>If True shows subsampling result. Defaults to False.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Raises:</strong></p>
   <table>
@@ -1080,14 +1132,18 @@ Defaults to None.</p></td>
           <td>
                 <code>TypeError</code>
           </td>
-          <td><p>if data is not str - DataFrame - ndarray</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>if data is not str - DataFrame - ndarray</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
@@ -1199,10 +1255,11 @@ Defaults to None.</p></td>
         <span class="n">scaler</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">),</span> <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1218,9 +1275,9 @@ Defaults to None.</p></td>
   
       <p>Plots timeseries data</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
 <span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
@@ -1254,10 +1311,11 @@ Defaults to None.</p></td>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1272,6 +1330,8 @@ Defaults to None.</p></td>
   <div class="doc doc-contents ">
   
       <p>Shrinks dataframe d and dependencies based on the selected features</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1289,7 +1349,11 @@ Defaults to None.</p></td>
           <td>
                 <code>list(str</code>
           </td>
-          <td><p>features selected by the selector</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>features selected by the selector</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1297,9 +1361,9 @@ Defaults to None.</p></td>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">113</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/data.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
 <span class="normal">116</span>
@@ -1315,7 +1379,7 @@ Defaults to None.</p></td>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">selected_features</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1373,10 +1437,10 @@ Defaults to None.</p></td>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
     
   </body>
