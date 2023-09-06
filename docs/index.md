@@ -1,4 +1,4 @@
-# <img src="assets/icon.png" width="25"> FPCMCI - Filtered PCMCI
+# <img src="assets/icon.png" width="25"> F-PCMCI - Filtered PCMCI
 
 Extension of the state-of-the-art causal discovery method [PCMCI](https://github.com/jakobrunge/tigramite) augmented with a feature-selection method based on Transfer Entropy. The algorithm, starting from a prefixed set of variables, identifies the correct subset of features and possible links between them which describe the observed process. Then, from the selected features and links, a causal model is built.
 
@@ -9,11 +9,11 @@ Extension of the state-of-the-art causal discovery method [PCMCI](https://github
 * [Tutorials](https://github.com/lcastri/fpcmci/tree/main/tutorials)
 
 
-## Why FPCMCI?
+## Why F-PCMCI?
 
-Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
+Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. F-PCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
-In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created by defining a 6-variables system defined as follows:
+In the following it is presented an example showing a comparison between causal models obtained by PCMCI and F-PCMCI causal discovery algorithms on the same data. The latter have been created by defining a 6-variables system defined as follows:
 
 ``` python
 min_lag = 1
@@ -30,23 +30,23 @@ for t in range(max_lag, nsample):
   d[t, 4] += d[t-1, 4] + d[t-1, 5] * d[t-1, 0]
 ```
 
-Causal Model by PCMCI       |  Causal Model by FPCMCI 
+Causal Model by PCMCI       |  Causal Model by F-PCMCI 
 :-------------------------:|:-------------------------:
-![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_1.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_1.png "Causal model by FPCMCI")
+![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_1.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_1.png "Causal model by F-PCMCI")
 Execution time ~ 6min 50sec | Execution time ~ 2min 45sec
 
-The causal analysis performed by the **FPCMCI** results not only faster but also more accurate. Indeed, the causal model derived by the FPCMCI agrees with the structure of the system of equations, instead the one derived by the PCMCI presents spurious links:
+The causal analysis performed by the **F-PCMCI** results not only faster but also more accurate. Indeed, the causal model derived by the F-PCMCI agrees with the structure of the system of equations, instead the one derived by the PCMCI presents spurious links:
 * $X_2$ &rarr; $X_4$
 * $X_2$ &rarr; $X_5$
 
-Note that, since all the 6 variables were involved in the evolution of the system, the FPCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6(t) = \eta_6(t)$. In the following the comparison between PCMCI and FPCMCI with this new system configuration:
+Note that, since all the 6 variables were involved in the evolution of the system, the F-PCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6(t) = \eta_6(t)$. In the following the comparison between PCMCI and F-PCMCI with this new system configuration:
 
-Causal Model by PCMCI       |  Causal Model by FPCMCI 
+Causal Model by PCMCI       |  Causal Model by F-PCMCI 
 :-------------------------:|:-------------------------:
-![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_2.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_2.png "Causal model by FPCMCI")
+![](https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_2.png "Causal model by PCMCI")  |  ![](https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_2.png "Causal model by F-PCMCI")
 Execution time ~ 8min 40sec | Execution time ~ 3min 00sec
 
-In this case the FPCMCI removes the $X_6$ variable from the causal graph leading to generate exactly the same causal model as in the previous example, with comparable executional time. Instead, the PCMCI suffers the presence of $X_6$ in terms of time and accuracy of the causal structure. Indeed, a spurious link $X_6$ &rarr; $X_5$ appears in the causal graph derived by the PCMCI.
+In this case the F-PCMCI removes the $X_6$ variable from the causal graph leading to generate exactly the same causal model as in the previous example, with comparable executional time. Instead, the PCMCI suffers the presence of $X_6$ in terms of time and accuracy of the causal structure. Indeed, a spurious link $X_6$ &rarr; $X_5$ appears in the causal graph derived by the PCMCI.
 
 
 ## Citation
@@ -78,12 +78,12 @@ If you found this useful for your work, please cite this papers:
 
 ## Installation
 
-Before installing the FPCMCI package, you need to install Java and the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the current release of `FPCMCI` with:
+Before installing the F-PCMCI package, you need to install Java and the [IDTxl package](https://github.com/pwollstadt/IDTxl) used for the feature-selection process, following the guide described [here](https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements). Once complete, you can install the current release of `F-PCMCI` with:
 ``` shell
 pip install fpcmci
 ```
 
-For a complete installation Java - IDTxl - FPCMCI, follow the following procedure.
+For a complete installation Java - IDTxl - F-PCMCI, follow the following procedure.
 
 ### 1 - Java installation
 Verify that you have not already installed Java:
@@ -121,7 +121,7 @@ cd IDTxl
 pip install -e .
 ```
 
-### 3 - FPCMCI installation
+### 3 - F-PCMCI installation
 ```shell
 pip install fpcmci
 ```
