@@ -15,7 +15,7 @@
         <link rel="next" href="preprocessing/">
       
       <link rel="icon" href="assets/icon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -23,10 +23,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.eebd395e.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -73,7 +73,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fpcmci-filtered-pcmci" class="md-skip">
+        <a href="#f-pcmci-filtered-pcmci" class="md-skip">
           Skip to content
         </a>
       
@@ -259,8 +259,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-fpcmci" class="md-nav__link">
-    Why FPCMCI?
+  <a href="#why-f-pcmci" class="md-nav__link">
+    Why F-PCMCI?
   </a>
   
 </li>
@@ -302,8 +302,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-fpcmci-installation" class="md-nav__link">
-    3 - FPCMCI installation
+  <a href="#3-f-pcmci-installation" class="md-nav__link">
+    3 - F-PCMCI installation
   </a>
   
 </li>
@@ -396,8 +396,8 @@
   
   
     <li class="md-nav__item">
-      <a href="causal_graph/" class="md-nav__link">
-        Causal Graph
+      <a href="DAG/" class="md-nav__link">
+        DAG
       </a>
     </li>
   
@@ -437,8 +437,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-fpcmci" class="md-nav__link">
-    Why FPCMCI?
+  <a href="#why-f-pcmci" class="md-nav__link">
+    Why F-PCMCI?
   </a>
   
 </li>
@@ -480,8 +480,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-fpcmci-installation" class="md-nav__link">
-    3 - FPCMCI installation
+  <a href="#3-f-pcmci-installation" class="md-nav__link">
+    3 - F-PCMCI installation
   </a>
   
 </li>
@@ -513,16 +513,16 @@
                   
 
 
-<h1 id="fpcmci-filtered-pcmci"><img src="assets/icon.png" width="25"> FPCMCI - Filtered PCMCI</h1>
+<h1 id="f-pcmci-filtered-pcmci"><img src="assets/icon.png" width="25"> F-PCMCI - Filtered PCMCI</h1>
 <p>Extension of the state-of-the-art causal discovery method <a href="https://github.com/jakobrunge/tigramite">PCMCI</a> augmented with a feature-selection method based on Transfer Entropy. The algorithm, starting from a prefixed set of variables, identifies the correct subset of features and possible links between them which describe the observed process. Then, from the selected features and links, a causal model is built.</p>
 <h2 id="useful-links">Useful links</h2>
 <ul>
 <li><a href="https://lcastri.github.io/fpcmci/">Documentation</a></li>
 <li><a href="https://github.com/lcastri/fpcmci/tree/main/tutorials">Tutorials</a></li>
 </ul>
-<h2 id="why-fpcmci">Why FPCMCI?</h2>
-<p>Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. FPCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results <strong>faster</strong> and <strong>more accurate</strong>.</p>
-<p>In the following it is presented an example showing a comparison between causal models obtained by PCMCI and FPCMCI causal discovery algorithms on the same data. The latter have been created by defining a 6-variables system defined as follows:</p>
+<h2 id="why-f-pcmci">Why F-PCMCI?</h2>
+<p>Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. F-PCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results <strong>faster</strong> and <strong>more accurate</strong>.</p>
+<p>In the following it is presented an example showing a comparison between causal models obtained by PCMCI and F-PCMCI causal discovery algorithms on the same data. The latter have been created by defining a 6-variables system defined as follows:</p>
 <pre><code class="language-python">min_lag = 1
 max_lag = 1
 np.random.seed(1)
@@ -540,13 +540,13 @@ for t in range(max_lag, nsample):
 <thead>
 <tr>
 <th style="text-align: center;">Causal Model by PCMCI</th>
-<th style="text-align: center;">Causal Model by FPCMCI</th>
+<th style="text-align: center;">Causal Model by F-PCMCI</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: center;"><img alt="" src="https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_1.png" title="Causal model by PCMCI" /></td>
-<td style="text-align: center;"><img alt="" src="https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_1.png" title="Causal model by FPCMCI" /></td>
+<td style="text-align: center;"><img alt="" src="https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_1.png" title="Causal model by F-PCMCI" /></td>
 </tr>
 <tr>
 <td style="text-align: center;">Execution time ~ 6min 50sec</td>
@@ -554,21 +554,21 @@ for t in range(max_lag, nsample):
 </tr>
 </tbody>
 </table>
-<p>The causal analysis performed by the <strong>FPCMCI</strong> results not only faster but also more accurate. Indeed, the causal model derived by the FPCMCI agrees with the structure of the system of equations, instead the one derived by the PCMCI presents spurious links:
+<p>The causal analysis performed by the <strong>F-PCMCI</strong> results not only faster but also more accurate. Indeed, the causal model derived by the F-PCMCI agrees with the structure of the system of equations, instead the one derived by the PCMCI presents spurious links:
 * $X_2$ &rarr; $X_4$
 * $X_2$ &rarr; $X_5$</p>
-<p>Note that, since all the 6 variables were involved in the evolution of the system, the FPCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6(t) = \eta_6(t)$. In the following the comparison between PCMCI and FPCMCI with this new system configuration:</p>
+<p>Note that, since all the 6 variables were involved in the evolution of the system, the F-PCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6(t) = \eta_6(t)$. In the following the comparison between PCMCI and F-PCMCI with this new system configuration:</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: center;">Causal Model by PCMCI</th>
-<th style="text-align: center;">Causal Model by FPCMCI</th>
+<th style="text-align: center;">Causal Model by F-PCMCI</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: center;"><img alt="" src="https://github.com/lcastri/fpcmci/raw/main/images/PCMCI_example_2.png" title="Causal model by PCMCI" /></td>
-<td style="text-align: center;"><img alt="" src="https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_2.png" title="Causal model by FPCMCI" /></td>
+<td style="text-align: center;"><img alt="" src="https://github.com/lcastri/fpcmci/raw/main/images/FPCMCI_example_2.png" title="Causal model by F-PCMCI" /></td>
 </tr>
 <tr>
 <td style="text-align: center;">Execution time ~ 8min 40sec</td>
@@ -576,7 +576,7 @@ for t in range(max_lag, nsample):
 </tr>
 </tbody>
 </table>
-<p>In this case the FPCMCI removes the $X_6$ variable from the causal graph leading to generate exactly the same causal model as in the previous example, with comparable executional time. Instead, the PCMCI suffers the presence of $X_6$ in terms of time and accuracy of the causal structure. Indeed, a spurious link $X_6$ &rarr; $X_5$ appears in the causal graph derived by the PCMCI.</p>
+<p>In this case the F-PCMCI removes the $X_6$ variable from the causal graph leading to generate exactly the same causal model as in the previous example, with comparable executional time. Instead, the PCMCI suffers the presence of $X_6$ in terms of time and accuracy of the causal structure. Indeed, a spurious link $X_6$ &rarr; $X_5$ appears in the causal graph derived by the PCMCI.</p>
 <h2 id="citation">Citation</h2>
 <p>If you found this useful for your work, please cite this papers:</p>
 <pre><code>@inproceedings{castri2023fpcmci,
@@ -600,10 +600,10 @@ for t in range(max_lag, nsample):
 <li>h5py&gt;=3.7.0    </li>
 </ul>
 <h2 id="installation">Installation</h2>
-<p>Before installing the FPCMCI package, you need to install Java and the <a href="https://github.com/pwollstadt/IDTxl">IDTxl package</a> used for the feature-selection process, following the guide described <a href="https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements">here</a>. Once complete, you can install the current release of <code>FPCMCI</code> with:</p>
+<p>Before installing the F-PCMCI package, you need to install Java and the <a href="https://github.com/pwollstadt/IDTxl">IDTxl package</a> used for the feature-selection process, following the guide described <a href="https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements">here</a>. Once complete, you can install the current release of <code>F-PCMCI</code> with:</p>
 <pre><code class="language-shell">pip install fpcmci
 </code></pre>
-<p>For a complete installation Java - IDTxl - FPCMCI, follow the following procedure.</p>
+<p>For a complete installation Java - IDTxl - F-PCMCI, follow the following procedure.</p>
 <h3 id="1-java-installation">1 - Java installation</h3>
 <p>Verify that you have not already installed Java:</p>
 <pre><code class="language-shell">java -version
@@ -633,7 +633,7 @@ conda install mpmath
 cd IDTxl
 pip install -e .
 </code></pre>
-<h3 id="3-fpcmci-installation">3 - FPCMCI installation</h3>
+<h3 id="3-f-pcmci-installation">3 - F-PCMCI installation</h3>
 <pre><code class="language-shell">pip install fpcmci
 </code></pre>
 <h2 id="recent-changes">Recent changes</h2>
@@ -645,6 +645,22 @@ pip install -e .
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: center;">4.3.3</td>
+<td>sourcelist method signature fixed in Node.py</td>
+</tr>
+<tr>
+<td style="text-align: center;">4.3.2</td>
+<td>documentation improved</td>
+</tr>
+<tr>
+<td style="text-align: center;">4.3.1</td>
+<td>README and index.md updated</td>
+</tr>
+<tr>
+<td style="text-align: center;">4.3.0</td>
+<td>alpha level fix in PCMCI<br>timeseries_dag fix<br>adaptation to DAG structure</td>
+</tr>
 <tr>
 <td style="text-align: center;">4.2.1</td>
 <td>fixed dependency error in setup.py</td>
@@ -712,10 +728,10 @@ pip install -e .
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
       
     
   </body>

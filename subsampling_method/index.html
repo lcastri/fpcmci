@@ -17,7 +17,7 @@
         <link rel="next" href="../feature_selection_method/">
       
       <link rel="icon" href="../assets/icon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.13">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.1.21">
     
     
       
@@ -25,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -653,8 +653,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../causal_graph/" class="md-nav__link">
-        Causal Graph
+      <a href="../DAG/" class="md-nav__link">
+        DAG
       </a>
     </li>
   
@@ -1051,7 +1051,7 @@
 
 
 <h2 id="fpcmci.preprocessing.Subsampler.Subsampler" class="doc doc-heading">
-        <code>Subsampler</code>
+          <code>Subsampler</code>
 
 
 </h2>
@@ -1071,10 +1071,9 @@
 <li>WSStatic - entropy base method with predefined window size</li>
 </ul>
 </details>
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
@@ -1204,11 +1203,12 @@
         <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
             <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -1232,6 +1232,8 @@
   
       <p>Subsampler class constructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -1248,7 +1250,11 @@
           <td>
                 <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
           </td>
-          <td><p>dataframe to subsample</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>dataframe to subsample</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1258,7 +1264,11 @@
           <td>
                 <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>
           </td>
-          <td><p>subsampling method</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>subsampling method</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1266,9 +1276,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
 <span class="normal">21</span>
@@ -1294,10 +1304,11 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">ss_method</span> <span class="o">=</span> <span class="n">ss_method</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">ss_method</span><span class="o">.</span><span class="n">initialise</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1312,6 +1323,8 @@
   <div class="doc doc-contents ">
   
       <p>Plot dataframe sub-sampled data</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1329,7 +1342,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>image dpi. Defaults to 100.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>image dpi. Defaults to 100.</p>
+            </div>
+          </td>
           <td>
                 <code>100</code>
           </td>
@@ -1339,7 +1356,11 @@
           <td>
                 <code>bool</code>
           </td>
-          <td><p>if True it shows the figure and block the process. Defaults to True.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>if True it shows the figure and block the process. Defaults to True.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1347,9 +1368,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
@@ -1405,10 +1426,11 @@
     <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
         <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1424,6 +1446,8 @@
   
       <p>Runs the subsampling algorithm and returns the subsapled ndarray</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1437,14 +1461,18 @@
           <td>
                 <code>ndarray</code>
           </td>
-          <td><p>Subsampled dataframe value</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Subsampled dataframe value</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/Subsampler.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
 <span class="normal">36</span>
@@ -1462,7 +1490,7 @@
     <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_method</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="p">:]</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1506,23 +1534,22 @@
 
 
 <h2 id="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" class="doc doc-heading">
-        <code>SubsamplingMethod</code>
+          <code>SubsamplingMethod</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="abc.ABC">ABC</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="abc.ABC">ABC</span></code></p>
 
   
       <p>SubsamplingMethod abstract class</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/SubsamplingMethod.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/SubsamplingMethod.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
@@ -1572,11 +1599,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -1600,6 +1628,8 @@
   
       <p>Initialise class by setting the dataframe to subsample</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -1616,7 +1646,11 @@
           <td>
                 <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
           </td>
-          <td><p><em>description</em></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p><em>description</em></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1624,9 +1658,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/SubsamplingMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/SubsamplingMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
@@ -1642,10 +1676,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">dataframe</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1665,9 +1700,9 @@
   
       <p>Run subsampler</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/SubsamplingMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/SubsamplingMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -1679,7 +1714,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1723,23 +1758,22 @@
 
 
 <h2 id="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" class="doc doc-heading">
-        <code>EntropyBasedMethod</code>
+          <code>EntropyBasedMethod</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><span title="abc.ABC">ABC</span></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="abc.ABC">ABC</span></code></p>
 
   
       <p>EntropyBasedMethod abstract class</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  6</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  6</span>
 <span class="normal">  7</span>
 <span class="normal">  8</span>
 <span class="normal">  9</span>
@@ -1961,11 +1995,12 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -1989,9 +2024,9 @@
   
       <p>Normalize entropy for each moving window</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -2005,10 +2040,11 @@
     <span class="k">for</span> <span class="n">mw</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">windows</span><span class="p">:</span>
         <span class="n">mw</span><span class="o">.</span><span class="n">entropy</span> <span class="o">=</span> <span class="n">mw</span><span class="o">.</span><span class="n">entropy</span> <span class="o">/</span> <span class="n">max_e</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2024,6 +2060,8 @@
   
       <p>Create deepcopy of the dataframe but with rounded values</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2037,14 +2075,18 @@
           <td>
                 <code>pd.<span title="pd.DataFrame">DataFrame</span></code>
           </td>
-          <td><p>rounded dataframe</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>rounded dataframe</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
@@ -2064,10 +2106,11 @@
     <span class="n">de</span> <span class="o">=</span> <span class="n">de</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">de</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2087,9 +2130,9 @@
   
       <p>abstract method</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">111</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
 <span class="normal">114</span>
@@ -2101,10 +2144,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2121,9 +2165,9 @@
       <p>Extract a list of indexes corresponding to the samples
 selected by the subsampling procedure</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span>
@@ -2145,10 +2189,11 @@ selected by the subsampling procedure</p>
         <span class="n">_sample_index_list</span> <span class="o">+=</span> <span class="n">sample_index</span>
     <span class="k">return</span> <span class="n">_sample_index_list</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2164,9 +2209,9 @@ selected by the subsampling procedure</p>
   
       <p>Compute dataframe entropy on moving windows</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/EntropyBasedMethod.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
@@ -2214,7 +2259,7 @@ selected by the subsampling procedure</p>
     <span class="c1"># Entropy normalization</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">__normalization</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2258,23 +2303,22 @@ selected by the subsampling procedure</p>
 
 
 <h2 id="fpcmci.preprocessing.subsampling_methods.WSDynamic.WSDynamic" class="doc doc-heading">
-        <code>WSDynamic</code>
+          <code>WSDynamic</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
 
   
       <p>Subsampling method with dynamic window size based on entropy analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
@@ -2374,11 +2418,12 @@ selected by the subsampling procedure</p>
 
         <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -2402,6 +2447,8 @@ selected by the subsampling procedure</p>
   
       <p>WSDynamic class constructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2418,7 +2465,11 @@ selected by the subsampling procedure</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>minimun window size</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>minimun window size</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2428,13 +2479,19 @@ selected by the subsampling procedure</p>
           <td>
                 <code>float</code>
           </td>
-          <td><p>entropy threshold</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>entropy threshold</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Raises:</strong></p>
   <table>
@@ -2449,14 +2506,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>ValueError</code>
           </td>
-          <td><p>if window_min_size == None</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>if window_min_size == None</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
@@ -2490,10 +2551,11 @@ selected by the subsampling procedure</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">wms</span> <span class="o">=</span> <span class="n">window_min_size</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">ws</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2509,9 +2571,9 @@ selected by the subsampling procedure</p>
   
       <p>Segments dataset based on breakpoint analysis and a min window size</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -2529,10 +2591,11 @@ selected by the subsampling procedure</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">segments</span> <span class="o">=</span> <span class="p">[(</span><span class="n">seg_res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seg_res</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seg_res</span><span class="p">))]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">seg_res</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2548,6 +2611,8 @@ selected by the subsampling procedure</p>
   
       <p>Run subsampler</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2561,14 +2626,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>list[int]</code>
           </td>
-          <td><p>indexes of the remaining samples</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>indexes of the remaining samples</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
@@ -2602,7 +2671,7 @@ selected by the subsampling procedure</p>
 
     <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2646,23 +2715,22 @@ selected by the subsampling procedure</p>
 
 
 <h2 id="fpcmci.preprocessing.subsampling_methods.WSDynamic.WSDynamic" class="doc doc-heading">
-        <code>WSDynamic</code>
+          <code>WSDynamic</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
 
   
       <p>Subsampling method with dynamic window size based on entropy analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
@@ -2762,11 +2830,12 @@ selected by the subsampling procedure</p>
 
         <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -2790,6 +2859,8 @@ selected by the subsampling procedure</p>
   
       <p>WSDynamic class constructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2806,7 +2877,11 @@ selected by the subsampling procedure</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>minimun window size</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>minimun window size</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2816,13 +2891,19 @@ selected by the subsampling procedure</p>
           <td>
                 <code>float</code>
           </td>
-          <td><p>entropy threshold</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>entropy threshold</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Raises:</strong></p>
   <table>
@@ -2837,14 +2918,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>ValueError</code>
           </td>
-          <td><p>if window_min_size == None</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>if window_min_size == None</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
@@ -2878,10 +2963,11 @@ selected by the subsampling procedure</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">wms</span> <span class="o">=</span> <span class="n">window_min_size</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">ws</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2897,9 +2983,9 @@ selected by the subsampling procedure</p>
   
       <p>Segments dataset based on breakpoint analysis and a min window size</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -2917,10 +3003,11 @@ selected by the subsampling procedure</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">segments</span> <span class="o">=</span> <span class="p">[(</span><span class="n">seg_res</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">seg_res</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seg_res</span><span class="p">))]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">seg_res</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2936,6 +3023,8 @@ selected by the subsampling procedure</p>
   
       <p>Run subsampler</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2949,14 +3038,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>list[int]</code>
           </td>
-          <td><p>indexes of the remaining samples</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>indexes of the remaining samples</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSDynamic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
@@ -2990,7 +3083,7 @@ selected by the subsampling procedure</p>
 
     <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -3034,23 +3127,22 @@ selected by the subsampling procedure</p>
 
 
 <h2 id="fpcmci.preprocessing.subsampling_methods.Static.Static" class="doc doc-heading">
-        <code>Static</code>
+          <code>Static</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code></p>
 
   
       <p>Subsamples data by taking one sample each step-samples</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/Static.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/Static.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 4</span>
 <span class="normal"> 5</span>
 <span class="normal"> 6</span>
 <span class="normal"> 7</span>
@@ -3092,11 +3184,12 @@ selected by the subsampling procedure</p>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -3120,6 +3213,8 @@ selected by the subsampling procedure</p>
   
       <p>Static class constructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -3136,13 +3231,19 @@ selected by the subsampling procedure</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>integer subsampling step</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>integer subsampling step</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Raises:</strong></p>
   <table>
@@ -3157,14 +3258,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>ValueError</code>
           </td>
-          <td><p>if step == None</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>if step == None</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/Static.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/Static.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
@@ -3192,7 +3297,7 @@ selected by the subsampling procedure</p>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;step not specified&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -3236,23 +3341,22 @@ selected by the subsampling procedure</p>
 
 
 <h2 id="fpcmci.preprocessing.subsampling_methods.WSFFTStatic.WSFFTStatic" class="doc doc-heading">
-        <code>WSFFTStatic</code>
+          <code>WSFFTStatic</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
 
   
       <p>Subsampling method with static window size based on Fourier analysis</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
@@ -3394,11 +3498,12 @@ selected by the subsampling procedure</p>
 
         <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -3422,6 +3527,8 @@ selected by the subsampling procedure</p>
   
       <p>Compute window size based on Fourier analysis performed on dataframe</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -3435,14 +3542,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>window size</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>window size</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
@@ -3484,10 +3595,11 @@ selected by the subsampling procedure</p>
         <span class="c1"># pl.show()</span>
     <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">w_array</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3502,6 +3614,8 @@ selected by the subsampling procedure</p>
   <div class="doc doc-contents ">
   
       <p>WSFFTStatic class constructor</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3519,7 +3633,11 @@ selected by the subsampling procedure</p>
           <td>
                 <code>float</code>
           </td>
-          <td><p>timeseries sampling time</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>timeseries sampling time</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3529,7 +3647,11 @@ selected by the subsampling procedure</p>
           <td>
                 <code>float</code>
           </td>
-          <td><p>entropy threshold</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>entropy threshold</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3537,9 +3659,9 @@ selected by the subsampling procedure</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
@@ -3561,10 +3683,11 @@ selected by the subsampling procedure</p>
     <span class="n">EntropyBasedMethod</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entropy_threshold</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">sampling_time</span> <span class="o">=</span> <span class="n">sampling_time</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3580,9 +3703,9 @@ selected by the subsampling procedure</p>
   
       <p>Segments dataset with a fixed window size</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
 <span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
@@ -3600,10 +3723,11 @@ selected by the subsampling procedure</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">seg_res</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
         <span class="n">seg_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3619,6 +3743,8 @@ selected by the subsampling procedure</p>
   
       <p>Run subsampler</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -3632,14 +3758,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>list[int]</code>
           </td>
-          <td><p>indexes of the remaining samples</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>indexes of the remaining samples</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSFFTStatic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
@@ -3679,7 +3809,7 @@ selected by the subsampling procedure</p>
 
     <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -3723,23 +3853,22 @@ selected by the subsampling procedure</p>
 
 
 <h2 id="fpcmci.preprocessing.subsampling_methods.WSStatic.WSStatic" class="doc doc-heading">
-        <code>WSStatic</code>
+          <code>WSStatic</code>
 
 
 </h2>
 
 
   <div class="doc doc-contents ">
-      <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
+          <p class="doc doc-class-bases">
+            Bases: <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod" href="#fpcmci.preprocessing.subsampling_methods.SubsamplingMethod.SubsamplingMethod">SubsamplingMethod</a></code>, <code><a class="autorefs autorefs-internal" title="fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod" href="#fpcmci.preprocessing.subsampling_methods.EntropyBasedMethod.EntropyBasedMethod">EntropyBasedMethod</a></code></p>
 
   
       <p>Entropy based subsampling method with static window size</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
+            <details class="quote">
+              <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
 <span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
@@ -3841,11 +3970,12 @@ selected by the subsampling procedure</p>
 
         <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -3869,6 +3999,8 @@ selected by the subsampling procedure</p>
   
       <p>WSStatic class constructor</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -3885,7 +4017,11 @@ selected by the subsampling procedure</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>minimun window size</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>minimun window size</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3895,13 +4031,19 @@ selected by the subsampling procedure</p>
           <td>
                 <code>float</code>
           </td>
-          <td><p>entropy threshold</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>entropy threshold</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Raises:</strong></p>
   <table>
@@ -3916,14 +4058,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>ValueError</code>
           </td>
-          <td><p>if window_size == None</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>if window_size == None</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
@@ -3957,10 +4103,11 @@ selected by the subsampling procedure</p>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;window_type = STATIC but window_size not specified&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">ws</span> <span class="o">=</span> <span class="n">window_size</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3976,9 +4123,9 @@ selected by the subsampling procedure</p>
   
       <p>Segments dataset with a fixed window size</p>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -3996,10 +4143,11 @@ selected by the subsampling procedure</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">seg_res</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)))</span>
         <span class="n">seg_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4015,6 +4163,8 @@ selected by the subsampling procedure</p>
   
       <p>Run subsampler</p>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -4028,14 +4178,18 @@ selected by the subsampling procedure</p>
           <td>
                 <code>list[int]</code>
           </td>
-          <td><p>indexes of the remaining samples</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>indexes of the remaining samples</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
+          <details class="quote">
+            <summary>Source code in <code>fpcmci/preprocessing/subsampling_methods/WSStatic.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
 <span class="normal">42</span>
@@ -4069,7 +4223,7 @@ selected by the subsampling procedure</p>
 
     <span class="k">return</span> <span class="n">idxs</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -4127,10 +4281,10 @@ selected by the subsampling procedure</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.b4d07000.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
     
   </body>
