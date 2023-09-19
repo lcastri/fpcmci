@@ -132,6 +132,7 @@ pip install fpcmci
 
 | Version | Changes |
 | :---: | ----------- |
+| 4.3.4 | neglect autodependent nodes fix |
 | 4.3.3 | sourcelist method signature fixed in Node.py |
 | 4.3.2 | documentation improved |
 | 4.3.1 | README and index.md updated |
