@@ -62,7 +62,7 @@ class FPCMCI():
             logpath, self.respath, self.dag_path, self.ts_dag_path = utils.get_selectorpath(resfolder)  
             sys.stdout = Logger(logpath)
         
-        self.validator = PCMCI(self.pcmci_alpha, min_lag, max_lag, val_condtest, verbosity)       
+        self.validator = PCMCI(self.pcmci_alpha, min_lag, max_lag, neglect_only_autodep, val_condtest, verbosity)       
         CP.set_verbosity(verbosity)
 
 

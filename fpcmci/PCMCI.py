@@ -15,7 +15,7 @@ class PCMCI():
     PCMCI works with FSelector in order to find the causal 
     model starting from a prefixed set of variables and links.
     """
-    def __init__(self, alpha, min_lag, max_lag, val_condtest: CondIndTest, verbosity: CPLevel, sys_context = dict()):
+    def __init__(self, alpha, min_lag, max_lag, neglect_only_autodep, val_condtest: CondIndTest, verbosity: CPLevel, sys_context = dict()):
         """
         PCMCI class constructor
 
@@ -29,6 +29,7 @@ class PCMCI():
         self.alpha = alpha
         self.min_lag = min_lag
         self.max_lag = max_lag
+        self.neglect_only_autodep = neglect_only_autodep
         self.result = None
         self.dependencies = None
         self.val_method = None
@@ -287,8 +288,6 @@ class PCMCI():
                               cond_ind_test = self.val_condtest,
                               verbosity = self.verbosity)
 
-        # self.result = self.__my_mci(link_assumptions = autodep_dag.get_link_assumptions(autodep_ok = True),
-        #                             parents = autodep_dag.get_parents())
         self.result = self.__my_mci(autodep_dag)
         
         self.result['var_names'] = data.features
@@ -309,7 +308,7 @@ class PCMCI():
         Returns:
             (DAG): pc result re-elaborated
         """
-        tmp_dag = DAG(features, self.min_lag, self.max_lag)
+        tmp_dag = DAG(features, self.min_lag, self.max_lag, self.neglect_only_autodep)
         tmp_dag.sys_context = self.sys_context
         for t in parents:
             for s in parents[t]:
@@ -328,7 +327,7 @@ class PCMCI():
             (DAG): pcmci result re-elaborated
         """
         vars = self.result['var_names']
-        tmp_dag = DAG(vars, self.min_lag, self.max_lag)
+        tmp_dag = DAG(vars, self.min_lag, self.max_lag, self.neglect_only_autodep)
         tmp_dag.sys_context = self.sys_context
         N, lags = self.result['graph'][0].shape
         for s in range(len(self.result['graph'])):

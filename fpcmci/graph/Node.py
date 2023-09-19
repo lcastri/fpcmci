@@ -1,3 +1,4 @@
+import copy
 from fpcmci.basics.constants import SCORE
 
 
@@ -96,7 +97,10 @@ class Node():
         Returns:
             bool: Returns True if the node has at least one child. Otherwise False
         """
-        return len(self.children) > 0
+        tmp = copy.deepcopy(self.children)
+        if self.name in tmp:
+            tmp.remove(self.name)
+        return len(tmp) > 0
     
     
     @property
