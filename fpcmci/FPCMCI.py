@@ -177,11 +177,19 @@ class FPCMCI():
         
         if self.CM:
             if save_name is None: save_name = self.dag_path
-            self.CM.dag(node_layout, min_width, 
-                        max_width, min_score, max_score,
-                        node_size, node_color, edge_color,
-                        font_size, label_type, save_name,
-                        img_ext)
+            try:
+                self.CM.dag(node_layout, min_width, 
+                            max_width, min_score, max_score,
+                            node_size, node_color, edge_color,
+                            font_size, label_type, save_name,
+                            img_ext)
+            except:
+                CP.warning("node_layout = " + node_layout + " generates error. node_layout = circular used.")
+                self.CM.dag("circular", min_width, 
+                            max_width, min_score, max_score,
+                            node_size, node_color, edge_color,
+                            font_size, label_type, save_name,
+                            img_ext)
         else:
             CP.warning("Dag impossible to create: causal model not estimated yet")
     
