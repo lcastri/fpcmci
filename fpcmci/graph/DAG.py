@@ -207,22 +207,6 @@ class DAG():
         return scm
     
     
-    def get_causal_matrix(self):
-        """
-        Returns a dictionary with keys the lags and values the causal matrix containing the causal weights between targets (rows) and sources (columns)
-
-        Returns:
-            dict/np.ndarray: causal matrix per 
-        """
-        cm_per_lag = {lag : np.zeros((len(self.features), len(self.features))) for lag in range(self.min_lag, self.max_lag + 1)}
-        for lag in cm_per_lag:
-            for t in self.g:
-                for s in self.g[t].sources:
-                    if s[1] == lag: cm_per_lag[lag][self.features.index(t)][self.features.index(s[0])] = self.g[t].sources[s][SCORE]
-        if len(cm_per_lag) == 1: return list(cm_per_lag.values())[0]
-        return cm_per_lag
-    
-    
     def make_pretty(self) -> dict:
         """
         Makes variables' names pretty, i.e. $ varname $
@@ -481,3 +465,53 @@ class DAG():
             (float): scaled score
         """
         return ((score - min_score) / (max_score - min_score)) * (max_width - min_width) + min_width
+    
+    
+    def get_skeleton(self) -> np.array:
+        """
+        Returns skeleton matrix.
+        Skeleton matrix is composed by 0 and 1.
+        1 <- if there is a link from source to target 
+        0 <- if there is not a link from source to target 
+
+        Returns:
+            np.array: skeleton matrix
+        """
+        r = [np.zeros(shape=(len(self.features), len(self.features))) for _ in range(self.min_lag, self.max_lag + 1)]
+        for l in range(self.min_lag, self.max_lag + 1):
+            for t in self.g.keys():
+                for s in self.g[t].sources:
+                    if s[1] == l: r[l - self.min_lag][self.features.index(t), self.features.index(s[0])] = 1
+        return np.array(r)
+
+
+    def get_val_matrix(self) -> np.array:
+        """
+        Returns val matrix.
+        val matrix contains information about the strength of the links componing the causal model.
+
+        Returns:
+            np.array: val matrix
+        """
+        r = [np.zeros(shape=(len(self.features), len(self.features))) for _ in range(self.min_lag, self.max_lag + 1)]
+        for l in range(self.min_lag, self.max_lag + 1):
+            for t in self.g.keys():
+                for s, info in self.g[t].sources.items():
+                    if s[1] == l: r[l - self.min_lag][self.features.index(t), self.features.index(s[0])] = info['score']
+        return np.array(r)
+
+
+    def get_pval_matrix(self) -> np.array:
+        """
+        Returns pval matrix.
+        pval matrix contains information about the pval of the links componing the causal model.=
+        
+        Returns:
+            np.array: pval matrix
+        """
+        r = [np.zeros(shape=(len(self.features), len(self.features))) for _ in range(self.min_lag, self.max_lag + 1)]
+        for l in range(self.min_lag, self.max_lag + 1):
+            for t in self.g.keys():
+                for s, info in self.g[t].sources.items():
+                    if s[1] == l: r[l - self.min_lag][self.features.index(t), self.features.index(s[0])] = info['pval']
+        return np.array(r)
