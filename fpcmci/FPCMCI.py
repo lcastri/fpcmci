@@ -58,7 +58,6 @@ class FPCMCI():
 
         self.respath, self.dag_path, self.ts_dag_path = None, None, None
         if resfolder is not None:
-            utils.create_results_folder()
             logpath, self.respath, self.dag_path, self.ts_dag_path = utils.get_selectorpath(resfolder)  
             sys.stdout = Logger(logpath)
         
