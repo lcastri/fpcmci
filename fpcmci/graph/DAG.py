@@ -477,7 +477,7 @@ class DAG():
         Returns:
             np.array: skeleton matrix
         """
-        r = [np.zeros(shape=(len(self.features), len(self.features))) for _ in range(self.min_lag, self.max_lag + 1)]
+        r = [np.zeros(shape=(len(self.features), len(self.features)), dtype = np.int32) for _ in range(self.min_lag, self.max_lag + 1)]
         for l in range(self.min_lag, self.max_lag + 1):
             for t in self.g.keys():
                 for s in self.g[t].sources:
