@@ -233,6 +233,7 @@ class DAG():
             min_score = 0, max_score = 1,
             node_size = 8, node_color = 'orange',
             edge_color = 'grey',
+            bundle_parallel_edges = True,
             font_size = 12,
             label_type = LabelType.Lag,
             save_name = None,
@@ -249,6 +250,7 @@ class DAG():
             node_size (int, optional): node size. Defaults to 8.
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
+            bundle_parallel_edges (str, optional): bundle parallel edge bit. Defaults to True.
             font_size (int, optional): font size. Defaults to 12.
             label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
             save_name (str, optional): Filename path. If None, plot is shown and not saved. Defaults to None.
@@ -332,7 +334,7 @@ class DAG():
                     edge_alpha = 1,
                     edge_zorder = 1,
                     edge_label_position = 0.35,
-                    edge_layout_kwargs = dict(bundle_parallel_edges = False, k = 0.05))
+                    edge_layout_kwargs = dict(bundle_parallel_edges = bundle_parallel_edges, k = 0.05))
             
             nx.draw_networkx_labels(G, 
                                     pos = a.node_positions,
@@ -350,6 +352,7 @@ class DAG():
                min_width = 1, max_width = 5,
                min_score = 0, max_score = 1,
                node_size = 8,
+               node_proximity = 2,
                node_color = 'orange',
                edge_color = 'grey',
                font_size = 12,
@@ -365,6 +368,7 @@ class DAG():
             min_score (int, optional): minimum score range. Defaults to 0.
             max_score (int, optional): maximum score range. Defaults to 1.
             node_size (int, optional): node size. Defaults to 8.
+            node_proximity (int, optional): node proximity. Defaults to 2.
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
             font_size (int, optional): font size. Defaults to 12.
@@ -376,7 +380,7 @@ class DAG():
 
         # add nodes
         G = nx.grid_2d_graph(tau + 1, len(r.g.keys()))
-        pos = {n : (n[0], n[1]/2) for n in G.nodes()}
+        pos = {n : (n[0], n[1]/node_proximity) for n in G.nodes()}
         scale = max(pos.values())
         G.remove_edges_from(G.edges())
         
@@ -504,7 +508,7 @@ class DAG():
     def get_pval_matrix(self) -> np.array:
         """
         Returns pval matrix.
-        pval matrix contains information about the pval of the links componing the causal model.=
+        pval matrix contains information about the pval of the links componing the causal model.
         
         Returns:
             np.array: pval matrix

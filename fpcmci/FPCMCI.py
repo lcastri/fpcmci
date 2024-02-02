@@ -10,6 +10,8 @@ from fpcmci.basics.logger import Logger
 import fpcmci.basics.utils as utils
 from fpcmci.PCMCI import PCMCI
 from fpcmci.preprocessing.data import Data 
+from sklearn.utils._testing import ignore_warnings
+from sklearn.exceptions import ConvergenceWarning
 
 
 class FPCMCI():
@@ -65,6 +67,7 @@ class FPCMCI():
         CP.set_verbosity(verbosity)
 
 
+    @ignore_warnings(category=ConvergenceWarning)
     def run_filter(self):
         """
         Run filter method
@@ -82,6 +85,7 @@ class FPCMCI():
         self.CM = self.sel_method.compute_dependencies()  
 
 
+    @ignore_warnings(category=ConvergenceWarning)
     def run_pcmci(self):
         """
         Run PCMCI
@@ -107,6 +111,7 @@ class FPCMCI():
         return self.CM.features, self.CM
 
     
+    @ignore_warnings(category=ConvergenceWarning)
     def run(self):
         """
         Run Selector and Validator

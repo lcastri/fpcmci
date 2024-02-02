@@ -47,7 +47,7 @@ if __name__ == '__main__':
     features, CM = FS.run()
     elapsed_FPCMCI = time() - start
     print(str(timedelta(seconds = elapsed_FPCMCI)))
-    print(CM.get_causal_matrix())
+    print(CM.get_val_matrix())
     FS.dag(label_type = LabelType.NoLabels, node_layout = 'dot')
     FS.timeseries_dag()
     
