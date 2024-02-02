@@ -6,7 +6,6 @@ class Logger(object):
     def __init__(self, path):
         self.terminal = sys.stdout
         self.log = open(path, "w")
-        cls()
 
     def write(self, message):
         self.terminal.write(message)
