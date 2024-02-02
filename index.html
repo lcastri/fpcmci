@@ -597,7 +597,9 @@ for t in range(max_lag, nsample):
 <li>torch&gt;=1.11.0</li>
 <li>gpytorch&gt;=1.4</li>
 <li>dcor&gt;=0.5.3</li>
-<li>h5py&gt;=3.7.0    </li>
+<li>h5py&gt;=3.7.0</li>
+<li>jpype1&gt;=1.5.0</li>
+<li>mpmath&gt;=1.3.0  </li>
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Before installing the F-PCMCI package, you need to install Java and the <a href="https://github.com/pwollstadt/IDTxl">IDTxl package</a> used for the feature-selection process, following the guide described <a href="https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements">here</a>. Once complete, you can install the current release of <code>F-PCMCI</code> with:</p>
@@ -621,15 +623,6 @@ source /etc/environment
 <h3 id="2-idtxl-installation">2 - IDTxl installation</h3>
 <pre><code class="language-shell"># IDTxl
 git clone https://github.com/pwollstadt/IDTxl.git
-conda create --name fpcmci python=3.8 pip matplotlib h5py scipy networkx
-conda activate fpcmci
-conda install -c conda-forge jpype1    # required by CPU JIDT estimators
-conda install -c conda-forge pyopencl  # required by GPU OpenCL estimators
-conda install -c anaconda ecos         # required by Tartu PID estimator
-conda install numba                    # required by NumbaCuda estimators
-conda install cudatoolkit              # required by NumbaCuda estimators
-conda install mpmath
-
 cd IDTxl
 pip install -e .
 </code></pre>
@@ -645,6 +638,10 @@ pip install -e .
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: center;">4.4.1</td>
+<td>installation simplified<br>dag fix and bundle_parallel_edges param added<br>node_proximity param added in timeseries_dag<br>get_skeleton, get_val_matrix, get_pval_matrix added into DAG<br>clean_cls param added to F-PCMCI constructor</td>
+</tr>
 <tr>
 <td style="text-align: center;">4.4.0</td>
 <td>neglect autodependent nodes fix</td>
