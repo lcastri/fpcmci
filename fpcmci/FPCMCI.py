@@ -29,6 +29,7 @@ class FPCMCI():
                  min_lag, max_lag, 
                  sel_method: SelectionMethod, val_condtest: CondIndTest, 
                  verbosity: CPLevel, 
+                 clean_cls = True, 
                  f_alpha = 0.05, 
                  pcmci_alpha = 0.05, 
                  resfolder = None,
@@ -43,6 +44,7 @@ class FPCMCI():
             sel_method (SelectionMethod): selection method
             val_condtest (CondIndTest): validation method
             verbosity (CPLevel): verbosity level
+            clean_cls (bool): Clean console bit. Default to True.
             f_alpha (float, optional): filter significance level. Defaults to 0.05.
             pcmci_alpha (float, optional): PCMCI significance level. Defaults to 0.05.
             resfolder (string, optional): result folder to create. Defaults to None.
@@ -61,7 +63,7 @@ class FPCMCI():
         self.respath, self.dag_path, self.ts_dag_path = None, None, None
         if resfolder is not None:
             logpath, self.respath, self.dag_path, self.ts_dag_path = utils.get_selectorpath(resfolder)  
-            sys.stdout = Logger(logpath)
+            sys.stdout = Logger(logpath, clean_cls)
         
         self.validator = PCMCI(self.pcmci_alpha, min_lag, max_lag, neglect_only_autodep, val_condtest, verbosity)       
         CP.set_verbosity(verbosity)
@@ -158,6 +160,7 @@ class FPCMCI():
             node_size = 8,
             node_color = 'orange',
             edge_color = 'grey',
+            bundle_parallel_edges = True,
             font_size = 12,
             label_type = LabelType.Lag,
             save_name = None,
@@ -174,6 +177,7 @@ class FPCMCI():
             node_size (int, optional): node size. Defaults to 8.
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
+            bundle_parallel_edges (str, optional): bundle parallel edge bit. Defaults to True.
             font_size (int, optional): font size. Defaults to 12.
             label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
             img_ext (ImageExt, optional): dag image extention (.png, .pdf, ..). Default ImageExt.PNG.
@@ -185,15 +189,15 @@ class FPCMCI():
                 self.CM.dag(node_layout, min_width, 
                             max_width, min_score, max_score,
                             node_size, node_color, edge_color,
-                            font_size, label_type, save_name,
-                            img_ext)
+                            bundle_parallel_edges, font_size, 
+                            label_type, save_name, img_ext)
             except:
                 CP.warning("node_layout = " + node_layout + " generates error. node_layout = circular used.")
                 self.CM.dag("circular", min_width, 
                             max_width, min_score, max_score,
                             node_size, node_color, edge_color,
-                            font_size, label_type, save_name,
-                            img_ext)
+                            bundle_parallel_edges, font_size, 
+                            label_type, save_name, img_ext)
         else:
             CP.warning("Dag impossible to create: causal model not estimated yet")
     
@@ -204,6 +208,7 @@ class FPCMCI():
                        min_score = 0,
                        max_score = 1,
                        node_size = 8,
+                       node_proximity = 2,
                        font_size = 12,
                        node_color = 'orange',
                        edge_color = 'grey',
@@ -218,6 +223,7 @@ class FPCMCI():
             min_score (int, optional): minimum score range. Defaults to 0.
             max_score (int, optional): maximum score range. Defaults to 1.
             node_size (int, optional): node size. Defaults to 8.
+            node_proximity (int, optional): node proximity. Defaults to 2.
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
             font_size (int, optional): font size. Defaults to 12.
@@ -228,7 +234,7 @@ class FPCMCI():
             if save_name is None: save_name = self.ts_dag_path
             self.CM.ts_dag(self.max_lag, min_width,
                            max_width, min_score, max_score,
-                           node_size, node_color, edge_color,
+                           node_size, node_proximity, node_color, edge_color,
                            font_size, save_name, img_ext)
         else:
             CP.warning("Timeseries dag impossible to create: causal model not estimated yet")

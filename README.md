@@ -125,7 +125,7 @@ pip install fpcmci
 
 | Version | Changes |
 | :---: | ----------- |
-| 4.4.1 | installation simplified<br>dag fix and bundle_parallel_edges param added<br>node_proximity param added in timeseries_dag<br>get_skeleton, get_val_matrix, get_pval_matrix added into DAG|
+| 4.4.1 | installation simplified<br>dag fix and bundle_parallel_edges param added<br>node_proximity param added in timeseries_dag<br>get_skeleton, get_val_matrix, get_pval_matrix added into DAG<br>clean_cls param added to F-PCMCI constructor|
 | 4.4.0 | neglect autodependent nodes fix |
 | 4.3.3 | sourcelist method signature fixed in Node.py |
 | 4.3.2 | documentation improved |
