@@ -3,11 +3,11 @@ from fpcmci.basics.utils import cls
 
 
 class Logger(object):
-    def __init__(self, path):
+    def __init__(self, path, clean_console = True):
         self.terminal = sys.stdout
         self.log = open(path, "w")
-        cls()
-
+        if clean_console: cls()
+        
     def write(self, message):
         self.terminal.write(message)
         self.log.write(message)

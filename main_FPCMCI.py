@@ -41,13 +41,14 @@ if __name__ == '__main__':
                 sel_method = TE(TEestimator.Gaussian), 
                 val_condtest = GPDC(significance = 'analytic', gp_params = None),
                 verbosity = CPLevel.DEBUG,
+                clean_cls = True,
                 neglect_only_autodep = False,
                 resfolder = 'ex_FPCMCI')
     
     features, CM = FS.run()
     elapsed_FPCMCI = time() - start
     print(str(timedelta(seconds = elapsed_FPCMCI)))
-    print(CM.get_causal_matrix())
+    print(CM.get_val_matrix())
     FS.dag(label_type = LabelType.NoLabels, node_layout = 'dot')
     FS.timeseries_dag()
     

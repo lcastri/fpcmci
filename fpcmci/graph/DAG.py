@@ -207,22 +207,6 @@ class DAG():
         return scm
     
     
-    def get_causal_matrix(self):
-        """
-        Returns a dictionary with keys the lags and values the causal matrix containing the causal weights between targets (rows) and sources (columns)
-
-        Returns:
-            dict/np.ndarray: causal matrix per 
-        """
-        cm_per_lag = {lag : np.zeros((len(self.features), len(self.features))) for lag in range(self.min_lag, self.max_lag + 1)}
-        for lag in cm_per_lag:
-            for t in self.g:
-                for s in self.g[t].sources:
-                    if s[1] == lag: cm_per_lag[lag][self.features.index(t)][self.features.index(s[0])] = self.g[t].sources[s][SCORE]
-        if len(cm_per_lag) == 1: return list(cm_per_lag.values())[0]
-        return cm_per_lag
-    
-    
     def make_pretty(self) -> dict:
         """
         Makes variables' names pretty, i.e. $ varname $
@@ -249,6 +233,7 @@ class DAG():
             min_score = 0, max_score = 1,
             node_size = 8, node_color = 'orange',
             edge_color = 'grey',
+            bundle_parallel_edges = True,
             font_size = 12,
             label_type = LabelType.Lag,
             save_name = None,
@@ -265,6 +250,7 @@ class DAG():
             node_size (int, optional): node size. Defaults to 8.
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
+            bundle_parallel_edges (str, optional): bundle parallel edge bit. Defaults to True.
             font_size (int, optional): font size. Defaults to 12.
             label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
             save_name (str, optional): Filename path. If None, plot is shown and not saved. Defaults to None.
@@ -348,7 +334,7 @@ class DAG():
                     edge_alpha = 1,
                     edge_zorder = 1,
                     edge_label_position = 0.35,
-                    edge_layout_kwargs = dict(bundle_parallel_edges = False, k = 0.05))
+                    edge_layout_kwargs = dict(bundle_parallel_edges = bundle_parallel_edges, k = 0.05))
             
             nx.draw_networkx_labels(G, 
                                     pos = a.node_positions,
@@ -366,6 +352,7 @@ class DAG():
                min_width = 1, max_width = 5,
                min_score = 0, max_score = 1,
                node_size = 8,
+               node_proximity = 2,
                node_color = 'orange',
                edge_color = 'grey',
                font_size = 12,
@@ -381,6 +368,7 @@ class DAG():
             min_score (int, optional): minimum score range. Defaults to 0.
             max_score (int, optional): maximum score range. Defaults to 1.
             node_size (int, optional): node size. Defaults to 8.
+            node_proximity (int, optional): node proximity. Defaults to 2.
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
             font_size (int, optional): font size. Defaults to 12.
@@ -392,7 +380,7 @@ class DAG():
 
         # add nodes
         G = nx.grid_2d_graph(tau + 1, len(r.g.keys()))
-        pos = {n : (n[0], n[1]/2) for n in G.nodes()}
+        pos = {n : (n[0], n[1]/node_proximity) for n in G.nodes()}
         scale = max(pos.values())
         G.remove_edges_from(G.edges())
         
@@ -481,3 +469,53 @@ class DAG():
             (float): scaled score
         """
         return ((score - min_score) / (max_score - min_score)) * (max_width - min_width) + min_width
+    
+    
+    def get_skeleton(self) -> np.array:
+        """
+        Returns skeleton matrix.
+        Skeleton matrix is composed by 0 and 1.
+        1 <- if there is a link from source to target 
+        0 <- if there is not a link from source to target 
+
+        Returns:
+            np.array: skeleton matrix
+        """
+        r = [np.zeros(shape=(len(self.features), len(self.features)), dtype = np.int32) for _ in range(self.min_lag, self.max_lag + 1)]
+        for l in range(self.min_lag, self.max_lag + 1):
+            for t in self.g.keys():
+                for s in self.g[t].sources:
+                    if s[1] == l: r[l - self.min_lag][self.features.index(t), self.features.index(s[0])] = 1
+        return np.array(r)
+
+
+    def get_val_matrix(self) -> np.array:
+        """
+        Returns val matrix.
+        val matrix contains information about the strength of the links componing the causal model.
+
+        Returns:
+            np.array: val matrix
+        """
+        r = [np.zeros(shape=(len(self.features), len(self.features))) for _ in range(self.min_lag, self.max_lag + 1)]
+        for l in range(self.min_lag, self.max_lag + 1):
+            for t in self.g.keys():
+                for s, info in self.g[t].sources.items():
+                    if s[1] == l: r[l - self.min_lag][self.features.index(t), self.features.index(s[0])] = info['score']
+        return np.array(r)
+
+
+    def get_pval_matrix(self) -> np.array:
+        """
+        Returns pval matrix.
+        pval matrix contains information about the pval of the links componing the causal model.
+        
+        Returns:
+            np.array: pval matrix
+        """
+        r = [np.zeros(shape=(len(self.features), len(self.features))) for _ in range(self.min_lag, self.max_lag + 1)]
+        for l in range(self.min_lag, self.max_lag + 1):
+            for t in self.g.keys():
+                for s, info in self.g[t].sources.items():
+                    if s[1] == l: r[l - self.min_lag][self.features.index(t), self.features.index(s[0])] = info['pval']
+        return np.array(r)
