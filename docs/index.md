@@ -73,7 +73,9 @@ If you found this useful for your work, please cite this papers:
 * torch>=1.11.0
 * gpytorch>=1.4
 * dcor>=0.5.3
-* h5py>=3.7.0    
+* h5py>=3.7.0
+* jpype1>=1.5.0
+* mpmath>=1.3.0  
 
 
 ## Installation
@@ -108,15 +110,6 @@ source /etc/environment
 ```shell
 # IDTxl
 git clone https://github.com/pwollstadt/IDTxl.git
-conda create --name fpcmci python=3.8 pip matplotlib h5py scipy networkx
-conda activate fpcmci
-conda install -c conda-forge jpype1    # required by CPU JIDT estimators
-conda install -c conda-forge pyopencl  # required by GPU OpenCL estimators
-conda install -c anaconda ecos         # required by Tartu PID estimator
-conda install numba                    # required by NumbaCuda estimators
-conda install cudatoolkit              # required by NumbaCuda estimators
-conda install mpmath
-
 cd IDTxl
 pip install -e .
 ```
@@ -131,6 +124,7 @@ pip install fpcmci
 
 | Version | Changes |
 | :---: | ----------- |
+| 4.4.1 | installation simplified<br>dag fix and bundle_parallel_edges param added<br>node_proximity param added in timeseries_dag<br>get_skeleton, get_val_matrix, get_pval_matrix added into DAG<br>clean_cls param added to F-PCMCI constructor|
 | 4.4.0 | neglect autodependent nodes fix |
 | 4.3.3 | sourcelist method signature fixed in Node.py |
 | 4.3.2 | documentation improved |
