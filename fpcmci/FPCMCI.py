@@ -161,6 +161,7 @@ class FPCMCI():
             node_color = 'orange',
             edge_color = 'grey',
             bundle_parallel_edges = True,
+            skip_autodep = False,
             font_size = 12,
             label_type = LabelType.Lag,
             save_name = None,
@@ -178,6 +179,7 @@ class FPCMCI():
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
             bundle_parallel_edges (str, optional): bundle parallel edge bit. Defaults to True.
+            skip_autodep (bool, optional): skip autodependency border. Defaults to False.
             font_size (int, optional): font size. Defaults to 12.
             label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
             img_ext (ImageExt, optional): dag image extention (.png, .pdf, ..). Default ImageExt.PNG.
@@ -189,14 +191,14 @@ class FPCMCI():
                 self.CM.dag(node_layout, min_width, 
                             max_width, min_score, max_score,
                             node_size, node_color, edge_color,
-                            bundle_parallel_edges, font_size, 
+                            bundle_parallel_edges, skip_autodep, font_size, 
                             label_type, save_name, img_ext)
             except:
                 CP.warning("node_layout = " + node_layout + " generates error. node_layout = circular used.")
                 self.CM.dag("circular", min_width, 
                             max_width, min_score, max_score,
                             node_size, node_color, edge_color,
-                            bundle_parallel_edges, font_size, 
+                            bundle_parallel_edges, skip_autodep, font_size, 
                             label_type, save_name, img_ext)
         else:
             CP.warning("Dag impossible to create: causal model not estimated yet")

@@ -13,11 +13,11 @@ class DAG():
         DAG constructor
 
         Args:
-            var_names (list): _description_
-            min_lag (int): _description_
-            max_lag (int): _description_
-            neglect_autodep (bool, optional): _description_. Defaults to False.
-            scm (dict, optional): _description_. Defaults to None.
+            var_names (list): variable list
+            min_lag (int): minimum time lag
+            max_lag (int): maximum time lag
+            neglect_autodep (bool, optional): bit to neglet nodes when they are only autodependent. Defaults to False.
+            scm (dict, optional): Build the DAG from SCM. Defaults to None.
         """
         self.g = {var: Node(var, neglect_autodep) for var in var_names}
         self.neglect_autodep = neglect_autodep
@@ -234,6 +234,7 @@ class DAG():
             node_size = 8, node_color = 'orange',
             edge_color = 'grey',
             bundle_parallel_edges = True,
+            skip_autodep = False,
             font_size = 12,
             label_type = LabelType.Lag,
             save_name = None,
@@ -251,6 +252,7 @@ class DAG():
             node_color (str, optional): node color. Defaults to 'orange'.
             edge_color (str, optional): edge color. Defaults to 'grey'.
             bundle_parallel_edges (str, optional): bundle parallel edge bit. Defaults to True.
+            skip_autodep (bool, optional): skip autodependency border. Defaults to False.
             font_size (int, optional): font size. Defaults to 12.
             label_type (LabelType, optional): enum to set whether to show the lag time (LabelType.Lag) or the strength (LabelType.Score) of the dependencies on each link/node or not showing the labels (LabelType.NoLabels). Default LabelType.Lag.
             save_name (str, optional): Filename path. If None, plot is shown and not saved. Defaults to None.
@@ -267,7 +269,7 @@ class DAG():
         border = dict()
         for t in r.g:
             border[t] = 0
-            if r.g[t].is_autodependent:
+            if not skip_autodep and r.g[t].is_autodependent:
                 autodep = r.g[t].get_max_autodependent
                 border[t] = max(self.__scale(r.g[t].sources[autodep][SCORE], min_width, max_width, min_score, max_score), border[t])
         
@@ -277,12 +279,11 @@ class DAG():
             node_label = {t: [] for t in r.g.keys()}
             for t in r.g:
                 if r.g[t].is_autodependent:
-                    for s in r.g[t].sources:
-                        if s[0] == t:
-                            if label_type == LabelType.Lag:
-                                node_label[t].append(s[1])
-                            elif label_type == LabelType.Score:
-                                node_label[t].append(round(r.g[t].sources[s][SCORE], 2))
+                    autodep = r.g[t].get_max_autodependent
+                    if label_type == LabelType.Lag:
+                        node_label[t].append(autodep[1])
+                    elif label_type == LabelType.Score:
+                        node_label[t].append(round(r.g[t].sources[autodep][SCORE], 3))
                 node_label[t] = ",".join(str(s) for s in node_label[t])
 
 
