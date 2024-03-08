@@ -13,7 +13,7 @@ Extension of the state-of-the-art causal discovery method [PCMCI](https://github
 
 Current state-of-the-art causal discovery approaches suffer in terms of speed and accuracy of the causal analysis when the process to be analysed is composed by a large number of features. F-PCMCI is able to select the most meaningful features from a set of variables and build a causal model from such selection. To this end, the causal analysis results **faster** and **more accurate**.
 
-In the following it is presented an example showing a comparison between causal models obtained by PCMCI and F-PCMCI causal discovery algorithms on the same data. The latter have been created by defining a 6-variables system defined as follows:
+In the following it is presented an example showing a comparison between causal models obtained by PCMCI and F-PCMCI causal discovery algorithms on the same data. The latter have been created by defining a 6-variables system as follows:
 
 ``` python
 min_lag = 1
