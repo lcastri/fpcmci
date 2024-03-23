@@ -32,6 +32,12 @@ class TE(SelectionMethod):
         
     @property
     def isOpenCLinstalled(self):
+        """
+        checks whether the pyopencl pkg is installed
+
+        Returns:
+            bool: True if pyopencl is installed
+        """
         try:
             importlib.import_module('pyopencl')
             return True
@@ -39,6 +45,9 @@ class TE(SelectionMethod):
             return False
         
     def _select_estimator(self):
+        """
+        selects the TE estimator
+        """
         CP.info("\n##")
         CP.info("## TE Estimator selection")
         CP.info("##")
@@ -73,7 +82,7 @@ class TE(SelectionMethod):
 
     def compute_dependencies(self):
         """
-        compute list of dependencies for each target by transfer entropy analysis
+        computes list of dependencies for each target by transfer entropy analysis
 
         Returns:
             (dict): dictonary(TARGET: list SOURCES)

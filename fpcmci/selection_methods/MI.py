@@ -29,6 +29,12 @@ class MI(SelectionMethod):
         
     @property
     def isOpenCLinstalled(self):
+        """
+        checks whether the pyopencl pkg is installed
+
+        Returns:
+            bool: True if pyopencl is installed
+        """
         try:
             importlib.import_module('pyopencl')
             return True
@@ -36,6 +42,9 @@ class MI(SelectionMethod):
             return False
         
     def _select_estimator(self):
+        """
+        selects the MI estimator
+        """
         CP.info("\n##")
         CP.info("## MI Estimator selection")
         CP.info("##")
