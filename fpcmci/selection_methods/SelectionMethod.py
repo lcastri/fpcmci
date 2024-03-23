@@ -49,7 +49,6 @@ class SelectionMethod(ABC):
         return self.ctest.value
 
 
-    # def initialise(self, data: Data, alpha, min_lag, max_lag):
     def initialise(self, data: Data, alpha, min_lag, max_lag, graph):
         """
         Initialises the selection method

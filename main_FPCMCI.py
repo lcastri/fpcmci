@@ -22,9 +22,9 @@ if __name__ == '__main__':
     max_lag = 1
     
     np.random.seed(1)
-    nsample = 500
+    nsample = 1500
     nfeature = 7
-    d = np.random.random(size = (nsample, nfeature))
+    d = np.random.normal(0, 1, size = (nsample, nfeature))
     for t in range(max_lag, nsample):
         d[t, 0] += 2 * d[t-1, 1] + 3 * d[t-1, 3]
         d[t, 2] += 1.1 * d[t-1, 1]**2
@@ -38,7 +38,7 @@ if __name__ == '__main__':
                 pcmci_alpha = pcmci_alpha, 
                 min_lag = min_lag, 
                 max_lag = max_lag, 
-                sel_method = TE(TEestimator.Gaussian), 
+                sel_method = TE(TEestimator.Auto), 
                 val_condtest = GPDC(significance = 'analytic', gp_params = None),
                 verbosity = CPLevel.DEBUG,
                 clean_cls = True,
@@ -48,7 +48,6 @@ if __name__ == '__main__':
     features, CM = FS.run()
     elapsed_FPCMCI = time() - start
     print(str(timedelta(seconds = elapsed_FPCMCI)))
-    print(CM.get_val_matrix())
     FS.dag(label_type = LabelType.NoLabels, node_layout = 'dot')
     FS.timeseries_dag()
     
