@@ -8,8 +8,10 @@ from fpcmci.CPrinter import CP
 
 
 class TEestimator(Enum):
+    Auto = 'Auto'
     Gaussian = 'JidtGaussianCMI'
     Kraskov = 'JidtKraskovCMI'
+    OpenCLKraskovCMI = 'OpenCLKraskovCMI'
 
 
 class TE(SelectionMethod):
