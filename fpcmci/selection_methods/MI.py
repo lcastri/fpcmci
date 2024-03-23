@@ -84,6 +84,8 @@ class MI(SelectionMethod):
         Returns:
             (dict): dictonary(TARGET: list SOURCES)
         """
+        if self.estimator is MIestimator.Auto: self._select_estimator()
+
         with _suppress_stdout():
             data = Data(self.d.values, dim_order='sp') # sp = samples(row) x processes(col)
 
