@@ -17,3 +17,7 @@ class Logger(object):
         # this handles the flush command by doing nothing.
         # you might want to specify some extra behavior here.
         pass
+    
+    def close(self):
+        sys.stdout = sys.__stdout__
+        self.log.close()

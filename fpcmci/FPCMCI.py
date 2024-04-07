@@ -61,9 +61,11 @@ class FPCMCI():
         self.neglect_only_autodep = neglect_only_autodep
 
         self.respath, self.dag_path, self.ts_dag_path = None, None, None
+        self.resfolder = resfolder
         if resfolder is not None:
             logpath, self.respath, self.dag_path, self.ts_dag_path = utils.get_selectorpath(resfolder)  
-            sys.stdout = Logger(logpath, clean_cls)
+            self.logger = Logger(logpath, clean_cls)
+            sys.stdout = self.logger
         
         self.validator = PCMCI(self.pcmci_alpha, min_lag, max_lag, neglect_only_autodep, val_condtest, verbosity)       
         CP.set_verbosity(verbosity)
@@ -110,6 +112,7 @@ class FPCMCI():
         # Saving final causal model
         self.save()
         
+        if self.resfolder is not None: self.logger.close()
         return self.CM.features, self.CM
 
     
@@ -148,6 +151,7 @@ class FPCMCI():
         self.__print_differences(f_dag, self.CM)
         self.save()
         
+        if self.resfolder is not None: self.logger.close()
         return self.CM.features, self.CM
     
 
