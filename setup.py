@@ -11,13 +11,10 @@ INSTALL_REQUIRES = ["tigramite>=5.1.0.3",
                     "networkx>=2.8.6",
                     "ruptures>=1.1.7",
                     "scikit_learn>=1.1.3",
-                    "torch>=1.11.0", 
-                    "gpytorch>=1.4",       
                     "dcor>=0.5.3",
                     "h5py>=3.7.0",
                     "jpype1>=1.5.0",
                     "mpmath>=1.3.0",
-                    "pyopencl>=2024.1"
                     ]
 
 setup(
