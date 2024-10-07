@@ -554,10 +554,16 @@ for t in range(max_lag, nsample):
 </tr>
 </tbody>
 </table>
-<p>The causal analysis performed by the <strong>F-PCMCI</strong> results not only faster but also more accurate. Indeed, the causal model derived by the F-PCMCI agrees with the structure of the system of equations, instead the one derived by the PCMCI presents spurious links:
-* $X_2$ &rarr; $X_4$
-* $X_2$ &rarr; $X_5$</p>
-<p>Note that, since all the 6 variables were involved in the evolution of the system, the F-PCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as $X_1$ and $X_5$) and does not appear in any other equation, defined as follows: $X_6(t) = \eta_6(t)$. In the following the comparison between PCMCI and F-PCMCI with this new system configuration:</p>
+<p>The causal analysis performed by the <strong>F-PCMCI</strong> results not only faster but also more accurate. Indeed, the causal model derived by the F-PCMCI agrees with the structure of the system of equations, instead the one derived by the PCMCI presents spurious links:</p>
+<ul>
+<li>
+<script type="math/tex">X_2</script> -&gt; <script type="math/tex">X_4</script>
+</li>
+<li>
+<script type="math/tex">X_2</script> -&gt; <script type="math/tex">X_5</script>
+</li>
+</ul>
+<p>Note that, since all the 6 variables were involved in the evolution of the system, the F-PCMCI did not remove any of them. In the following example instead, we added a new variable in the system which is defined just by the noise component (as <script type="math/tex">X_1</script> and <script type="math/tex">X_5</script>) and does not appear in any other equation, defined as follows: <script type="math/tex">X_6(t) = \eta_6(t)</script>. In the following the comparison between PCMCI and F-PCMCI with this new system configuration:</p>
 <table>
 <thead>
 <tr>
@@ -576,14 +582,16 @@ for t in range(max_lag, nsample):
 </tr>
 </tbody>
 </table>
-<p>In this case the F-PCMCI removes the $X_6$ variable from the causal graph leading to generate exactly the same causal model as in the previous example, with comparable executional time. Instead, the PCMCI suffers the presence of $X_6$ in terms of time and accuracy of the causal structure. Indeed, a spurious link $X_6$ &rarr; $X_5$ appears in the causal graph derived by the PCMCI.</p>
+<p>In this case the F-PCMCI removes the <script type="math/tex">X_6</script> variable from the causal graph leading to generate exactly the same causal model as in the previous example, with comparable executional time. Instead, the PCMCI suffers the presence of <script type="math/tex">X_6</script> in terms of time and accuracy of the causal structure. Indeed, a spurious link <script type="math/tex">X_6</script> -&gt; <script type="math/tex">X_5</script> appears in the causal graph derived by the PCMCI.</p>
 <h2 id="citation">Citation</h2>
 <p>If you found this useful for your work, please cite this papers:</p>
-<pre><code>@inproceedings{castri2023fpcmci,
-    title={Enhancing Causal Discovery from Robot Sensor Data in Dynamic Scenarios},
-    author={Castri, Luca and Mghames, Sariah and Hanheide, Marc and Bellotto, Nicola},
-    booktitle={Conference on Causal Learning and Reasoning (CLeaR)},
-    year={2023},
+<pre><code>@inproceedings{castri2023enhancing,
+  title={Enhancing Causal Discovery from Robot Sensor Data in Dynamic Scenarios},
+  author={Castri, Luca and Mghames, Sariah and Hanheide, Marc and Bellotto, Nicola},
+  booktitle={Conference on Causal Learning and Reasoning},
+  pages={243--258},
+  year={2023},
+  organization={PMLR}
 }
 </code></pre>
 <h2 id="requirements">Requirements</h2>
@@ -597,9 +605,7 @@ for t in range(max_lag, nsample):
 <li>torch&gt;=1.11.0</li>
 <li>gpytorch&gt;=1.4</li>
 <li>dcor&gt;=0.5.3</li>
-<li>h5py&gt;=3.7.0</li>
-<li>jpype1&gt;=1.5.0</li>
-<li>mpmath&gt;=1.3.0  </li>
+<li>h5py&gt;=3.7.0    </li>
 </ul>
 <h2 id="installation">Installation</h2>
 <p>Before installing the F-PCMCI package, you need to install Java and the <a href="https://github.com/pwollstadt/IDTxl">IDTxl package</a> used for the feature-selection process, following the guide described <a href="https://github.com/pwollstadt/IDTxl/wiki/Installation-and-Requirements">here</a>. Once complete, you can install the current release of <code>F-PCMCI</code> with:</p>
@@ -623,6 +629,15 @@ source /etc/environment
 <h3 id="2-idtxl-installation">2 - IDTxl installation</h3>
 <pre><code class="language-shell"># IDTxl
 git clone https://github.com/pwollstadt/IDTxl.git
+conda create --name fpcmci python=3.8 pip matplotlib h5py scipy networkx
+conda activate fpcmci
+conda install -c conda-forge jpype1    # required by CPU JIDT estimators
+conda install -c conda-forge pyopencl  # required by GPU OpenCL estimators
+conda install -c anaconda ecos         # required by Tartu PID estimator
+conda install numba                    # required by NumbaCuda estimators
+conda install cudatoolkit              # required by NumbaCuda estimators
+conda install mpmath
+
 cd IDTxl
 pip install -e .
 </code></pre>
@@ -638,10 +653,6 @@ pip install -e .
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align: center;">4.4.1</td>
-<td>installation simplified<br>dag fix and bundle_parallel_edges param added<br>node_proximity param added in timeseries_dag<br>get_skeleton, get_val_matrix, get_pval_matrix added into DAG<br>clean_cls param added to F-PCMCI constructor</td>
-</tr>
 <tr>
 <td style="text-align: center;">4.4.0</td>
 <td>neglect autodependent nodes fix</td>
@@ -733,6 +744,10 @@ pip install -e .
     
     
       <script src="assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+        
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        
       
     
   </body>
