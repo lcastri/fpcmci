@@ -22,7 +22,7 @@ np.random.seed(1)
 nsample = 1500
 nfeature = 6
 
-d = np.random.random(size = (nsample, feature))
+d = np.random.random(size = (nsample, nfeature))
 for t in range(max_lag, nsample):
   d[t, 0] += 2 * d[t-1, 1] + 3 * d[t-1, 3]
   d[t, 2] += 1.1 * d[t-1, 1]**2
